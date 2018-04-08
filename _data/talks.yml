@@ -1,0 +1,27 @@
+talk2:
+    date: September, 2017
+    title: 'Conjugar: A Case Study of Programmatic Layout'
+    event:
+        name: iOSDevUK
+        link: https://www.iosdevuk.com/
+    location:
+        name: Prifysgol Aberystwyth
+        link: http://www.aber.ac.uk/cy/
+        city: Aberystwyth 🇬🇧
+    links:
+        code: https://github.com/vermont42/Conjugar
+        video: https://vimeo.com/217891291
+
+talk1:
+    date: September, 2015
+    title: GPX Data in the Simulator
+    event:
+        name: Swift Language User Group of San Francisco
+        link: https://www.meetup.com/swift-language/
+    location:
+        name: Realm
+        link: https://realm.io
+        city: San Francisco 🇺🇸🇬
+    links:
+        code: https://github.com/vermont42/GpxLocationManager
+        video: https://academy.realm.io/posts/josh-adams-gpx-location-manager/

@@ -1,0 +1,35 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Race Condition",
+    "home_page_url": "http://localhost:4000",
+    "feed_url": "http://localhost:4000/feed.json",
+    "description": "A Blog by Josh Adams",
+    "icon": "http://localhost:4000/ico/logo.jpg",
+    "favicon": "http://localhost:4000/favicon.ico",
+    "expired": false,
+    "author": {
+        "name": "Josh Adams",
+        "url": "http://localhost:4000",
+        "avatar": "http://localhost:4000/ico/avatar.jpg"
+    },
+    "items": [
+        
+        {
+            "id": "http://localhost:4000/blog/test-post/",
+            "url": "http://localhost:4000/blog/test-post/",
+            "title": "Test Post",
+            "date_published": "2018-04-08T00:00:00-07:00",
+            
+            "date_modified": "2018-04-08T00:00:00-07:00",
+            
+            "author": {
+                "name": "Josh Adams",
+                "url": "http://localhost:4000",
+                "avatar": "http://localhost:4000/ico/avatar.jpg"
+            },
+            "summary": "<p>This is the body of the post.</p>\n\n<figure>\n    <img class=\"img-thumbnail img-responsive center \" src=\"/img/\" title=\"\" alt=\"\" />\n    \n</figure>\n\n",
+            "content_html": "<p>This is the body of the post.</p>\n\n<figure>\n    <img class=\"img-thumbnail img-responsive center \" src=\"/img/\" title=\"\" alt=\"\" />\n    \n</figure>\n\n"
+        }
+        
+    ]
+}

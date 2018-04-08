@@ -1,0 +1,98 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-control" content="public">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="hexed bits, apps, iOS, objective-c, swift, cocoa, apple, xcode, app store, software, programming, engineering, design patterns">
+    <meta name="description" content="{{ site.description }}">
+    <meta name="author" content="{{ site.author.name }}">
+    <title>
+        {% if page.title %}
+            {{ page.title }} &middot; {{ site.title }}
+        {% else %}
+            {{ site.title }} &middot; {{ site.description }}
+        {% endif %}
+    </title>
+
+    <meta itemprop="canonical" href="{{ site.url }}{{ page.url }}" />
+    <meta itemprop="url" content="{{ site.url }}{{ page.url }}" />
+    <meta itemprop="about" content="{{ site.description }}" />
+
+    {% if page.title %}
+    <meta itemprop="name" content="{{ page.title }}" />
+    <meta itemprop="description" content="{{ page.excerpt | normalize_whitespace | strip_html | truncatewords: 40 }}" />
+    {% else %}
+    <meta itemprop="name" content="{{ site.title }}" />
+    <meta itemprop="description" content="{{ site.description }}" />
+    {% endif %}
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="{{ site.title }}" />
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+
+    {% if page.image %}
+    <meta property="og:image" content="{{ site.url }}{{ site.img_url}}/{{ page.image.file }}" />
+    {% else %}
+    <meta property="og:image" content="{{ site.url }}{{ site.logo }}" />
+    {% endif %}
+
+    {% if page.title %}
+    <meta property="og:title" content="{{ page.title }}" />
+    <meta property="og:description" content="{{ page.excerpt | normalize_whitespace | strip_html | truncatewords: 40 }}"/>
+    {% else %}
+    <meta property="og:title" content="{{ site.title }}" />
+    <meta property="og:description" content="{{ site.description }}" />
+    {% endif %}
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@{{ site.author.twitter }}" />
+    <meta name="twitter:creator" content="@{{ site.author.twitter }}" />
+
+    {% if page.image %}
+    <meta name="twitter:image" content="{{ site.url }}{{ site.img_url}}/{{ page.image.file }}" />
+    {% else %}
+    <meta name="twitter:image" content="{{ site.url }}{{ site.logo }}" />
+    {% endif %}
+
+    {% if page.title %}
+    <meta name="twitter:title" content="{{ page.title }}" />
+    <meta name="twitter:description" content="{{ page.excerpt | normalize_whitespace | strip_html | truncatewords: 40 }}" />
+    {% else %}
+    <meta name="twitter:title" content="{{ site.title }}" />
+    <meta name="twitter:description" content="{{ site.description }}" />
+    {% endif %}
+
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/font/ubuntuMono/ubuntuMono.css" rel="stylesheet">
+    <link href="/css/syntax.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="/node_modules/html5shiv/dist/html5shiv.min.js"></script>
+      <script src="/node_modules/respond/dest/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96x96.png">
+    <link rel="apple-touch-icon" href="/ico/apple-touch-icon.png">
+
+    <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="{{ site.title }}" />
+    <link type="application/json" rel="alternate" href="/feed.json" title="{{ site.title }}" />
+
+    <script>
+         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+         })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+         ga('create', 'UA-37319916-5', 'auto');
+         ga('send', 'pageview');
+    </script>
+</head>

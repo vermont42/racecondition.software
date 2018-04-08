@@ -1,0 +1,46 @@
+# Dependencies
+markdown: kramdown
+highlighter: rouge
+
+plugins:
+    - jekyll-paginate
+    - jekyll-sitemap
+
+# File rules
+exclude: [vendor, Dangerfile, Gemfile, Gemfile.lock, LICENSE, README.md, assets/, package.json, yarn.lock, scripts/]
+include: [.htaccess]
+
+keep_files: [.well-known]
+
+# Permalinks
+permalink: /blog/:title/
+
+# Site
+title: 'Race Condition'
+description: 'A Blog by Josh Adams'
+url: http://racecondition.software
+logo: /ico/logo.jpg
+timezone: America/Los_Angeles
+img_url: /img
+
+# Author
+author:
+    name: 'Josh Adams'
+    twitter: vermont42
+    avatar: /ico/avatar.jpg
+
+# Setup
+paginate: 3
+paginate_path: /blog/page/:num/
+excerpt_separator: <!--excerpt-->
+
+# Data
+links:
+    github: 'https://github.com/vermont42/racecondition.software'
+    issue: 'https://github.com/vermont42/racecondition.software/issues/new'
+    pull: 'https://github.com/vermont42/racecondition.software/compare'
+
+social_links:
+    twitter: 'https://twitter.com/vermont42'
+    github: 'https://github.com/vermont42/'
+    linkedin: 'https://www.linkedin.com/in/josh-adams-4839b41'

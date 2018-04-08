@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-control" content="public">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="hexed bits, apps, iOS, objective-c, swift, cocoa, apple, xcode, app store, software, programming, engineering, design patterns">
+    <meta name="description" content="A Blog by Josh Adams">
+    <meta name="author" content="Josh Adams">
+    <title>
+        
+            Test Post &middot; Race Condition
+        
+    </title>
+
+    <meta itemprop="canonical" href="http://localhost:4000/blog/test-post/" />
+    <meta itemprop="url" content="http://localhost:4000/blog/test-post/" />
+    <meta itemprop="about" content="A Blog by Josh Adams" />
+
+    
+    <meta itemprop="name" content="Test Post" />
+    <meta itemprop="description" content="This is the body of the post.   " />
+    
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Race Condition" />
+    <meta property="og:url" content="http://localhost:4000/blog/test-post/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+
+    
+    <meta property="og:image" content="http://localhost:4000/img/Sandy.jpg" />
+    
+
+    
+    <meta property="og:title" content="Test Post" />
+    <meta property="og:description" content="This is the body of the post.   "/>
+    
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@vermont42" />
+    <meta name="twitter:creator" content="@vermont42" />
+
+    
+    <meta name="twitter:image" content="http://localhost:4000/img/Sandy.jpg" />
+    
+
+    
+    <meta name="twitter:title" content="Test Post" />
+    <meta name="twitter:description" content="This is the body of the post.   " />
+    
+
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/font/ubuntuMono/ubuntuMono.css" rel="stylesheet">
+    <link href="/css/syntax.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="/node_modules/html5shiv/dist/html5shiv.min.js"></script>
+      <script src="/node_modules/respond/dest/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96x96.png">
+    <link rel="apple-touch-icon" href="/ico/apple-touch-icon.png">
+
+    <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Race Condition" />
+    <link type="application/json" rel="alternate" href="/feed.json" title="Race Condition" />
+
+    <script>
+         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+         })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+         ga('create', 'UA-37319916-5', 'auto');
+         ga('send', 'pageview');
+    </script>
+</head>
+
+   <body>
+      
+<header class="container container-fluid">
+   <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <h1 class="text-center"><a href="/">Race Condition</a></h1>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <h2 class="tagline">A Blog by Josh Adams</h2>
+         </div> <!-- col -->
+      </div> <!-- col -->
+   </div> <!-- row -->
+
+   <div class="row menu">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+         <a class="btn btn-default" href="/">Blog</a>
+         <a class="btn btn-default" href="/speaking/">Speaking</a>
+         <a class="btn btn-default" href="/about/">About</a>
+      </div> <!-- col -->
+   </div> <!-- row -->
+   <hr>
+</header>
+
+
+      <div class="container container-fluid">
+         <div class="row">
+            <div class="col-sm-12 col-sm-offset-0 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+               
+
+
+
+
+
+
+
+
+<article>
+    <h1 class="post-title"><a href="">Test Post</a></h1>
+
+    
+        <h2 class="post-subtitle">This is a test post. <small class="post-date">08 Apr 2018</small></h2>
+    
+
+    
+        <small class="text-warning bg-warning"><strong>Updated: 08 Apr 2018</strong></small>
+    
+
+    <div class="post-content">
+        <p>This is the body of the post.</p>
+
+<figure>
+    <img class="img-thumbnail img-responsive center " src="/img/" title="" alt="" />
+    
+</figure>
+
+
+    </div> <!-- post-content -->
+</article>
+
+
+
+
+
+
+
+
+
+<div class="post-share-subscribe">
+   <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-12 center">
+         <div class="btn-group btn-group-justified" role="group">
+
+            <div class="btn-group dropup" role="group">
+               <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Share <i class="fa fa-share-alt" aria-hidden="true"></i>
+               </button>
+               <ul class="dropdown-menu">
+                  <li>
+                     <a href="https://twitter.com/intent/tweet?text=Test%20Post%20http://localhost:4000/blog/test-post/%20via%20@vermont42" title="Tweet" target="_blank">
+                     Twitter &nbsp;<i class="fa fa-twitter" aria-hidden="true"></i>
+                     </a>
+                  </li>
+                  <li>
+                     <a href="https://www.facebook.com/sharer.php?u=http://localhost:4000/blog/test-post/" title="Post" target="_blank">
+                     Facebook &nbsp;<i class="fa fa-facebook" aria-hidden="true"></i>
+                     </a>
+                  </li>
+                  <li>
+                     <a href="https://plus.google.com/share?url=http://localhost:4000/blog/test-post/" title="Share" target="_blank">
+                     Google &nbsp;<i class="fa fa-google-plus" aria-hidden="true"></i>
+                     </a>
+                  </li>
+               </ul>
+            </div> <!-- share dropup -->
+
+            <div class="btn-group dropup" role="group">
+               <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Subscribe <i class="fa fa-rss" aria-hidden="true"></i>
+               </button>
+               <ul class="dropdown-menu">
+                  <li><a href="/feed.xml" title="Subscribe via RSS/Atom">RSS/Atom &nbsp;<i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                  <li><a href="/feed.json" title="Subscribe via JSON Feed">JSON Feed &nbsp;<i class="fa fa-code" aria-hidden="true"></i></a></li>
+                  <li><a href="" title="Add to Apple News">Apple News &nbsp;<i class="fa fa-apple" aria-hidden="true"></i></a></li>
+               </ul>
+            </div> <!-- subscribe drop-up -->
+         </div> <!-- btn-group -->
+      </div> <!-- col -->
+   </div> <!-- row -->
+
+   <div class="row feedback">
+      <div class="col-md-6 col-sm-6 col-xs-12 center">
+         <p class="text-muted text-center"><small><b>Questions? Feedback? Corrections?</b></small></p>
+         <p class="text-muted text-center">
+         <small>Open an <a href="https://github.com/vermont42/racecondition.software/issues/new?title=Test Post&body=Comments, Questions, Feedback: http://localhost:4000/blog/test-post/&labels=blog%20comments%20%26%20questions" target="_blank"><b>issue</b></a>,
+         submit a <a href="https://github.com/vermont42/racecondition.software/compare" target="_blank"><b>pull request</b></a>,
+         or <a href="https://github.com/jessesquires/jessesquires.com/edit/master/_posts/2018-04-08-test-post.md" target="_blank"><b>edit</b></a> this post.</small></p>
+      </div> <!-- col -->
+   </div> <!-- row -->
+
+</div> <!-- post-share-subscribe -->
+
+
+            </div> <!-- col -->
+         </div> <!-- row -->
+      </div> <!-- container -->
+
+      
+<footer class="container container-fluid">
+   <hr>
+
+   <div class="row contact">
+    <div class="col-sm-12 col-sm-offset-0 col-md-8 col-md-offset-2">
+        <ul class="inline center">
+            <li><a href="https://github.com/vermont42/" title="Follow me on Github"><i class="fa fa-lg fa-github" aria-hidden="true"></i></a></li>
+            <li><a href="https://twitter.com/vermont42" title="Follow me on Twitter"><i class="fa fa-lg fa-twitter" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/josh-adams-4839b41" title="Connect with me on LinkedIn"><i class="fa fa-lg fa-linkedin" aria-hidden="true"></i></a></li>
+            <li><a href="/feed.xml" title="Subscribe via RSS/atom"><i class="fa fa-lg fa-rss-square" aria-hidden="true"></i></a></li>
+        </ul>
+    </div> <!-- col -->
+</div> <!-- row -->
+
+
+   <p class="text-muted text-center"><small>
+   &copy; 2018 Josh Adams.
+   This site is <a href="https://github.com/vermont42/racecondition.software">open source</a>.
+   </small></p>
+</footer>
+
+      
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+   </body>
+</html>

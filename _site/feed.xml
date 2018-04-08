@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Race Condition</title>
+    <subtitle>A Blog by Josh Adams</subtitle>
+    <link href="http://localhost:4000/feed.xml" rel="self" />
+    <link href="http://localhost:4000" />
+    <updated>2018-04-08T14:31:06-07:00</updated>
+    <id>http://localhost:4000</id>
+
+    <author>
+        <name>Josh Adams</name>
+    </author>
+
+    <icon>http://localhost:4000/ico/logo.jpg</icon>
+
+    <category term="programming"/>
+    <category term="ios"/>
+    <category term="swift"/>
+    <category term="objective-c"/>
+    <category term="software"/>
+    <category term="mobile"/>
+
+    
+    <entry>
+        <link href="http://localhost:4000/blog/test-post/" />
+        <id>http://localhost:4000/blog/test-post</id>
+        <title>Test Post</title>
+        <subtitle>This is a test post.</subtitle>
+        <published>2018-04-08T00:00:00-07:00</published>
+        
+        <updated>2018-04-08T00:00:00-07:00</updated>
+        
+        <summary><p>This is the body of the post.</p>
+
+<figure>
+    <img class="img-thumbnail img-responsive center " src="/img/" title="" alt="" />
+    
+</figure>
+
+
+        </summary>
+        <content type="html">&lt;p&gt;This is the body of the post.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;img class=&quot;img-thumbnail img-responsive center &quot; src=&quot;/img/&quot; title=&quot;&quot; alt=&quot;&quot; /&gt;
+    
+&lt;/figure&gt;
+
+
+        </content>
+    </entry>
+    
+</feed>
