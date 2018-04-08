@@ -4,7 +4,7 @@
     <subtitle>A Blog by Josh Adams</subtitle>
     <link href="http://localhost:4000/feed.xml" rel="self" />
     <link href="http://localhost:4000" />
-    <updated>2018-04-08T14:31:06-07:00</updated>
+    <updated>2018-04-08T15:15:50-07:00</updated>
     <id>http://localhost:4000</id>
 
     <author>
@@ -33,7 +33,11 @@
         <summary><p>This is the body of the post.</p>
 
 <figure>
-    <img class="img-thumbnail img-responsive center " src="/img/" title="" alt="" />
+    <img class="img-thumbnail img-responsive center " src="/img/Sandy.jpg" title="Sandy" alt="Sandy" />
+    
+        <figcaption>
+            <p><small class="text-muted center">Sandy </small></p>
+        </figcaption>
     
 </figure>
 
@@ -42,7 +46,11 @@
         <content type="html">&lt;p&gt;This is the body of the post.&lt;/p&gt;
 
 &lt;figure&gt;
-    &lt;img class=&quot;img-thumbnail img-responsive center &quot; src=&quot;/img/&quot; title=&quot;&quot; alt=&quot;&quot; /&gt;
+    &lt;img class=&quot;img-thumbnail img-responsive center &quot; src=&quot;/img/Sandy.jpg&quot; title=&quot;Sandy&quot; alt=&quot;Sandy&quot; /&gt;
+    
+        &lt;figcaption&gt;
+            &lt;p&gt;&lt;small class=&quot;text-muted center&quot;&gt;Sandy &lt;/small&gt;&lt;/p&gt;
+        &lt;/figcaption&gt;
     
 &lt;/figure&gt;
 

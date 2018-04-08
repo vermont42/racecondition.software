@@ -27,8 +27,8 @@
                 "url": "http://localhost:4000",
                 "avatar": "http://localhost:4000/ico/avatar.jpg"
             },
-            "summary": "<p>This is the body of the post.</p>\n\n<figure>\n    <img class=\"img-thumbnail img-responsive center \" src=\"/img/\" title=\"\" alt=\"\" />\n    \n</figure>\n\n",
-            "content_html": "<p>This is the body of the post.</p>\n\n<figure>\n    <img class=\"img-thumbnail img-responsive center \" src=\"/img/\" title=\"\" alt=\"\" />\n    \n</figure>\n\n"
+            "summary": "<p>This is the body of the post.</p>\n\n<figure>\n    <img class=\"img-thumbnail img-responsive center \" src=\"/img/Sandy.jpg\" title=\"Sandy\" alt=\"Sandy\" />\n    \n        <figcaption>\n            <p><small class=\"text-muted center\">Sandy </small></p>\n        </figcaption>\n    \n</figure>\n\n",
+            "content_html": "<p>This is the body of the post.</p>\n\n<figure>\n    <img class=\"img-thumbnail img-responsive center \" src=\"/img/Sandy.jpg\" title=\"Sandy\" alt=\"Sandy\" />\n    \n        <figcaption>\n            <p><small class=\"text-muted center\">Sandy </small></p>\n        </figcaption>\n    \n</figure>\n\n"
         }
         
     ]
