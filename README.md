@@ -6,7 +6,7 @@
 
 ## About
 
-This my website about software development. Eventually, this website will be a companion to a podcast also called Race Condition.
+This my website about software development, primarily, but not exclusively, on iOS and using Swift. Eventually, this website will be a companion to a podcast also called Race Condition.
 
 Lovingly built with [Jekyll](https://jekyllrb.com), [Bootstrap](https://getbootstrap.com), [jQuery](https://jquery.com), and [Font Awesome](https://fortawesome.github.io/Font-Awesome/). Gratefully copied from [Jesse Squires](https://github.com/jessesquires/jessesquires.com).
 
