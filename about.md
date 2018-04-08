@@ -5,7 +5,7 @@ title: About
 
 I'm a software developer in San Francisco, California. Although my primary focus is Swift, I have also written code in Atari BASIC, GFA BASIC, HyperTalk, C++, C, SQL, PL/SQL, Java, Objective-C, BASH, and JavaScript.
 
-Software is both my career and my hobby. As a hobbyist, I have released three iOS apps, [Immigration](https://itunes.apple.com/us/app/immigration/id777319358), [RaceRunner](https://itunes.apple.com/us/app/racerunner-run-tracking-app/id1065017082), and [Conjugar](https://itunes.apple.com/us/app/conjugar/id1236500467), as well as a variety of [open-source](https://github.com/vermont42) libraries.
+Software is both my career and my hobby. As a hobbyist, I have released three iOS apps: [Immigration](https://itunes.apple.com/us/app/immigration/id777319358), [RaceRunner](https://itunes.apple.com/us/app/racerunner-run-tracking-app/id1065017082), and [Conjugar](https://itunes.apple.com/us/app/conjugar/id1236500467). I have also released a variety of [open-source](https://github.com/vermont42) libraries.
 
 My interests outside software are wide-ranging and include linguistics, population genetics, geography, [podcasts](https://github.com/vermont42/Podcasts), and [jam bands](https://www.youtube.com/watch?v=RHT7Kr_50Uo).
 
