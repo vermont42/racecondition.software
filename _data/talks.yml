@@ -21,7 +21,7 @@ talk1:
     location:
         name: Realm
         link: https://realm.io
-        city: San Francisco 🇺🇸🇬
+        city: San Francisco 🇺🇸
     links:
         code: https://github.com/vermont42/GpxLocationManager
         video: https://academy.realm.io/posts/josh-adams-gpx-location-manager/
