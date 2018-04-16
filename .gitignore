@@ -1,0 +1,58 @@
+.DS_Store
+
+# jekyll
+
+.jekyll-metadata
+_site/
+
+# ignore all extra node_modules from yarn
+# only keep dependency source (not entire git repo)
+
+# bootstrap
+
+node_modules/bootstrap/*
+!node_modules/bootstrap/dist/
+
+node_modules/bootstrap/dist/*
+!node_modules/bootstrap/dist/css
+!node_modules/bootstrap/dist/fonts
+!node_modules/bootstrap/dist/js
+
+node_modules/bootstrap/dist/css/*
+!node_modules/bootstrap/dist/css/*.min.css
+
+node_modules/bootstrap/dist/js/*
+!node_modules/bootstrap/dist/js/*.min.js
+
+# font awesome
+
+node_modules/font-awesome/*
+!node_modules/font-awesome/css/
+!node_modules/font-awesome/fonts
+
+node_modules/font-awesome/css/*
+!node_modules/font-awesome/css/*.min.css
+
+# html5shiv
+
+node_modules/html5shiv/*
+!node_modules/html5shiv/dist
+
+node_modules/html5shiv/dist/*
+!node_modules/html5shiv/dist/*.min.js
+
+# jquery
+
+node_modules/jquery/*
+!node_modules/jquery/dist
+
+node_modules/jquery/dist/*
+!node_modules/jquery/dist/*.min.js
+
+# respond.js
+
+node_modules/respond.js/*
+!node_modules/respond.js/dest
+
+node_modules/respond.js/dest/*
+!node_modules/respond.js/dest/*.min.js
