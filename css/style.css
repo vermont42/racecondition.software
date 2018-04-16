@@ -12,7 +12,6 @@ body p {
 }
 
 hr {
-   border-color: #d7d7d7;
    width: 50%;
 }
 
@@ -27,10 +26,6 @@ h1 > code, h2 > code, h3 > code {
    margin-right: auto;
    display: block;
    text-align: center;
-}
-
-.btn-default {
-   color: #444444;
 }
 
 a > code {
@@ -48,44 +43,16 @@ a > code {
 
 /* LINKS */
 
-a {
-   color: #31808c;
-}
-
-a:link {
-   border-bottom: 1px dotted #31808c;
-}
-
-a:visited {
-   border-bottom: 0px none #31808c;
-}
-
-a:hover {
-   color: #47bacc;
-   text-decoration: none;
-}
-
-a:active {
-   text-decoration:none;
-}
-
 h1 > a:link {
    border-width: 0px;
 }
 
-a.post-continue:hover {
-   color: #47bacc;
-   border-color: #47bacc;
-}
-
 a.post-continue {
-   color: #666666;
    border-width: 0px;
 }
 
 footer a, footer a:visited,
 .contact a, .contact a:visited {
-  color: #444444;
 }
 
 .dropdown-menu a {
@@ -97,7 +64,6 @@ footer a, footer a:visited,
 }
 
 .contact ul li a:hover {
-   color: #666666;
    text-decoration: none;
 }
 
@@ -105,13 +71,12 @@ footer a, footer a:visited,
 
 header, header code {
    text-align: center;
-   color: #444444;
 }
 
 header h1 {
    font-size: 50px;
    font-weight: normal;
-   font-family: 'Ubuntu Mono', 'Arial';
+   font-family: 'Arial';
    display: inline-block;
 }
 
@@ -157,14 +122,12 @@ header h2 {
 }
 
 .post-subtitle {
-   color: #444444;
    font-size: 26px;
    font-weight: normal;
    margin-top: 0rem;
 }
 
 .post-date {
-   color: #666666;
    display: inline-block;
 }
 
@@ -187,7 +150,6 @@ header h2 {
 /* PAGES */
 
 a.btn, a:visited.btn, a:link.btn {
-   color: #666666;
    border: 1px solid #ccc;
 }
 
@@ -220,10 +182,6 @@ sup a:link {
 
 .feedback {
   margin: 1rem;
-}
-
-blockquote {
-   color: #555;
 }
 
 .standalone {
