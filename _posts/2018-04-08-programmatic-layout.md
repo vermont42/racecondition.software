@@ -874,7 +874,7 @@ On an illustrative note, here is the implementation of a selector for a `UISegme
 }
 ```
 
-26\. Conversion is complete! For the sake of [簡素](https://theendlessfurther.com/tag/kanso/), delete `Main.storyboard` and commented-out IB-dependent code. A fully converted version of the app is available [here](). Enjoy learning about cat breeds.
+26\. Conversion is complete! For the sake of [簡素](https://theendlessfurther.com/tag/kanso/), delete `Main.storyboard` and commented-out IB-dependent code. A fully converted version of the app is available [here](https://github.com/vermont42/CatBreedsPL). Enjoy learning about cat breeds.
 
 ### Closing Thoughts
 
