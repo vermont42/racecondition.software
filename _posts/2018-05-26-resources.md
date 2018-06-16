@@ -6,7 +6,7 @@ date-updated: 26 May 2018
 
 ---
 
-I make iOS apps as a means of supporting my family and as a creative outlet. On the creative side, I have released three apps in the past five years: [Immigration](https://itunes.apple.com/us/app/immigration/id777319358), [RaceRunner](https://itunes.apple.com/us/app/racerunner-run-tracking-app/id1065017082), and [Conjugar](https://itunes.apple.com/us/app/conjugar/id1236500467). Like many side-project apps, mine have had small budgets for asset creation. But they have greatly benefitted from free and low-cost assets (FALCAs). In this post, I introduce five sources for these FALCAs: Coolors, icon websites, Google Images, Sound Jay, and Incompetech.
+I make iOS apps as a means of supporting my family and as a creative outlet. On the creative side, I have released three apps in the past five years: [Immigration](https://itunes.apple.com/us/app/immigration/id777319358), [RaceRunner](https://itunes.apple.com/us/app/racerunner-run-tracking-app/id1065017082), and [Conjugar](https://itunes.apple.com/us/app/conjugar/id1236500467). Like many side-project apps, mine have had small budgets for asset creation. But they have greatly benefitted from free and low-cost assets (FALCAs). In this post, I introduce five sources for these FALCAs: Coolors, icon websites, Google Images, Sound Jay, Incompetech, and Free App Store Preview Music.
 
 <!--excerpt-->
 
@@ -84,19 +84,21 @@ With respect to the app icon, I recommend hiring someone to create it. The app i
 
 Some apps also need photos. As the app developer, you can sometimes take the photo you need with your iPhone. For CatBreeds, I had access to cats of two required breeds, Tonkinese and Abyssinian, so I took those photos and used them. But I did not have access to cats of any of the other nine breeds. So I got the photos I needed from [Google Images](http://images.google.com/) searches. You are perhaps already familiar with Google Images, but I mention it here as a lead-in to the following tip. When searching for images to use in side-project apps, filter by license. In search results, click `Tools -> Usage rights`. Choose an option. `Labeled for reuse with modification` is the most-permissive option, but there are others. With the proper filter, the image you choose will be safe for use.
 
-
 ### Sound Jay
 
 Expanding the Treehouse [definition](http://blog.teamtreehouse.com/affordances-web-design), an affordance is a "clue[] about how an object should be", can be, or has been used. An example is the scroll bar in a `UIScrollView`, which informs the user that a view can be further scrolled. Sounds can act as affordances. In RaceRunner, for example, the starter-pistol sound that plays when a run starts a run confirms that the user has tapped the start-run button. As Treehouse has noted, "affordances ... can help lead to more intuitive user experiences." I incorporate sound into my apps both as an affordance and to add an element of fun. As an example of the latter, when a search fails in Immigration, a sad trombone plays.
 
 I have acquired all sounds for my side-project apps from a website called [Sound Jay](https://www.soundjay.com), which features thousands of permissively [licensed](https://www.soundjay.com/tos.html) sounds. By way of example of the breadth of Sound Jay's catalog, there are _nine_ different [applause sounds](https://www.soundjay.com/applause-sounds-1.html).
 
-### Incompetech
+### Incompetech & Free App Store Preview Music
 
 Apple [describes](https://developer.apple.com/app-store/app-previews/) "[a]pp previews [as a] demonstrat[ion of] the features, functionality, and user interface of your app using footage captured on device." I consider app previews to be app advertisements. The [right song](https://www.youtube.com/watch?v=CcXwlOBbCT0) makes an advertisement stand out.
 
-There is, on the Internet, a handy source of music for app previews and [other](https://vimeo.com/188424809) purposes: [Incompetech](https://incompetech.com). Genres available include disco, lounge, electronic, rock, Christmas, jazz, and classical. Songs are free to use with attribution or can be used without attribution for the [low, low](https://www.youtube.com/watch?v=9o-DCk2qhDM) price of $30. I use Incompetech for [all](https://vimeo.com/158836234) my app previews.
+There are, on the Internet, two handy sources of music for app previews and [other](https://vimeo.com/188424809) purposes.
 
+One is [Incompetech](https://incompetech.com). Genres available include disco, lounge, electronic, rock, Christmas, jazz, and classical. Songs are free to use with attribution or can be used without attribution for the [low, low](https://www.youtube.com/watch?v=9o-DCk2qhDM) price of $30. I use Incompetech for [all](https://vimeo.com/158836234) my app previews.
+
+The other is [Free App Store Preview Music](https://soundcloud.com/good_day_sir/sets/free-app-store-preview-music) by [Matt Luedke](https://twitter.com/matt_luedke). License: Creative Commons. Matt also composes full-length songs. I like [Real Thing](https://soundcloud.com/good_day_sir/real-thing-instrumental). On a parenthetical note, his [tutorial](https://www.raywenderlich.com/155772/make-app-like-runkeeper-part-1-2) was the starting point for RaceRunner.
 
 ### Exhortation and Question for the Reader
 
