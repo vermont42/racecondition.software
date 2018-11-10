@@ -99,3 +99,13 @@ accent = Accent(rawValue: storedAccentString) ?? .🇺🇸
 ```
 
 Initialization of `Accent` based on `rawValue` can fail, but since most RaceRunner users are in the United States, American is a sensible default for accent. I had been force-unwrapping, but, since the cleanup, I use this default value.
+
+### Postscript
+
+Reader Olivier [Halligon](https://twitter.com/aligatr?lang=fr) suggested an alternative [solution](https://github.com/SwiftGen/SwiftGen) to the problem described in this post: "SwiftGen[,] a tool to auto-generate Swift code for resources of your projects, [making] them type-safe to use." Using SwiftGen, per the readme, a `UIImage` can be initialized as follows:
+
+```
+let bananaImage = UIImage(asset: Asset.Exotic.banana)
+```
+
+No force-unwrap! I plan to trial SwiftGen in my next greenfield app.
