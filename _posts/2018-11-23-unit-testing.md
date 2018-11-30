@@ -10,7 +10,15 @@ This blog post describes, by way of a real-world example, how to use dependency 
 
 <!--excerpt-->
 
-I am in the process of adding unit tests to my Spanish-verb-conjugation [app](https://github.com/vermont42/Conjugar), [Conjugar](https://itunes.apple.com/us/app/conjugar/id1236500467). My primary motivation is to ensure that future code changes do not break existing functionality. As Jon Reid [observed](https://qualitycoding.org), "[a] robust suite of unit tests acts as a safety harness, giving you [courage](https://www.theverge.com/2016/9/7/12838024/apple-iphone-7-plus-headphone-jack-removal-courage) to make bold changes."
+{% include image.html
+    file="dependencyInjection/dancers.jpg"
+    alt="Flamenco Dancers"
+    caption="Flamenco Dancers by Max Pixel, Licensed Under CC0"
+    source_link=null
+    half_width=false
+%}
+
+I am in the process of adding unit tests to my Spanish-verb-conjugation [app](https://github.com/vermont42/Conjugar), [Conjugar](https://itunes.apple.com/us/app/conjugar/id1236500467). My primary motivation is to ensure that future code changes do not break existing functionality. As Jon Reid [observed](https://qualitycoding.org), "[a] robust suite of unit tests acts as a safety harness, giving you [courage](https://www.theverge.com/2016/9/7/12838024/apple-iphone-7-plus-headphone-jack-removal-courage) to make bold changes." A secondary benefit of unit testing is that the act of writing unit tests smokes out bugs by ensuring that functionality is fully [exercised](https://english.stackexchange.com/questions/111583/exercise-but-not-exercize). For example, when I was writing unit tests for this blog post, I discovered that quizzes were not quizzing conjugations for one of the Spanish pronouns.
 
 With the goal of making my app testable, I audited every type for code that currently makes unit testing difficult or impossible. (By "type", I mean `class`, `struct`, or `enum`.) For each type, I recorded answers to the following questions:
 
