@@ -1,5 +1,9 @@
 .DS_Store
 
+# S3 Logs
+
+logs/
+
 # jekyll
 
 .jekyll-metadata
