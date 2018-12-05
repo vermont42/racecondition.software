@@ -319,7 +319,7 @@ As the screenshot demonstrates, the only thing not tested is the actual `SKStore
 
 #### Closing Thoughts
 
-Modifying `ReviewPrompter` and `Settings` for unit testability was a lot of work. I still need to modify the other seven seven settings in Conjugar as well as thirty `Settings` call sites. The globality of `Settings` was the largest impediment to unit testing all of Conjugar, however, so this initial step is a big one towards my goal. That said, in my next greenfield project, I plan to inject dependencies from day one.
+Modifying `ReviewPrompter` and `Settings` for unit testability was a lot of work. I still need to modify the other seven  settings in Conjugar as well as thirty `Settings` call sites. The globality of `Settings` was the largest impediment to unit testing all of Conjugar, however, so this initial step is a big one towards my goal. That said, in my next greenfield project, I plan to inject dependencies from day one.
 
 Widespread application of dependency injection will not only facilitate unit testing of Conjugar but also UI testing. I could imagine using [launch arguments](https://developer.apple.com/documentation/xctest/xcuiapplication/1500477-launcharguments) in UI tests to control, for example, the presence of _vos_ conjugations in the UI and the sequence of verbs in the conjugation quiz. That sequence is currently random, but I envision adding a facility to inject a not-so-random-number generator into the `Quiz` model so that the sequence of verbs is repeatable across UI-test launches.
 
