@@ -95,7 +95,7 @@ I propose the following definition for dependency injection: "explicitly providi
 
 As noted above, `ReviewPrompter`'s use of a global settings object was problematic both because of the assumption of that object's existence and because changes by `ReviewPrompter` to that object could affect both other unit tests and ordinary operation of the app. The solution was to *inject* a settings object into `ReviewPrompter`. That way, clients, specifically unit tests, could fully control the settings object and avoid side effects on other unit tests and ordinary operation of the app.
 
-In Conjugar (and my [two](https://itunes.apple.com/us/app/immigration/id777319358) [other](https://itunes.apple.com/us/app/racerunner-run-tracking-app/id1065017082) side-hussle apps, for that matter), I had implemented settings as a globally accessible singleton backed by `UserDefaults`. In order to inject settings in the unit-testing context, I had to give clients the option of using a settings object that was not globally accessible and, because I did not want side effects, that was not backed by `UserDefaults`. Here is my initial no-side-effects implementation:
+In Conjugar (and my [two](https://itunes.apple.com/us/app/immigration/id777319358) [other](https://itunes.apple.com/us/app/racerunner-run-tracking-app/id1065017082) side-hustle apps, for that matter), I had implemented settings as a globally accessible singleton backed by `UserDefaults`. In order to inject settings in the unit-testing context, I had to give clients the option of using a settings object that was not globally accessible and, because I did not want side effects, that was not backed by `UserDefaults`. Here is my initial no-side-effects implementation:
 
 ```
 import Foundation
@@ -319,7 +319,7 @@ As the screenshot demonstrates, the only thing not tested is the actual `SKStore
 
 #### Closing Thoughts
 
-Modifying `ReviewPrompter` and `Settings` for unit testability was a lot of work. I still need to modify the other seven  settings in Conjugar as well as thirty `Settings` call sites. The globality of `Settings` was the largest impediment to unit testing all of Conjugar, however, so this initial step is a big one towards my goal. That said, in my next greenfield project, I plan to inject dependencies from day one.
+Modifying `ReviewPrompter` and `Settings` for unit testability was a lot of work. I still need to modify the other seven settings in Conjugar as well as thirty `Settings` call sites. The globality of `Settings` was the largest impediment to unit testing all of Conjugar, however, so this initial step is a big one towards my goal. That said, in my next greenfield project, I plan to inject dependencies from day one.
 
 Widespread application of dependency injection will not only facilitate unit testing of Conjugar but also UI testing. I could imagine using [launch arguments](https://developer.apple.com/documentation/xctest/xcuiapplication/1500477-launcharguments) in UI tests to control, for example, the presence of _vos_ conjugations in the UI and the sequence of verbs in the conjugation quiz. That sequence is currently random, but I envision adding a facility to inject a not-so-random-number generator into the `Quiz` model so that the sequence of verbs is repeatable across UI-test launches.
 
