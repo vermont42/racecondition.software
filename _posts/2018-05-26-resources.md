@@ -2,7 +2,6 @@
 layout: post
 title: Free and Low-Cost App Assets
 subtitle: Some Learnings from Five Years of Side-Project  Development
-date-updated: 26 May 2018
 
 ---
 

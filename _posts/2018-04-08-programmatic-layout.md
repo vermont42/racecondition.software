@@ -2,7 +2,6 @@
 layout: post
 title: Converting an App from Interface Builder to Programmatic Layout
 subtitle: A Step-by-Step Tutorial
-date-updated: 08 Apr 2018
 
 ---
 

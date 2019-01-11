@@ -18,8 +18,8 @@ permalink: /blog/:title/
 # Site
 title: 'Race Condition'
 description: 'A Blog by Josh Adams'
-url: http://racecondition.software
-logo: /ico/logo.jpg
+url: http://www.racecondition.software
+logo: /ico/logo.png
 timezone: America/Los_Angeles
 img_url: /img
 

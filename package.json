@@ -1,0 +1,10 @@
+{
+  "name": "Race-Condition",
+  "description": "A Blog by Josh Adams",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "4.2.1",
+    "font-awesome": "4.7.0",
+    "jquery": "3.3.1"
+  }
+}

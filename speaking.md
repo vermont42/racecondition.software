@@ -3,18 +3,9 @@ layout: standalone
 title: Speaking
 ---
 
-I am proud to have spoken about Swift development at a meetup and at a conference. The preparation is brutal, but the experience is rewarding.
+I am proud to have spoken in public about software development on several occasions. The preparation is brutal, but the reward is great.
 
-### Upcoming Talks
-
-<div class="table-responsive" markdown="1">
-| <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp; Date | <i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp; Event |
-|:------------|:-----------------------------|
-| 🤞           | 🤞                            |
-{: class="table table-striped table-bordered"}
-</div>
-
-### Past Talks
+### Upcoming and Past Talks
 
 <div class="table-responsive">
     <table class="table table-striped table-bordered">

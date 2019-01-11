@@ -2,7 +2,6 @@
 layout: post
 title: Dependency Injection for Testability
 subtitle: A Real-World Example
-date-updated: 30 Nov 2018
 
 ---
 
