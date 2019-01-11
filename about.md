@@ -15,6 +15,10 @@ This website started as a clone of Jesse Squires's [website](https://www.jessesq
 
 You can contact me [here](/contact).
 
-<div class="col-xs-12 col-xs-offset-0 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-<img class="img-thumbnail img-responsive center" src="{{ site.author.avatar }}" title="Josh Adams" alt="Josh Adams"/>
+<div class="row">
+    <div class="col"></div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+        <img class="img-thumbnail img-fluid center" src="{{ site.author.avatar }}" title="Josh Adams" alt="Josh Adams"/>
+    </div>
+    <div class="col"></div>
 </div>

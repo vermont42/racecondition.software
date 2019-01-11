@@ -1,4 +1,15 @@
-talk2:
+talk4:
+    date: September, 2019
+    title: 'Dependency Injection in Practice: Unit-Testing and More'
+    event:
+        name: iOSDevUK
+        link: https://www.iosdevuk.com/
+    location:
+        name: Prifysgol Aberystwyth
+        link: http://www.aber.ac.uk/cy/
+        city: Aberystwyth 🇬🇧
+
+talk3:
     date: September, 2017
     title: 'Conjugar: A Case Study of Programmatic Layout'
     event:
@@ -12,9 +23,9 @@ talk2:
         code: https://github.com/vermont42/Conjugar
         video: https://vimeo.com/217891291
 
-talk1:
+talk2:
     date: September, 2015
-    title: GPX Data in the Simulator
+    title: 'GPX Data in the Simulator'
     event:
         name: Swift Language User Group of San Francisco
         link: https://www.meetup.com/swift-language/
@@ -25,3 +36,14 @@ talk1:
     links:
         code: https://github.com/vermont42/GpxLocationManager
         video: https://academy.realm.io/posts/josh-adams-gpx-location-manager/
+
+talk1:
+    date: May, 2000
+    title: 'Methods for Moving Oracle Data'
+    event:
+        name: Independent Oracle Users Group
+        link: http://www.ioug.org
+    location:
+        name: Anaheim Convention Center & Arena
+        link: https://www.anaheim.net/1117/Anaheim-Convention-Center-Arena
+        city: Anaheim 🇺🇸

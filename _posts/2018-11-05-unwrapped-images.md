@@ -2,7 +2,6 @@
 layout: post
 title: Initializing UIImages Without Force-Unwrapping
 subtitle: No More Bangs
-date-updated: 05 Nov 2018
 
 ---
 

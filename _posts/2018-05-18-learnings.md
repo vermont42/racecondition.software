@@ -2,7 +2,6 @@
 layout: post
 title: How My Code Has Improved in Three Years
 subtitle: Some Learnings from RaceRunner
-date-updated: 18 May 2018
 
 ---
 
