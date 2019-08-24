@@ -341,7 +341,7 @@ init(verb: String, settings: Settings, analyticsService: AnalyticsServiceable)
 ```
 The `verb` parameter is central to this object's purpose. The other two parameters are mere dependeffects. In the Swinject and The World implementations, dependeffects would not clutter the parameter list and would therefore not obscure the centrality of the `verb` parameter.
 
-As of the time of writing, the `master` branch of Conjugar's [repo](https://github.com/vermont42/Conjugar) uses constructor injection.
+Branch `constructor-injection` of Conjugar's [repo](https://github.com/vermont42/Conjugar/tree/constructor-injection) uses constructor injection.
 
 #### Swinject
 
@@ -466,7 +466,7 @@ The disadvantage of The World is that singletons are controversial. As one Stack
 
 If minimizing controversy were my primary goal in choosing an approach to dependency injection, I would avoid The World. But it is not, and I would not. This is not to say that the perceptions of other developers play no [rôle](https://en.wikipedia.org/wiki/Circumflex) in my approach to software development. For example, for esthetic reasons, I would prefer, [like Eric Allman](https://en.wikipedia.org/wiki/Indentation_style#Allman_style), to put the opening brace ("{") on its own line. But following the overwhelming [preference](https://github.com/raywenderlich/swift-style-guide#spacing) of my software-development community, I put the opening brace at the end of the line beginning the relevant scope. That said, I find the technical benefits of The World, described in preceding paragraphs, more compelling than my esthetic preference for [Allman](https://www.youtube.com/watch?v=Wqg4taiLRRE)-style brace placement.
 
-The `world` [branch](https://github.com/vermont42/Conjugar/tree/world) of Conjugar's repo uses The World.
+The `master` [branch](https://github.com/vermont42/Conjugar) of Conjugar's repo uses The World.
 
 ### Recommendations
 
@@ -476,7 +476,7 @@ In a small app with few dependeffects, I recommend constructor injection. This u
 
 If business needs strongly militate in favor of one or more features of Swinject, I recommend Swinject. More generally, I recommend examining the feature sets of other dependency-injection frameworks, including [Weaver](https://github.com/scribd/Weaver), [Typhoon](https://github.com/appsquickly/Typhoon), [Cleanse](https://github.com/square/Cleanse), and [Needle](https://github.com/uber/needle).
 
-Otherwise, the clarity and reduction-of-boilerplate benefits of The World cause me to recommend that approach. Indeed, although the `master` branch of Conjugar currently uses constructor injection, I am so convinced of The World's benefits that I plan to merge the `world` branch of Conjugar onto `master`, preserving then-`master` as a new branch, `constructor-injection`. Development of Conjugar will continue on `master`.
+Otherwise, the clarity and reduction-of-boilerplate benefits of The World cause me to recommend that approach. Indeed, I am so convinced of The World's benefits that Conjugar will use that approach going forward.
 
 ### Colophon
 
