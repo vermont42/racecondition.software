@@ -7,7 +7,10 @@ talk4:
     location:
         name: Prifysgol Aberystwyth
         link: http://www.aber.ac.uk/cy/
-        city: Aberystwyth 🇬🇧
+        city: Aberystwyth 🏴󠁧󠁢󠁷󠁬󠁳󠁿
+    links:
+        code: https://racecondition.software/blog/dependency-injection/
+        video: https://vimeo.com/217891291
 
 talk3:
     date: September, 2017
@@ -18,9 +21,9 @@ talk3:
     location:
         name: Prifysgol Aberystwyth
         link: http://www.aber.ac.uk/cy/
-        city: Aberystwyth 🇬🇧
+        city: Aberystwyth 🏴󠁧󠁢󠁷󠁬󠁳󠁿
     links:
-        code: https://github.com/vermont42/Conjugar
+        code: https://racecondition.software/blog/programmatic-layout/
         video: https://vimeo.com/217891291
 
 talk2:
