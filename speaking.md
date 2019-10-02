@@ -3,7 +3,7 @@ layout: standalone
 title: Speaking
 ---
 
-I am proud to have spoken in public about software development on several occasions. The preparation is brutal, but the reward is great.
+I am proud to have spoken in public about software development on several occasions. The preparation is intense, but the reward is great.
 
 ### Upcoming and Past Talks
 
