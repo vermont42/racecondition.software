@@ -234,7 +234,7 @@ With respect to naming the colors, here are two possible approaches. You can cho
 ```
 class BreedBrowseView: UIView {
   // 0
-  internal let table: UITableView = {
+  internal var table: UITableView = {
     let table = UITableView()
     // 1
     table.backgroundColor = Colors.blackish
@@ -303,21 +303,9 @@ In the code you pasted, the goal is for the content, the cat table, to extend to
 
 // 6: This code could go in `BreedBrowseVC`, but bundling it here is tidier.
 
-12\. The Auto Layout code in the preceding Step is annoying for two reasons. First, `translatesAutoresizingMaskIntoConstraints = false`, though necessary, is head-scratchy and hard-to-remember. Second, the syntax `.isActive = true` is awkward. Doug Suriano helpfully [provides](https://youtu.be/DmpoiN-SVds) fixes for both in the forms of extensions on `UIView` and `NSLayoutConstraint`.
+12\. The Auto Layout code in the preceding Step is annoying for two reasons. First, `translatesAutoresizingMaskIntoConstraints = false`, though necessary, is head-scratchy and hard-to-remember. Second, the syntax `.isActive = true` is awkward. Doug Suriano helpfully [provides](https://youtu.be/DmpoiN-SVds) a fix for repetition of `.isActive = true` in the form of an extension `NSLayoutConstraint`.
 
-In the `Misc` group, create a file called `UIViewExtension.swift` and give it the following contents:
-
-```
-import UIKit
-
-extension UIView {
-  func enableAutoLayout() {
-    translatesAutoresizingMaskIntoConstraints = false
-  }
-}
-```
-
-Also in the `Misc` group, create a file called `NSLayoutConstraintExtension.swift` and give it the following contents:
+In the `Misc` group, create a file called `NSLayoutConstraintExtension.swift` and give it the following contents:
 
 ```
 import UIKit
@@ -330,18 +318,29 @@ extension NSLayoutConstraint {
 }
 ```
 
-These two extensions provide cleaner ways to enable Auto Layout and activate constraints. How, you ask? In `BreedBrowseView.swift`, replace the line
+Antoine van der Lee helpfully [provides](https://www.avanderlee.com/swift/auto-layout-programmatically/) a fix for repetition of `translatesAutoresizingMaskIntoConstraints = false` in the form of a property wrapper.
+
+In the `Misc` group, create a file called `UsesAutoLayout.swift` and give it the following contents:
 
 ```
-table.translatesAutoresizingMaskIntoConstraints = false
+import UIKit
+
+@propertyWrapper
+public struct UsesAutoLayout<T: UIView> {
+  public var wrappedValue: T {
+    didSet {
+      wrappedValue.translatesAutoresizingMaskIntoConstraints = false
+    }
+  }
+
+  public init(wrappedValue: T) {
+    self.wrappedValue = wrappedValue
+    wrappedValue.translatesAutoresizingMaskIntoConstraints = false
+  }
+}
 ```
 
-with
-
-```
-table.enableAutoLayout()
-
-```
+This extension and property wrapper provide cleaner ways to enable Auto Layout and activate constraints. How, you ask? In `BreedBrowseView.swift`, add `@UsesAutoLayout` just above the line `internal var table: UITableView = {`.
 
 Replace the overridden `init()` with the following:
 
@@ -418,19 +417,19 @@ breedBrowseView.setupTable(dataSource: self, delegate: self)
 
 ```
 class BreedCell: UITableViewCell {
+  @UsesAutoLayout
   private var photo: UIImageView = {
     let photo = UIImageView()
     photo.contentMode = .scaleAspectFit
-    photo.enableAutoLayout()
     return photo
   } ()
 
+  @UsesAutoLayout
   private var name: UILabel = {
     let name = UILabel()
     name.textColor = Colors.white
     // 0
     name.font = Fonts.body
-    name.enableAutoLayout()
     return name
   } ()
 
@@ -589,20 +588,20 @@ This fixes the choppiness. The Author is open to less-hacky suggestions.
 
 ```
 class BreedDetailView: UIView {
+  @UsesAutoLayout
   internal var photo: UIImageView = {
     let photo = UIImageView()
     photo.contentMode = .scaleAspectFit
-    photo.enableAutoLayout()
     return photo
   } ()
 
+  @UsesAutoLayout
   internal var fullDescription: UITextView = {
     let fullDescription = UITextView()
     fullDescription.textColor = Colors.white
     fullDescription.backgroundColor = Colors.blackish
     fullDescription.font = Fonts.body
     fullDescription.bounces = false
-    fullDescription.enableAutoLayout()
     return fullDescription
   } ()
 
@@ -725,33 +724,33 @@ Build _and_ run. You now have a working breed-details screen. Scroll to see the 
 
 ```
 class CreditsView: UIView {
+  @UsesAutoLayout
   internal var credits: UITextView = {
     let credits = UITextView()
     credits.textColor = Colors.white
     credits.backgroundColor = Colors.blackish
     credits.font = Fonts.body
-    credits.enableAutoLayout()
     // 0
     credits.isEditable = false
     return credits
   } ()
 
   // 1
-  internal let meow1: UIButton = {
+  @UsesAutoLayout
+  internal var meow1: UIButton = {
     let meow1 = UIButton()
     meow1.setTitle("Meow 1", for: .normal)
     meow1.titleLabel?.font = Fonts.button
     meow1.setTitleColor(Colors.greenish, for: .normal)
-    meow1.enableAutoLayout()
     return meow1
   } ()
 
-  internal let meow2: UIButton = {
+  @UsesAutoLayout
+  internal var meow2: UIButton = {
     let meow2 = UIButton()
     meow2.setTitle("Meow 2", for: .normal)
     meow2.titleLabel?.font = Fonts.button
     meow2.setTitleColor(Colors.greenish, for: .normal)
-    meow2.enableAutoLayout()
     return meow2
   } ()
 
@@ -802,11 +801,9 @@ There are nine `UILabel`s near the top of the screen that are identical except f
 [translation, parentOrType, participioLabel, participio, gerundioLabel, gerundio, raizFuturaLabel, raizFutura, defectivo].forEach {
   $0.font = Fonts.label
   $0.textColor = Colors.yellow
-  $0.enableAutoLayout()
+  $0.translatesAutoresizingMaskIntoConstraints = false
 }
 ```
-
-
 
 // 2: Here is an example of using `forEach()` to avoid code duplication.
 
