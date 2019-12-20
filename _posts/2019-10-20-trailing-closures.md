@@ -85,7 +85,7 @@ Heterodox eschewal of trailing closures would be, I realized, grist for a blog p
 
 > I am researching a blog post in which I will argue that trailing closures sometimes are not conducive to maximum code clarity and maintainability. To that end, I would like to ask this forum a couple questions about trailing closures. First, what language, if any, inspired their inclusion in Swift? I heard Ruby, but I don’t have confirmation of that. Second, why do folks use them? Some reasons I can think of are terseness, not having to include the argument label or closing paren, and desire to follow the prevailing practice.
 
-Several commenters stated that the do not avoid trailing closures but rather restrict their use.
+Several commenters stated that they do not avoid trailing closures but rather restrict their use.
 
 Erica Sadun suggested, "Perhaps you should consider whether the closure is being used procedurally or functionally in your writeup. I follow [Lily Ballard]'s lead, trying to restrict them to procedural applications."
 
