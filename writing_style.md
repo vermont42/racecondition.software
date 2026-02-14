@@ -25,6 +25,8 @@ An analysis of Josh Adams's writing style based on blog posts at racecondition.s
 - **Precision over brevity.** Favors exact phrasing over conciseness, using qualifiers and nested clauses to capture nuance.
 - **Deliberate neologisms.** Coins terms freely ("dependeffect", "globality", "difficultizing") and often flags this explicitly: "a word I unashamedly just invented."
 - **Orthographic attention.** Obsessive care about diacritics, IPA notation, and letter-combination history. The French spelling post is entirely dedicated to orthographic consistency.
+- **No em dashes.** Avoid em dashes entirely. Instead, use a colon, semicolon, or comma. Or break into a new sentence with a period.
+- **Hyphenated phrasal adjectives.** Consistently hyphenate phrasal adjectives ("well-known pattern," "type-safe approach"). Exceptions: adverbs ending in -ly ("swiftly tilting planet," not "swiftly-tilting planet") and proper nouns ("New Jersey Turnpike," not "New-Jersey Turnpike").
 
 ## Content Patterns
 
