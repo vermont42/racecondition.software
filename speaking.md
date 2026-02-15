@@ -3,7 +3,7 @@ layout: standalone
 title: Speaking
 ---
 
-I am proud to have spoken in public about software development on several occasions. The preparation is intense, but the reward is great.
+I am fortunate to have had the opportunity to speak about software development in various public fora, including meet-ups, conferences, and videos.
 
 <div class="table-responsive">
     <table>

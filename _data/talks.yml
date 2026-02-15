@@ -1,5 +1,19 @@
+talk5:
+    date: December 2023
+    title: 'iOSExpert: All the Knowledge You Need for the iOS-Developer Interview'
+    event:
+        name: AlgoExpert
+        link: https://www.algoexpert.io
+    location:
+        name: My House
+        link: https://www.cityoforinda.gov
+        city: Orinda, CA 🦝
+    links:
+        code: https://github.com/algoexpert-io/iOSExpert
+        video: https://www.algoexpert.io/ios/product
+
 talk4:
-    date: September, 2019
+    date: September 2019
     title: 'Dependency Injection in Practice: Unit-Testing and More'
     event:
         name: iOSDevUK
@@ -13,7 +27,7 @@ talk4:
         video: https://vimeo.com/217891291
 
 talk3:
-    date: September, 2017
+    date: September 2017
     title: 'Conjugar: A Case Study of Programmatic Layout'
     event:
         name: iOSDevUK
@@ -27,7 +41,7 @@ talk3:
         video: https://vimeo.com/217891291
 
 talk2:
-    date: September, 2015
+    date: September 2015
     title: 'GPX Data in the Simulator'
     event:
         name: Swift Language User Group of San Francisco
@@ -38,10 +52,10 @@ talk2:
         city: San Francisco 🇺🇸
     links:
         code: https://github.com/vermont42/GpxLocationManager
-        video: https://academy.realm.io/posts/josh-adams-gpx-location-manager/
+        video: https://vimeo.com/138813570
 
 talk1:
-    date: May, 2000
+    date: May 2000
     title: 'Methods for Moving Oracle Data'
     event:
         name: Independent Oracle Users Group

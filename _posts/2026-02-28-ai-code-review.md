@@ -8,6 +8,14 @@ Reviewing your own code is hard. Not because you lack the skill, but because you
 
 <!--excerpt-->
 
+{% include image.html
+    file="aiCodeReview/Bundestag.png"
+    alt="A stylized illustration of the German Reichstag building with its iconic glass dome, rendered in warm tones with geometric detail"
+    caption="The Reichstag in Berlin, home of the Bundestag, representing the German cultural context of the Konjugieren app discussed in this post"
+    source_link=null
+    half_width=false
+%}
+
 ## The Setup
 
 Konjugieren had been in active development for approximately six weeks, built with Claude Code as my primary co-developer.[^1] The codebase was in what I considered a mature state: shipping-ready, well tested, with a CLAUDE.md file encoding my coding conventions, including an explicit prohibition on force-unwrapping in production code. I asked Claude to review the entire codebase as if it were a fresh pair of eyes, with no knowledge of what had been previously discussed or decided. The instruction was simple: find everything worth noting, categorize by severity, and provide specific file and line references.
