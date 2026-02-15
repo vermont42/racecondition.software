@@ -8,6 +8,14 @@ The standard narrative about AI-assisted software development is seductively uni
 
 <!--excerpt-->
 
+{% include image.html
+    file="youHelpClaude/Pretzel.png"
+    alt="A cheerful pretzel character wearing traditional Bavarian lederhosen and waving, the mascot of the Konjugieren German verb-conjugation app"
+    caption="The Konjugieren app mascot, a pretzel in lederhosen, representing the German-language focus of the project discussed in this post"
+    source_link=null
+    half_width=false
+%}
+
 ## The One-Directional Fallacy
 
 The dominant narrative about AI-assisted development, the one you encounter in conference keynotes and Hacker News threads alike, positions the human as the architect and the AI as the mason. You prompt; it responds. You evaluate; it revises. The relationship is unidirectional: the AI helps you.

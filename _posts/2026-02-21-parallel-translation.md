@@ -8,6 +8,14 @@ A professional translator produces roughly 2,000 to 3,000 words per day. At that
 
 <!--excerpt-->
 
+{% include image.html
+    file="parallelTranslation/Hat.png"
+    alt="A traditional Bavarian hat with a white feather and a braided cord in the black, red, and gold of the German flag"
+    caption="A traditional Bavarian hat adorned with the colors of the German flag, evoking the German-language localization at the heart of this post"
+    source_link=null
+    half_width=false
+%}
+
 ## The Localization Problem
 
 Konjugieren is an iOS app for learning German verb conjugations.[^1] Its content is extensive: thirteen articles explaining each German tense and mood, a terminology guide, a credits page, a dedication, verb-history essays, onboarding flows, and dozens of interface strings. In total, the app contains roughly 32,000 English words spread across 131 localization keys. The German localization contains a comparable 33,000 words. Combined, the bilingual corpus exceeds 65,000 words.

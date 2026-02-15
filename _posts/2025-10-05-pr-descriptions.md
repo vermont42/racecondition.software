@@ -4,7 +4,7 @@ title: High-Quality Pull-Request Descriptions
 subtitle: Much Benefit
 ---
 
-One of the primary duties of a software developer is enhancing and fixing existing codebases. We do this by raising[^1] pull requests (PRs)[^2], getting them approved, and merging[^3] them to the codebase. I have been performing this duty for the entirety of my fifteen-year career as a software developer, and I've amassed a toolkit for this process. One tool is raising error-free PRs. I wrote about that [here](https://www.racecondition.software/blog/proofing/). The post you are reading is about another tool: writing a high-quality PR description.[^4] The tips in this post, if adopted, will help you get PRs approved more quickly, spark joy in your PR-reviewer coworkers, and facilitate debugging far into the [future](https://youtu.be/yhuleEXuULg?si=CAQSotaF-OE5M3i-). 
+One of the primary duties of a software developer is enhancing and fixing existing codebases. We do this by raising pull requests (PRs), getting them approved, and merging them to the codebase. I have been performing this duty for the entirety of my fifteen-year career as a software developer, and I've amassed a toolkit for this process. One tool is raising error-free PRs. I wrote about that [here](https://www.racecondition.software/blog/proofing/). The post you are reading is about another tool: writing a high-quality PR description. The tips in this post, if adopted, will help you get PRs approved more quickly, spark joy in your PR-reviewer coworkers, and facilitate debugging far into the [future](https://youtu.be/yhuleEXuULg?si=CAQSotaF-OE5M3i-). 
 
 My target audience is primarily software developers. But non-developers who are curious about what we do might enjoy this post. Endnotes following it define terms that are likely unfamiliar to the developer-curious.
 
@@ -20,7 +20,7 @@ My target audience is primarily software developers. But non-developers who are 
 
 ## Consider the Audience When Conveying Intent
 
-A primary goal of the PR description is to make clear the intent of the PR. Reviewers need to know the intent because they need to decide, before approving the PR, whether the PR accomplishes developer intent. Future `git blame`[^5] users may need to discern the intent of the PR if the code changes in the PR cause a bug at some point in the future. In Xcode, the Integrated Developer Environment I use, `git blame` looks like this:
+A primary goal of the PR description[^4] is to make clear the intent of the PR[^2]. Reviewers need to know the intent because they need to decide, before approving the PR, whether the PR accomplishes developer intent. Future `git blame`[^5] users may need to discern the intent of the PR if the code changes in the PR cause a bug at some point in the future. In Xcode, the Integrated Developer Environment I use, `git blame` looks like this:
 
 {% include image.html
     file="prDescriptions/authors.png"
@@ -34,7 +34,7 @@ Discerning this intent may help future code maintainers decide whether the PR ca
 
 In a large codebase, required reviewers, or more precisely required review groups, are typically determined by a `CODEOWNERS` file. Per this file, a simple PR might require review only from one group, the PR-raiser's group, but a more-complex PR might require reviews from _many_ groups. 
 
-The contextual knowledge of reviewers is an important consideration for the level of detail in a PR description. Imagine you work on the engine team at a car company. You are raising a PR that increases the amount of gas squirted in the engine for a new high-performance feature of the engine. If the `CODEOWNERS` file dictates that the required review group is `engine`, at least one member of that group needs to review and approve the PR before it can be merged. Members of the engine team have the context on the high-performance feature. A description like this would suffice:
+The contextual knowledge of reviewers is an important consideration for the level of detail in a PR description. Imagine you work on the engine team at a car company. You are raising[^1] a PR that increases the amount of gas squirted in the engine for a new high-performance feature of the engine. If the `CODEOWNERS` file dictates that the required review group is `engine`, at least one member of that group needs to review and approve the PR before it can be merged[^3]. Members of the engine team have the context on the high-performance feature. A description like this would suffice:
 
 > This PR increases the fuel per second to the engine, in high-performance mode and at full throttle, from 5 ml/second to 10 ml/second.
 
