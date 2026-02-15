@@ -1,24 +1,27 @@
 {% assign post_entry = include.post_entry %}
+{% assign words = post_entry.content | number_of_words %}
+{% assign minutes = words | divided_by: 250 %}
+{% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}
 
-<h1 class="post-title"><a href="{{ post_entry.url }}">{{ post_entry.title }}</a></h1>
+<h2 class="post-entry__title"><a href="{{ post_entry.url }}">{{ post_entry.title }}</a></h2>
 
 {% if post_entry.subtitle %}
-    <h2 class="post-subtitle">{{ post_entry.subtitle }} <small class="post-date">{{ post_entry.date | date_to_string }}</small></h2>
-{% else %}
-    <h2 class="post-date-subtitle post-date">{{ post_entry.date | date_to_string }}</h2>
+    <p class="post-entry__subtitle">{{ post_entry.subtitle }}</p>
 {% endif %}
 
+<div class="post-entry__meta">
+    <time datetime="{{ post_entry.date | date: '%Y-%m-%d' }}">{{ post_entry.date | date_to_string }}</time>
+    <span class="post-entry__meta__sep"></span>
+    <span>{{ minutes }} min read</span>
+</div>
+
 {% if post_entry.date-updated %}
-    <div class="post-date-updated">
-    <span class="badge badge-dark">
-        <p>Updated: {{ post_entry.date-updated }}</p>
-    </span>
-    </div>
+    <div class="post-entry__updated">Updated: {{ post_entry.date-updated }}</div>
 {% endif %}
 
 {% if include.include_excerpt %}
-<div class="post-excerpt">
+<div class="post-entry__excerpt">
     {{ post_entry.excerpt }}
-    <p><a href="{{ post_entry.url }}" class="post-continue">Continue&hellip; <i class="fa fa-chevron-right"></i></a></p>
+    <p><a href="{{ post_entry.url }}" class="post-continue">Continue reading <span class="post-continue__arrow">&rarr;</span></a></p>
 </div>
 {% endif %}

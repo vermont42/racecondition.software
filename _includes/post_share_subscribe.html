@@ -6,59 +6,17 @@
 
 {% assign edit_url = base_edit_url | append: file_name %}
 
-<div class="post-share-subscribe">
-    <div class="row">
-        <div class="col-12 d-flex justify-content-center">
-            <div class="btn-group" role="group">
-
-            <div class="btn-group dropup" role="group">
-                <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Share <i class="fa fa-share-alt" aria-hidden="true"></i>
-                </button>
-                <div class="dropdown-menu">
-                    <h6 class="dropdown-header">Share this post</h6>
-                    <a class="dropdown-item btn-sm" href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}%20{{ site.url }}{{ page.url }}%20via%20@{{ site.author.twitter }}" title="Tweet" target="_blank">
-                        Twitter &nbsp;<i class="fa fa-twitter" aria-hidden="true"></i>
-                    </a>
-                    <a class="dropdown-item btn-sm" href="https://www.facebook.com/sharer.php?u={{ site.url }}{{ page.url }}" title="Post" target="_blank">
-                        Facebook &nbsp;<i class="fa fa-facebook" aria-hidden="true"></i>
-                    </a>
-                    <a class="dropdown-item btn-sm" href="https://plus.google.com/share?url={{ site.url }}{{ page.url }}" title="Share" target="_blank">
-                        Google &nbsp;<i class="fa fa-google-plus" aria-hidden="true"></i>
-                    </a>
-                </div>  <!-- dropdown-menu -->
-            </div> <!-- btn-group dropup -->
-
-            <div class="btn-group dropup" role="group">
-                <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Subscribe <i class="fa fa-rss" aria-hidden="true"></i>
-                </button>
-                <div class="dropdown-menu">
-                    <h6 class="dropdown-header">Subscribe</h6>
-                    <a class="dropdown-item btn-sm" href="/feed.xml" title="Subscribe via RSS/Atom">
-                        RSS/Atom &nbsp;<i class="fa fa-rss" aria-hidden="true"></i>
-                    </a>
-                    <a class="dropdown-item btn-sm" href="/feed.json" title="Subscribe via JSON Feed">
-                        JSON Feed &nbsp;<i class="fa fa-code" aria-hidden="true"></i>
-                    </a>
-                </div>  <!-- dropdown-menu -->
-            </div> <!-- btn-group dropup -->
-
-            </div> <!-- btn-group -->
-        </div> <!-- col -->
-    </div> <!-- row -->
-
-    <div class="row">
-        <div class="col">
-            <p class="text-muted text-center"><small><b>Questions? Feedback? Corrections?</b></small></p>
-            <p class="text-muted text-center">
-                <small>
-                    Open an <a href="{{ open_issue_url }}" target="_blank"><b>issue</b></a>,
-                    submit a <a href="{{ site.links.pull }}" target="_blank"><b>pull request</b></a>,
-                    or <a href="{{ edit_url }}" target="_blank"><b>edit</b></a> this post.
-                </small>
-            </p>
-        </div> <!-- col -->
-    </div> <!-- row -->
-
-</div> <!-- post-share-subscribe -->
+<div class="post-share">
+    <div class="post-share__links">
+        <a class="post-share__link" href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}%20{{ site.url }}{{ page.url }}%20via%20@{{ site.author.twitter }}" target="_blank" rel="noopener">Share on Twitter</a>
+        <a class="post-share__link" href="https://www.facebook.com/sharer.php?u={{ site.url }}{{ page.url }}" target="_blank" rel="noopener">Share on Facebook</a>
+        <a class="post-share__link" href="/feed.xml">RSS</a>
+        <a class="post-share__link" href="/feed.json">JSON Feed</a>
+    </div>
+    <p class="post-share__feedback">
+        <b>Questions? Feedback? Corrections?</b><br>
+        Open an <a href="{{ open_issue_url }}" target="_blank" rel="noopener">issue</a>,
+        submit a <a href="{{ site.links.pull }}" target="_blank" rel="noopener">pull request</a>,
+        or <a href="{{ edit_url }}" target="_blank" rel="noopener">edit</a> this post.
+    </p>
+</div>
