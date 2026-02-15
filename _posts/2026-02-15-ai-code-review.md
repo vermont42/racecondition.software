@@ -38,7 +38,7 @@ In `GameCenterReal.swift`, the score-submission code wrapped its network call in
 catch {}  // Empty catch block swallows errors
 ```
 
-When a Game Center score submission fails (network timeout, authentication lapse, server error), the error is silently discarded. The user believes their score was submitted. It was not. No log entry records the failure. No retry mechanism activates. The error vanishes into the void.
+When a Game Center score submission fails (network timeout, authentication lapse, server error), the error is silently discarded. The user believes that his score was submitted. It was not. No log entry records the failure. No retry mechanism activates. The error vanishes into the void.
 
 `SoundPlayerReal.swift` contained the same pattern in two locations: the audio-session setup and the audio-file loading:
 
@@ -106,6 +106,8 @@ There is a deeper principle here about the relationship between author knowledge
 The remaining two medium-severity findings were more technical. A custom markup parser in `StringExtensions.swift` assumed that all delimiters (`~` for bold, `$` for italic, `%` for links) were properly paired. Malformed input could leave the parser in an incorrect state. And in `Fonts.swift`, the SwiftUI body-font size (20pt) differed from the UIKit body-font size (16pt), an inconsistency that could produce subtle rendering differences in views that mixed both frameworks.
 
 Both were fixed. The markup parser received validation for unclosed delimiters, and the font sizes were aligned. The font-size mismatch is a particularly instructive finding because it is the kind of inconsistency that is invisible in testing. If no view in the current codebase mixes SwiftUI and UIKit rendering, the mismatch produces no visible artifact. But the constants exist as a latent inconsistency, waiting for the day a developer (or an AI co-developer) creates a view that uses both, at which point the 4-point size difference produces a subtle, hard-to-diagnose visual glitch. Fixing it now costs nothing. Diagnosing it later costs the time to notice the glitch, trace it to the font constants, and understand why two "body" fonts have different sizes.
+
+A postscript on the markup parser. Approximately two weeks after I fixed the unpaired-delimiter problem by inserting a `fatalError()` with a descriptive error message, I was adding descriptive text to a verb entry and inadvertently included an unpaired markup symbol. The app crashed immediately, with a message that identified both the offending string and the nature of the malformation. I fixed the text in under a minute. Without the code review and the defensive check it prompted, the malformed markup would have produced silently incorrect rendering: a bold or italic span that never terminated, bleeding its formatting into every subsequent character. The bug would have persisted until a user noticed the visual artifact, if a user noticed it at all. The interval between the fix and its first activation was two weeks. The cost of the fix was five minutes. The cost of the bug it caught, had it gone undetected, was indeterminate but assuredly greater. This is the kind of return on investment that makes comprehensive code review worth the effort.
 
 ## The Long Tail: Nits That Compound
 
