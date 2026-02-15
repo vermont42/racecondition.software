@@ -4,22 +4,14 @@ https://duckduckgo.com/search_box
 https://muffinresearch.co.uk/adding-a-duckduckgo-search-box-to-your-blog/
 -->
 
-<div class="search row justify-content-md-center">
-<div class="col-xs-12 col-sm-10 col-md-8">
-
-    <form name="search" action="//duckduckgo.com/">
-        <div class="input-group">
-            <input type="search" class="form-control" placeholder="DuckDuckGo" name="q">
-            <input type="hidden" value="racecondition.software" name="sites">
-            <input type="hidden" value="1" name="kh">
-            <input type="hidden" value="1" name="kn">
-            <input type="hidden" value="1" name="kac">
-            <input type="hidden" value="1" name="kc">
-            <div class="input-group-append">
-                <button class="btn btn-secondary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-            </div>
-        </div>
+<div class="search">
+    <form name="search" action="//duckduckgo.com/" class="search__form">
+        <input type="search" class="search__input" placeholder="Search via DuckDuckGo" name="q">
+        <input type="hidden" value="racecondition.software" name="sites">
+        <input type="hidden" value="1" name="kh">
+        <input type="hidden" value="1" name="kn">
+        <input type="hidden" value="1" name="kac">
+        <input type="hidden" value="1" name="kc">
+        <button class="search__button" type="submit">Search</button>
     </form>
-
-</div>
 </div>

@@ -7,7 +7,7 @@ plugins:
     - jekyll-sitemap
 
 # File rules
-exclude: [vendor, Dangerfile, Gemfile, Gemfile.lock, LICENSE, README.md, assets/, package.json, yarn.lock, scripts/]
+exclude: [vendor, node_modules, Dangerfile, Gemfile, Gemfile.lock, LICENSE, README.md, CLAUDE.md, writing_style.md, assets/, package.json, yarn.lock, scripts/]
 include: [.htaccess]
 
 keep_files: [.well-known]

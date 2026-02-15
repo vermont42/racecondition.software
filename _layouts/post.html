@@ -11,12 +11,32 @@ layout: default
 
 {% assign open_issue_url = site.links.issue | append: issue_all_params %}
 
+{% assign words = content | number_of_words %}
+{% assign minutes = words | divided_by: 250 %}
+{% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}
+
 <article>
-    {% include post_entry.html post_entry=page include_excerpt=false %}
+    <header class="post-header">
+        <h1 class="post-header__title">{{ page.title }}</h1>
+        {% if page.subtitle %}
+            <p class="post-header__subtitle">{{ page.subtitle }}</p>
+        {% endif %}
+        <div class="post-header__meta">
+            <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date_to_string }}</time>
+            <span class="post-entry__meta__sep"></span>
+            <span>{{ minutes }} min read</span>
+        </div>
+    </header>
+
+    {% if page.date-updated %}
+        <div class="post-entry__updated">Updated: {{ page.date-updated }}</div>
+    {% endif %}
+
+    {% include post_image.html %}
 
     <div class="post-content">
         {{ content }}
-    </div> <!-- post-content -->
+    </div>
 </article>
 
 {% include post_share_subscribe.html %}

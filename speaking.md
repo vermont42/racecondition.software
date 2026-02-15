@@ -5,17 +5,15 @@ title: Speaking
 
 I am proud to have spoken in public about software development on several occasions. The preparation is intense, but the reward is great.
 
-### Upcoming and Past Talks
-
 <div class="table-responsive">
-    <table class="table table-striped table-bordered">
+    <table>
         <thead>
             <tr>
-                <th><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp; Date</th>
-                <th><i class="fa fa-quote-left" aria-hidden="true"></i>&nbsp; Title</th>
-                <th><i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp; Event</th>
-                <th><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp; Location</th>
-                <th><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp; Links</th>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Event</th>
+                <th>Location</th>
+                <th>Links</th>
             </tr>
         </thead>
         <tbody>

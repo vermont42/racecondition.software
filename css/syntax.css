@@ -1,72 +1,150 @@
 /*
- * GitHub style for Pygments syntax highlighter, for use with Jekyll
- * Courtesy of GitHub.com
+ * Botanical Dusk - Syntax theme for Rouge/Pygments
+ * Built on brand colors: rose, sage, cream, teal
+ * Dark teal background with warm botanical tones
  */
 
-.highlight pre, pre, .highlight .hll { background-color: #f8f8f8; border: 1px solid #ccc; padding: 6px 10px; border-radius: 3px; }
-.highlight .c { color: #999988; font-style: italic; }
-.highlight .err { color: #a61717; background-color: #e3d2d2; }
-.highlight .k { font-weight: bold; }
-.highlight .o { font-weight: bold; }
-.highlight .cm { color: #999988; font-style: italic; }
-.highlight .cp { color: #999999; font-weight: bold; }
-.highlight .c1 { color: #999988; font-style: italic; }
-.highlight .cs { color: #999999; font-weight: bold; font-style: italic; }
-.highlight .gd { color: #000000; background-color: #ffdddd; }
-.highlight .gd .x { color: #000000; background-color: #ffaaaa; }
+.highlight pre, pre, .highlight .hll {
+    background-color: var(--bg-code);
+    border: none;
+    padding: var(--space-lg, 2rem);
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.highlight pre code {
+    display: block;
+    white-space: pre;
+    overflow-x: auto;
+    word-wrap: normal;
+}
+
+/* Comments - muted sage */
+.highlight .c,
+.highlight .cm,
+.highlight .c1,
+.highlight .cs { color: #6B8A82; font-style: italic; }
+
+/* Comment.Preproc */
+.highlight .cp { color: #8BA898; font-weight: bold; }
+
+/* Errors */
+.highlight .err { color: #E8A0A0; }
+
+/* Keywords - Rose */
+.highlight .k,
+.highlight .kc,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr { color: #D9A8B4; font-weight: bold; }
+
+/* Keyword.Type - Sage */
+.highlight .kt { color: #A8BFA0; font-weight: bold; }
+
+/* Operators */
+.highlight .o,
+.highlight .ow { color: #C8C0B0; font-weight: bold; }
+
+/* Strings - Warm cream */
+.highlight .s,
+.highlight .sb,
+.highlight .sc,
+.highlight .sd,
+.highlight .s2,
+.highlight .se,
+.highlight .sh,
+.highlight .si,
+.highlight .sx,
+.highlight .s1 { color: #E8D8B0; }
+
+/* String.Regex */
+.highlight .sr { color: #B8D0A8; }
+
+/* String.Symbol */
+.highlight .ss { color: #C8B0D0; }
+
+/* Numbers - Muted gold */
+.highlight .m,
+.highlight .mf,
+.highlight .mh,
+.highlight .mi,
+.highlight .mo,
+.highlight .il { color: #D0C8A0; }
+
+/* Names - Light cream (default text) */
+.highlight .n { color: #E8E0D0; }
+
+/* Name.Attribute - Sage */
+.highlight .na { color: #A8BFA0; }
+
+/* Name.Builtin - Soft blue-teal */
+.highlight .nb { color: #90B8C8; }
+
+/* Name.Class - Sage bold */
+.highlight .nc { color: #A8BFA0; font-weight: bold; }
+
+/* Name.Constant */
+.highlight .no { color: #B8C8A0; }
+
+/* Name.Entity */
+.highlight .ni { color: #C8B0C8; }
+
+/* Name.Exception */
+.highlight .ne { color: #E8A0A0; font-weight: bold; }
+
+/* Name.Function - Rose */
+.highlight .nf { color: #D9A8B4; font-weight: bold; }
+
+/* Name.Namespace */
+.highlight .nn { color: #90A8A0; }
+
+/* Name.Tag - Rose */
+.highlight .nt { color: #D9A8B4; }
+
+/* Name.Variable */
+.highlight .nv,
+.highlight .vc,
+.highlight .vg,
+.highlight .vi { color: #B8C8C0; }
+
+/* Generic.Deleted */
+.highlight .gd { color: #E8A0A0; background-color: rgba(232, 160, 160, 0.1); }
+.highlight .gd .x { color: #E8A0A0; background-color: rgba(232, 160, 160, 0.15); }
+
+/* Generic.Emph */
 .highlight .ge { font-style: italic; }
-.highlight .gr { color: #aa0000; }
-.highlight .gh { color: #999999; }
-.highlight .gi { color: #000000; background-color: #ddffdd; }
-.highlight .gi .x { color: #000000; background-color: #aaffaa; }
-.highlight .go { color: #888888; }
-.highlight .gp { color: #555555; }
+
+/* Generic.Error */
+.highlight .gr { color: #E8A0A0; }
+
+/* Generic.Heading */
+.highlight .gh { color: #90A8A0; }
+
+/* Generic.Inserted */
+.highlight .gi { color: #A8BFA0; background-color: rgba(168, 191, 160, 0.1); }
+.highlight .gi .x { color: #A8BFA0; background-color: rgba(168, 191, 160, 0.15); }
+
+/* Generic.Output */
+.highlight .go { color: #90A8A0; }
+
+/* Generic.Prompt */
+.highlight .gp { color: #8B9A92; }
+
+/* Generic.Strong */
 .highlight .gs { font-weight: bold; }
-.highlight .gu { color: #800080; font-weight: bold; }
-.highlight .gt { color: #aa0000; }
-.highlight .kc { font-weight: bold; }
-.highlight .kd { font-weight: bold; }
-.highlight .kn { font-weight: bold; }
-.highlight .kp { font-weight: bold; }
-.highlight .kr { font-weight: bold; }
-.highlight .kt { color: #445588; font-weight: bold; }
-.highlight .m { color: #009999; }
-.highlight .s { color: #dd1144; }
-.highlight .n { color: #333333; }
-.highlight .na { color: teal; }
-.highlight .nb { color: #0086b3; }
-.highlight .nc { color: #445588; font-weight: bold; }
-.highlight .no { color: teal; }
-.highlight .ni { color: purple; }
-.highlight .ne { color: #990000; font-weight: bold; }
-.highlight .nf { color: #990000; font-weight: bold; }
-.highlight .nn { color: #555555; }
-.highlight .nt { color: navy; }
-.highlight .nv { color: teal; }
-.highlight .ow { font-weight: bold; }
-.highlight .w { color: #bbbbbb; }
-.highlight .mf { color: #009999; }
-.highlight .mh { color: #009999; }
-.highlight .mi { color: #009999; }
-.highlight .mo { color: #009999; }
-.highlight .sb { color: #dd1144; }
-.highlight .sc { color: #dd1144; }
-.highlight .sd { color: #dd1144; }
-.highlight .s2 { color: #dd1144; }
-.highlight .se { color: #dd1144; }
-.highlight .sh { color: #dd1144; }
-.highlight .si { color: #dd1144; }
-.highlight .sx { color: #dd1144; }
-.highlight .sr { color: #009926; }
-.highlight .s1 { color: #dd1144; }
-.highlight .ss { color: #990073; }
-.highlight .bp { color: #999999; }
-.highlight .vc { color: teal; }
-.highlight .vg { color: teal; }
-.highlight .vi { color: teal; }
-.highlight .il { color: #009999; }
-.highlight .gc { color: #999; background-color: #EAF2F5; }
 
-/* Custom */
+/* Generic.Subheading */
+.highlight .gu { color: #C8899A; font-weight: bold; }
 
-.highlight pre code { display: block; white-space: pre; overflow-x: auto; word-wrap: normal; }
+/* Generic.Traceback */
+.highlight .gt { color: #E8A0A0; }
+
+/* Builtin.Pseudo */
+.highlight .bp { color: #90A8A0; }
+
+/* Whitespace */
+.highlight .w { color: #4A5C58; }
+
+/* Garbage Collected */
+.highlight .gc { color: #90A8A0; background-color: rgba(42, 56, 54, 0.5); }
