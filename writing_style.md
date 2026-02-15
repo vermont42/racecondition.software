@@ -27,6 +27,7 @@ An analysis of Josh Adams's writing style based on blog posts at racecondition.s
 - **Orthographic attention.** Obsessive care about diacritics, IPA notation, and letter-combination history. The French spelling post is entirely dedicated to orthographic consistency.
 - **No em dashes.** Avoid em dashes entirely. Instead, use a colon, semicolon, or comma. Or break into a new sentence with a period.
 - **Hyphenated phrasal adjectives.** Consistently hyphenate phrasal adjectives ("well-known pattern," "type-safe approach"). Exceptions: adverbs ending in -ly ("swiftly tilting planet," not "swiftly-tilting planet") and proper nouns ("New Jersey Turnpike," not "New-Jersey Turnpike").
+- **No singular they.** Find a different construction. Alternating "he" and "she" is fine. Thus, "the relationship between a lawyer and a legal assistant who works with her for years" and not "the relationship between a lawyer and a legal assistant who works with them for years".
 
 ## Content Patterns
 
