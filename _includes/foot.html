@@ -26,4 +26,148 @@
         }
     });
 })();
+
+// Sidenote footnotes (wide viewports only)
+(function() {
+    if (window.innerWidth < 1100) return;
+    var postContent = document.querySelector('.post-content');
+    var footnotesSection = document.querySelector('.footnotes');
+    if (!postContent || !footnotesSection) return;
+
+    var refs = postContent.querySelectorAll('sup[id^="fnref"] a');
+    if (!refs.length) return;
+
+    var footnotesOl = footnotesSection.querySelector('ol');
+    if (!footnotesOl) return;
+    var footnoteLis = footnotesOl.children;
+
+    // Pass 1: create sidenotes and position at paragraph offset
+    var sidenotes = [];
+    refs.forEach(function(ref) {
+        var href = ref.getAttribute('href');
+        if (!href) return;
+        var fnId = href.replace('#', '');
+        var li = document.getElementById(fnId);
+        if (!li) return;
+
+        var sup = ref.closest('sup');
+        if (!sup) return;
+
+        var aside = document.createElement('aside');
+        aside.className = 'sidenote';
+
+        var num = ref.textContent;
+        var numSpan = document.createElement('span');
+        numSpan.className = 'sidenote__number';
+        numSpan.textContent = num + '.';
+        aside.appendChild(numSpan);
+
+        var clone = li.cloneNode(true);
+        clone.removeAttribute('id');
+        var reverseLinks = clone.querySelectorAll('.reversefootnote');
+        reverseLinks.forEach(function(rl) { rl.remove(); });
+
+        var ps = clone.querySelectorAll('p');
+        ps.forEach(function(p) {
+            aside.appendChild(document.createTextNode(' '));
+            while (p.firstChild) {
+                aside.appendChild(p.firstChild);
+            }
+        });
+
+        if (!ps.length) {
+            aside.appendChild(document.createTextNode(' '));
+            while (clone.firstChild) {
+                aside.appendChild(clone.firstChild);
+            }
+        }
+
+        var paragraph = sup.closest('p') || sup.parentElement;
+        aside.style.top = paragraph.offsetTop + 'px';
+        postContent.appendChild(aside);
+        sidenotes.push(aside);
+    });
+
+    postContent.classList.add('has-sidenotes');
+
+    // Pass 2: fix overlaps after all sidenotes are laid out
+    var lastBottom = 0;
+    sidenotes.forEach(function(aside) {
+        var currentTop = parseInt(aside.style.top);
+        if (currentTop < lastBottom + 8) {
+            currentTop = lastBottom + 8;
+            aside.style.top = currentTop + 'px';
+        }
+        lastBottom = currentTop + aside.offsetHeight;
+    });
+})();
+
+// Blockquote attribution detection
+(function() {
+    var quotes = document.querySelectorAll('blockquote');
+    quotes.forEach(function(bq) {
+        var lastP = bq.querySelector('p:last-child');
+        if (!lastP) return;
+        var text = lastP.textContent.trim();
+        if (text.charAt(0) === '\u2014' || text.substring(0, 2) === '--') {
+            lastP.classList.add('blockquote-attribution');
+        }
+    });
+})();
+
+// Scroll-linked header shrink
+(function() {
+    var header = document.querySelector('.site-header');
+    if (!header) return;
+    var compact = false;
+    var ticking = false;
+
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(function() {
+                if (window.scrollY > 100 && !compact) {
+                    header.classList.add('header--compact');
+                    compact = true;
+                } else if (window.scrollY <= 100 && compact) {
+                    header.classList.remove('header--compact');
+                    compact = false;
+                }
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+})();
+
+// About page "Ink Cursor" mouse animation
+(function() {
+    var area = document.getElementById('about-ink-area');
+    if (!area) return;
+
+    // Desktop only
+    if (!window.matchMedia('(hover: hover)').matches) return;
+
+    // Respect reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var lastTime = 0;
+    area.addEventListener('mousemove', function(e) {
+        var now = Date.now();
+        if (now - lastTime < 30) return;
+        lastTime = now;
+
+        var dot = document.createElement('div');
+        dot.className = 'ink-dot';
+        var size = 2 + Math.random() * 3;
+        dot.style.width = size + 'px';
+        dot.style.height = size + 'px';
+        dot.style.left = e.clientX - size / 2 + 'px';
+        dot.style.top = e.clientY - size / 2 + 'px';
+        document.body.appendChild(dot);
+
+        dot.addEventListener('animationend', function() {
+            dot.remove();
+        });
+    });
+})();
 </script>
