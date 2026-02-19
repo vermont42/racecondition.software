@@ -575,6 +575,22 @@ main {
     margin-bottom: 1.2em;
 }
 
+/* Drop cap on first paragraph */
+.post-content > p:first-of-type::first-letter {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 3.5em;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.08em;
+    margin-top: 0.05em;
+    color: var(--accent-teal);
+    background: linear-gradient(135deg, var(--accent-sage), var(--accent-rose));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
 .post-content ul,
 .post-content ol {
     margin-bottom: 1.2em;
@@ -657,23 +673,15 @@ a > code {
 
 blockquote {
     border-left: 3px solid var(--accent-sage);
+    border-image: linear-gradient(to bottom, var(--accent-sage), var(--accent-rose)) 1;
+    border-image-slice: 1;
+    border-style: solid;
+    border-width: 0 0 0 3px;
     background: var(--bg-alt);
-    padding: var(--space-lg) var(--space-lg) var(--space-lg) calc(var(--space-lg) + var(--space-sm));
+    padding: var(--space-lg);
     margin: var(--space-lg) 0;
-    border-radius: 0 8px 8px 0;
+    border-radius: 0;
     position: relative;
-}
-
-blockquote::before {
-    content: '\201C';
-    font-family: var(--font-heading);
-    font-size: 3rem;
-    color: var(--accent-sage);
-    opacity: 0.4;
-    position: absolute;
-    top: 0.5rem;
-    left: 0.75rem;
-    line-height: 1;
 }
 
 blockquote p {
@@ -684,6 +692,14 @@ blockquote p {
 
 blockquote p:last-child {
     margin-bottom: 0;
+}
+
+.blockquote-attribution {
+    font-style: normal;
+    font-family: var(--font-ui);
+    font-size: var(--text-sm);
+    text-align: right;
+    color: var(--text-muted);
 }
 
 /* ===================================
@@ -797,6 +813,56 @@ sup a {
     background: none !important;
     color: var(--accent-teal);
     font-weight: 600;
+}
+
+/* Sidenotes (wide viewports only) */
+.sidenote {
+    display: none;
+}
+
+@media (min-width: 1100px) {
+    .post-content {
+        position: relative;
+    }
+
+    .sidenote {
+        display: block;
+        position: absolute;
+        right: calc(-14rem - var(--space-lg));
+        width: 13rem;
+        font-family: var(--font-ui);
+        font-size: var(--text-xs);
+        line-height: 1.5;
+        color: var(--text-muted);
+        border-left: 2px solid var(--border);
+        padding-left: var(--space-sm);
+    }
+
+    .sidenote__number {
+        font-weight: 600;
+        color: var(--accent-teal);
+        margin-right: 0.25em;
+    }
+
+    .sidenote a {
+        color: var(--text-muted);
+    }
+
+    .sidenote a:hover {
+        color: var(--link-hover);
+    }
+
+    .sidenote .reversefootnote {
+        display: none;
+    }
+
+    .has-sidenotes .footnotes {
+        display: none;
+    }
+
+    .has-sidenotes #endnotes {
+        display: none;
+    }
 }
 
 /* ===================================
@@ -1097,6 +1163,133 @@ tr:hover td {
 }
 
 /* ===================================
+   WIDE VIEWPORT (sidenotes)
+   =================================== */
+
+@media (min-width: 1100px) {
+    main {
+        max-width: calc(var(--measure) + 4rem);
+        margin-left: auto;
+        margin-right: max(calc(50% - (var(--measure) + 4rem) / 2), 15rem);
+    }
+}
+
+/* ===================================
+   HEADER COMPACT (scroll-linked)
+   =================================== */
+
+.site-header {
+    transition: none;
+}
+
+.header__logo {
+    transition: width 0.3s ease, height 0.3s ease, transform 0.3s ease;
+}
+
+.header__title {
+    transition: font-size 0.3s ease;
+}
+
+.header__inner {
+    transition: padding 0.3s ease;
+}
+
+.header--compact .header__logo {
+    width: 36px;
+    height: 36px;
+}
+
+.header--compact .header__title {
+    font-size: 1.25rem;
+}
+
+.header--compact .header__inner {
+    padding-top: var(--space-sm);
+    padding-bottom: var(--space-sm);
+}
+
+/* ===================================
+   POST LISTING HOVER LIFT
+   =================================== */
+
+@media (hover: hover) {
+    .post-entry {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border-radius: 8px;
+        padding-left: var(--space-md);
+        padding-right: var(--space-md);
+        margin-left: calc(-1 * var(--space-md));
+        margin-right: calc(-1 * var(--space-md));
+    }
+
+    .post-entry:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .post-entry:hover .post-entry__title a {
+        color: var(--link);
+    }
+}
+
+/* ===================================
+   INK CURSOR & ABOUT PAGE
+   =================================== */
+
+@keyframes inkFade {
+    from {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+}
+
+.ink-dot {
+    position: fixed;
+    border-radius: 50%;
+    background: var(--accent-teal);
+    pointer-events: none;
+    z-index: 9999;
+    animation: inkFade 1.5s ease-out forwards;
+}
+
+/* Botanical watermark for About page */
+.about-watermark {
+    position: relative;
+}
+
+.about-watermark::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 450px;
+    height: 600px;
+    max-width: 100%;
+    background: url('/img/fern.png') no-repeat center;
+    background-size: contain;
+    opacity: 0.10;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .about-watermark::before {
+        opacity: 0.07;
+        filter: brightness(1.5);
+    }
+}
+
+[data-theme="dark"] .about-watermark::before {
+    opacity: 0.07;
+    filter: brightness(1.5);
+}
+
+/* ===================================
    RESPONSIVE
    =================================== */
 
@@ -1123,11 +1316,7 @@ tr:hover td {
     }
 
     blockquote {
-        padding-left: var(--space-lg);
-    }
-
-    blockquote::before {
-        display: none;
+        padding-left: var(--space-md);
     }
 }
 

@@ -81,6 +81,8 @@ The Dangerfile configures prose checks with ignored words for Apple platform ter
 
 When making changes to the site, start `bundle exec jekyll serve --livereload` in the background if it is not already running. Use the Claude in Chrome extension to view the site at localhost:4000 and verify that changes render correctly. Take screenshots to check layout, styling, and content before considering work complete.
 
+UI changes must be verified for both desktop and mobile viewports. To test mobile sizes when the browser window can't be resized small enough, render the page in iframes at target widths (e.g., 375px for iPhone SE, 768px for iPad) using the Claude in Chrome extension's JavaScript tool.
+
 ## Writing Style
 
 When generating prose for this blog (post content, descriptions, etc.), follow the writing style documented in `writing_style.md`. Key characteristics include: academic yet personal tone, thesis-driven organization with balanced argumentation, extensive footnotes and hyperlinking, cross-domain synthesis, and precise language with deliberate word choices.

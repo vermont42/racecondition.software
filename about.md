@@ -3,6 +3,8 @@ layout: standalone
 title: About
 ---
 
+<div class="about-watermark" id="about-ink-area" markdown="1">
+
 I'm a software developer based near San Francisco, California. As a proud New England native, I [pronounce](https://en.wikipedia.org/wiki/Boston_accent#Declining_features) "aunt" like it rhymes with "flaunt".
 
 Although my primary language of late is Swift, I have also used Atari BASIC, GFA BASIC, HyperTalk, C++, C, SQL, Perl, PL/SQL, [Java](https://vimeo.com/250967769), Objective-C, BASH, Kotlin, JavaScript, and YAML.
@@ -18,3 +20,5 @@ This website started as a clone of Jesse Squires's [website](https://www.jessesq
 You can contact me [here](/contact).
 
 <img class="about-avatar" src="{{ site.author.avatar }}" alt="Josh Adams" title="Josh Adams">
+
+</div>
