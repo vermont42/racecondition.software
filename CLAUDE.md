@@ -77,6 +77,10 @@ Travis CI runs on each push:
 
 The Dangerfile configures prose checks with ignored words for Apple platform terms (Swift, iOS, macOS, etc.).
 
+## Development Workflow
+
+When making changes to the site, start `bundle exec jekyll serve --livereload` in the background if it is not already running. Use the Claude in Chrome extension to view the site at localhost:4000 and verify that changes render correctly. Take screenshots to check layout, styling, and content before considering work complete.
+
 ## Writing Style
 
 When generating prose for this blog (post content, descriptions, etc.), follow the writing style documented in `writing_style.md`. Key characteristics include: academic yet personal tone, thesis-driven organization with balanced argumentation, extensive footnotes and hyperlinking, cross-domain synthesis, and precise language with deliberate word choices.
