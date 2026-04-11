@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Jekyll-based static blog for racecondition.software, Josh Adams's blog and website. The focus of the blog is primarily iOS development in Swift, but there are posts on other subjects of professional interest. The site is deployed to AWS S3 for static hosting.
+This is a Jekyll-based static blog for racecondition.software, Josh Adams's blog and website. The focus of the blog is primarily iOS development in Swift, but there are posts on other subjects of professional interest. The site is deployed to AWS S3 with CloudFront CDN.
 
 ## Common Commands
 
@@ -71,11 +71,16 @@ Use `{% include image.html %}` for responsive images within posts.
 
 ## CI/CD
 
-Travis CI runs on each push:
-1. `bundle exec jekyll build` - Verifies site builds
-2. `bundle exec danger` - Prose linting with spell checking
+### Deployment
 
-The Dangerfile configures prose checks with ignored words for Apple platform terms (Swift, iOS, macOS, etc.).
+A GitHub Actions workflow (`.github/workflows/deploy.yml`) automatically deploys the site on every push to `master`:
+1. Builds the Jekyll site
+2. Syncs `_site/` to the S3 bucket
+3. Invalidates the CloudFront cache
+
+### Prose Linting
+
+Travis CI runs `bundle exec danger` for prose linting with spell checking on each push. The Dangerfile configures prose checks with ignored words for Apple platform terms (Swift, iOS, macOS, etc.).
 
 ## Development Workflow
 
