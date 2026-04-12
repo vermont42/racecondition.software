@@ -1272,21 +1272,21 @@ tr:hover td {
     max-width: 100%;
     background: url('/img/fern.png') no-repeat center;
     background-size: contain;
-    opacity: 0.10;
+    opacity: 0.35;
     pointer-events: none;
     z-index: -1;
 }
 
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) .about-watermark::before {
-        opacity: 0.07;
-        filter: brightness(1.5);
+        opacity: 0.45;
+        filter: invert(1) hue-rotate(180deg) brightness(1.15);
     }
 }
 
 [data-theme="dark"] .about-watermark::before {
-    opacity: 0.07;
-    filter: brightness(1.5);
+    opacity: 0.45;
+    filter: invert(1) hue-rotate(180deg) brightness(1.15);
 }
 
 /* ===================================
