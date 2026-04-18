@@ -19,7 +19,10 @@ Recent commits (for style reference):
 
 ## Task
 
-1. Stage all changes with `git add .`
+1. Stage changes — but be selective, not a blind `git add .`:
+   - Stage all modified tracked files.
+   - For untracked files, inspect each one and decide whether it belongs in this commit. **Exclude user-shared reference artifacts** — screenshots, scratch files, debug dumps, or anything whose name/location suggests the user dropped it in to illustrate a bug or provide context rather than to be committed. When in doubt, leave it out and mention in your response what you excluded and why, so the user can correct you if needed.
+   - Never stage files that look like secrets (`.env`, `credentials*`, keys, tokens).
 2. Create a commit with the message: $ARGUMENTS
    - If no message is provided, analyze the changes and create an appropriate descriptive message
    - Follow the commit message style shown in recent commits above
