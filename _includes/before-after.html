@@ -1,0 +1,27 @@
+{% assign before_url = site.img_url | append: "/" | append: include.before %}
+{% assign after_url = site.img_url | append: "/" | append: include.after %}
+{% assign alt_before = include.alt_before | default: "Before" %}
+{% assign alt_after = include.alt_after | default: "After" %}
+{% assign caption = include.caption %}
+
+<figure class="image-pair">
+    <div class="image-pair__row">
+        <div class="image-pair__item">
+            <img src="{{ before_url }}"
+                 alt="{{ alt_before }}"
+                 title="{{ alt_before }}"
+                 loading="lazy">
+            <span class="image-pair__label">Before</span>
+        </div>
+        <div class="image-pair__item">
+            <img src="{{ after_url }}"
+                 alt="{{ alt_after }}"
+                 title="{{ alt_after }}"
+                 loading="lazy">
+            <span class="image-pair__label">After</span>
+        </div>
+    </div>
+    {% if caption %}
+    <figcaption>{{ caption }}</figcaption>
+    {% endif %}
+</figure>

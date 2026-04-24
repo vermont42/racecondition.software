@@ -27,79 +27,147 @@
     });
 })();
 
-// Sidenote footnotes (wide viewports only)
+// Footnote enhancement: build sidenotes on wide viewports, and on every
+// viewport make the marker click do its own smooth scroll. The default
+// browser anchor jump is unreliable on image-heavy posts because images
+// continue to load after the scroll begins, shifting the target.
 (function() {
-    if (window.innerWidth < 1100) return;
-    var postContent = document.querySelector('.post-content');
-    var footnotesSection = document.querySelector('.footnotes');
-    if (!postContent || !footnotesSection) return;
+    var init = function() {
+        var postContent = document.querySelector('.post-content');
+        var footnotesSection = document.querySelector('.footnotes');
+        if (!postContent || !footnotesSection) return;
 
-    var refs = postContent.querySelectorAll('sup[id^="fnref"] a');
-    if (!refs.length) return;
+        var refs = postContent.querySelectorAll('sup[id^="fnref"] a');
+        if (!refs.length) return;
 
-    var footnotesOl = footnotesSection.querySelector('ol');
-    if (!footnotesOl) return;
-    var footnoteLis = footnotesOl.children;
+        var footnotesOl = footnotesSection.querySelector('ol');
+        if (!footnotesOl) return;
 
-    // Pass 1: create sidenotes and position at paragraph offset
-    var sidenotes = [];
-    refs.forEach(function(ref) {
-        var href = ref.getAttribute('href');
-        if (!href) return;
-        var fnId = href.replace('#', '');
-        var li = document.getElementById(fnId);
-        if (!li) return;
-
-        var sup = ref.closest('sup');
-        if (!sup) return;
-
-        var aside = document.createElement('aside');
-        aside.className = 'sidenote';
-
-        var num = ref.textContent;
-        var numSpan = document.createElement('span');
-        numSpan.className = 'sidenote__number';
-        numSpan.textContent = num + '.';
-        aside.appendChild(numSpan);
-
-        var clone = li.cloneNode(true);
-        clone.removeAttribute('id');
-        var reverseLinks = clone.querySelectorAll('.reversefootnote');
-        reverseLinks.forEach(function(rl) { rl.remove(); });
-
-        var ps = clone.querySelectorAll('p');
-        ps.forEach(function(p) {
-            aside.appendChild(document.createTextNode(' '));
-            while (p.firstChild) {
-                aside.appendChild(p.firstChild);
-            }
+        // Build entry list: one per footnote marker, including a reference
+        // to the bottom-of-post <li> for fallback navigation on narrow widths.
+        var entries = [];
+        refs.forEach(function(ref) {
+            var href = ref.getAttribute('href');
+            if (!href) return;
+            var li = document.getElementById(href.replace('#', ''));
+            if (!li) return;
+            var sup = ref.closest('sup');
+            if (!sup) return;
+            entries.push({ ref: ref, sup: sup, li: li, aside: null });
         });
+        if (!entries.length) return;
 
-        if (!ps.length) {
-            aside.appendChild(document.createTextNode(' '));
-            while (clone.firstChild) {
-                aside.appendChild(clone.firstChild);
+        // Wide viewports get sidenotes laid out in the right margin.
+        if (window.innerWidth >= 1100) {
+            entries.forEach(function(entry) {
+                var aside = document.createElement('aside');
+                aside.className = 'sidenote';
+
+                var numSpan = document.createElement('span');
+                numSpan.className = 'sidenote__number';
+                numSpan.textContent = entry.ref.textContent + '.';
+                aside.appendChild(numSpan);
+
+                var clone = entry.li.cloneNode(true);
+                clone.removeAttribute('id');
+                clone.querySelectorAll('.reversefootnote').forEach(function(rl) { rl.remove(); });
+
+                var ps = clone.querySelectorAll('p');
+                if (ps.length) {
+                    ps.forEach(function(p) {
+                        aside.appendChild(document.createTextNode(' '));
+                        while (p.firstChild) aside.appendChild(p.firstChild);
+                    });
+                } else {
+                    aside.appendChild(document.createTextNode(' '));
+                    while (clone.firstChild) aside.appendChild(clone.firstChild);
+                }
+
+                postContent.appendChild(aside);
+                entry.aside = aside;
+            });
+            postContent.classList.add('has-sidenotes');
+
+            // Position each sidenote next to its reference paragraph, pushing
+            // later notes down to avoid overlap. Done after window.load so
+            // paragraph offsets account for fully-loaded images.
+            var position = function() {
+                var lastBottom = 0;
+                entries.forEach(function(entry) {
+                    if (!entry.aside) return;
+                    var paragraph = entry.sup.closest('p') || entry.sup.parentElement;
+                    var top = paragraph.offsetTop;
+                    if (top < lastBottom + 8) top = lastBottom + 8;
+                    entry.aside.style.top = top + 'px';
+                    lastBottom = top + entry.aside.offsetHeight;
+                });
+            };
+            position();
+
+            var resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(position, 150);
+            });
+
+            // Lazy-loaded images below the fold continue landing after
+            // window.load, each one pushing later paragraphs down and
+            // leaving previously-positioned sidenotes anchored to stale
+            // offsets. Re-run position() whenever the post-content box
+            // resizes. Debounced so the callback fires once per burst.
+            if (window.ResizeObserver) {
+                var roTimer;
+                var ro = new ResizeObserver(function() {
+                    clearTimeout(roTimer);
+                    roTimer = setTimeout(position, 100);
+                });
+                ro.observe(postContent);
             }
         }
 
-        var paragraph = sup.closest('p') || sup.parentElement;
-        aside.style.top = paragraph.offsetTop + 'px';
-        postContent.appendChild(aside);
-        sidenotes.push(aside);
-    });
+        // Marker click: smooth-scroll to whichever target is currently
+        // visible. On wide viewports that's the sidenote; on narrow ones
+        // (or after a resize down) it's the bottom-of-post footnote li.
+        // Lazy-loaded images further down the page can load mid-scroll and
+        // push the target down, so we re-scroll on a short interval until
+        // the target is actually in view (or until we give up).
+        var scrollToTarget = function(target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            var attempts = 0;
+            var settle = setInterval(function() {
+                attempts++;
+                var rect = target.getBoundingClientRect();
+                var inView = rect.top >= 0 && rect.bottom <= window.innerHeight;
+                if (inView || attempts >= 8) {
+                    clearInterval(settle);
+                    return;
+                }
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 400);
+        };
 
-    postContent.classList.add('has-sidenotes');
+        entries.forEach(function(entry) {
+            entry.ref.addEventListener('click', function(e) {
+                var target = (entry.aside && entry.aside.offsetParent !== null)
+                    ? entry.aside
+                    : entry.li;
+                e.preventDefault();
+                target.classList.remove('sidenote--flash');
+                // Force reflow so the animation restarts on repeat clicks.
+                void target.offsetWidth;
+                target.classList.add('sidenote--flash');
+                scrollToTarget(target);
+            });
+        });
+    };
 
-    // Pass 2: fix overlaps after all sidenotes are laid out
-    var lastBottom = 0;
-    sidenotes.forEach(function(aside) {
-        var currentTop = parseInt(aside.style.top);
-        if (currentTop < lastBottom + 8) {
-            currentTop = lastBottom + 8;
-            aside.style.top = currentTop + 'px';
-        }
-        lastBottom = currentTop + aside.offsetHeight;
-    });
+    // Defer until images have loaded; otherwise paragraph.offsetTop is
+    // measured against a too-short page and sidenotes land in the wrong place.
+    if (document.readyState === 'complete') {
+        init();
+    } else {
+        window.addEventListener('load', init);
+    }
 })();
 
 // Blockquote attribution detection
