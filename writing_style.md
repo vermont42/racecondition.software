@@ -29,6 +29,7 @@ An analysis of Josh Adams's writing style based on blog posts at racecondition.s
 - **Hyphenated phrasal adjectives.** Consistently hyphenate phrasal adjectives ("well-known pattern," "type-safe approach"). Exceptions: adverbs ending in -ly ("swiftly tilting planet," not "swiftly-tilting planet") and proper nouns ("New Jersey Turnpike," not "New-Jersey Turnpike").
 - **Logical punctuation.** Place commas and periods outside closing quotation marks unless they are part of the original quoted material. This convention, also called British-style punctuation, prioritizes semantic accuracy over the American typographical convention. Thus, the word "German", not the word "German," and he said "hello". But: He said "I am leaving."
 - **No singular they.** Find a different construction. Alternating "he" and "she" is fine. Thus, "the relationship between a lawyer and a legal assistant who works with her for years" and not "the relationship between a lawyer and a legal assistant who works with them for years".
+- **Slavish parallelism.** When coordinating items with *and*, *or*, or a similar connector, repeat any preposition, article, or function word that governs the first item so the grammatical frame is reproduced for each successor. Thus, "as a writer and as a software developer" rather than "as a writer and a software developer"; "Left to my own defaults and to the defaults of a general-purpose coding assistant" rather than "Left to my own defaults and the defaults of a general-purpose coding assistant". The surface redundancy is the point: it prevents the reader from having to re-parse the function word and makes the coordination unambiguous.
 
 ## Content Patterns
 
@@ -65,4 +66,4 @@ An analysis of Josh Adams's writing style based on blog posts at racecondition.s
 ## Closing Conventions
 
 - **Credits sections.** Technical posts often end by thanking those who influenced the work—conferences that accepted talks, coworkers who shared techniques.
-- **Calls to action.** Many posts close with an invitation: "What other factors have you considered?" or "Please consider sharing your reflections with me."
+- **Calls to action.** Many posts close with an invitation: "What other factors have you considered?" or "Please consider sharing your reflections with me." Some other call to action may be appropriate. Or maybe none at all. Provide to the prompter your proposal for a possible call to action before including one in a draft.

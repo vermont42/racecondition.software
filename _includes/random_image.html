@@ -1,0 +1,25 @@
+{% assign prefix = site.img_url | append: "/" %}
+{% assign half_width = include.half_width %}
+
+<figure{% if half_width %} class="image--half"{% endif %}>
+    <img data-src="{{ prefix }}{{ include.file1 }}" data-alt="{{ include.alt1 }}" data-caption="{{ include.caption1 }}" hidden>
+    <img data-src="{{ prefix }}{{ include.file2 }}" data-alt="{{ include.alt2 }}" data-caption="{{ include.caption2 }}" hidden>
+    <img data-src="{{ prefix }}{{ include.file3 }}" data-alt="{{ include.alt3 }}" data-caption="{{ include.caption3 }}" hidden>
+    <figcaption hidden></figcaption>
+</figure>
+<script>
+(function () {
+    var fig = document.currentScript.previousElementSibling;
+    var imgs = fig.querySelectorAll("img[data-src]");
+    var cap = fig.querySelector("figcaption");
+    var pick = imgs[Math.floor(Math.random() * imgs.length)];
+    pick.src = pick.dataset.src;
+    pick.alt = pick.dataset.alt;
+    pick.title = pick.dataset.alt;
+    pick.removeAttribute("hidden");
+    if (pick.dataset.caption) {
+        cap.textContent = pick.dataset.caption;
+        cap.removeAttribute("hidden");
+    }
+})();
+</script>

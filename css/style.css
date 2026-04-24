@@ -17,6 +17,7 @@
     --accent-teal: #4A5C58;
     --accent-rose: #C8899A;
     --accent-cream: #F5F3EF;
+    --code-inline-text: #4A5C58;
     --header-bg: rgba(245, 243, 239, 0.85);
     --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
     --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -57,6 +58,7 @@
         --accent-teal: #6B8A82;
         --accent-rose: #D9A8B4;
         --accent-cream: #E8E0D0;
+        --code-inline-text: #C8D6D0;
         --header-bg: rgba(26, 36, 34, 0.85);
         --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -78,6 +80,7 @@
     --accent-teal: #6B8A82;
     --accent-rose: #D9A8B4;
     --accent-cream: #E8E0D0;
+    --code-inline-text: #C8D6D0;
     --header-bg: rgba(26, 36, 34, 0.85);
     --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -614,7 +617,7 @@ code {
 /* Inline code */
 :not(pre) > code {
     background: var(--bg-alt);
-    color: var(--accent-teal);
+    color: var(--code-inline-text);
     padding: 0.15em 0.4em;
     border-radius: 4px;
     font-size: 0.85em;
@@ -744,6 +747,42 @@ figcaption a {
     margin-right: auto;
 }
 
+.image-pair__row {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.image-pair__item {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.image-pair__item img {
+    max-width: 100%;
+    height: auto;
+}
+
+.image-pair__label {
+    font-family: var(--font-ui);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+@media (max-width: 640px) {
+    .image-pair__row {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
 /* ===================================
    SECTION BREAKS
    =================================== */
@@ -863,6 +902,18 @@ sup a {
     .has-sidenotes #endnotes {
         display: none;
     }
+}
+
+/* Footnote click highlight — applies to both sidenotes (wide viewports)
+   and bottom-of-post footnote <li>s (narrow viewports). */
+.sidenote--flash {
+    animation: sidenoteFlash 1.6s ease-out;
+}
+
+@keyframes sidenoteFlash {
+    0%   { background-color: transparent; }
+    15%  { background-color: var(--accent-rose); }
+    100% { background-color: transparent; }
 }
 
 /* ===================================
