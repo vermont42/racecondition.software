@@ -1,0 +1,10 @@
+These are examples of my posts being featured:
+
+https://iosdevweekly.com/issues/432#code
+https://iosdevweekly.com/issues/412#LVk2nSq
+https://iosdevweekly.com/issues/380#TT7NGmJ
+https://www.avanderlee.com/swiftlee-weekly/issues/116
+https://www.youtube.com/watch?v=B-b4Gu8ZLTU&t=5m53s
+https://www.youtube.com/watch?v=X6QY1iaizeA&t=5m42s
+
+Give the post URLs to Claude. Have it analyze recent iOS Dev Weekly issues. Have it suggest post topics not involving AI.
