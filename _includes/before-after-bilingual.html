@@ -1,0 +1,48 @@
+{% assign before_en = site.img_url | append: "/" | append: include.before_en %}
+{% assign after_en = site.img_url | append: "/" | append: include.after_en %}
+{% assign before_de = site.img_url | append: "/" | append: include.before_de %}
+{% assign after_de = site.img_url | append: "/" | append: include.after_de %}
+{% assign caption_en = include.caption_en %}
+{% assign caption_de = include.caption_de %}
+{% assign alt_before_en = include.alt_before_en | default: caption_en | append: " — before" %}
+{% assign alt_after_en = include.alt_after_en | default: caption_en | append: " — after" %}
+{% assign alt_before_de = include.alt_before_de | default: caption_de | append: " — vorher" %}
+{% assign alt_after_de = include.alt_after_de | default: caption_de | append: " — nachher" %}
+{% assign img_w = include.width | default: 640 %}
+{% assign img_h = include.height | default: 1391 %}
+
+<figure class="image-pair image-pair--bilingual">
+    <div class="image-pair__row">
+        <div class="image-pair__item">
+            <img class="image-pair__img"
+                 src="{{ before_en }}"
+                 data-src-en="{{ before_en }}"
+                 data-src-de="{{ before_de }}"
+                 data-alt-en="{{ alt_before_en }}"
+                 data-alt-de="{{ alt_before_de }}"
+                 alt="{{ alt_before_en }}"
+                 title="{{ alt_before_en }}"
+                 width="{{ img_w }}"
+                 height="{{ img_h }}"
+                 loading="lazy">
+            <span class="image-pair__label" data-which="before">Before</span>
+        </div>
+        <div class="image-pair__item">
+            <img class="image-pair__img"
+                 src="{{ after_en }}"
+                 data-src-en="{{ after_en }}"
+                 data-src-de="{{ after_de }}"
+                 data-alt-en="{{ alt_after_en }}"
+                 data-alt-de="{{ alt_after_de }}"
+                 alt="{{ alt_after_en }}"
+                 title="{{ alt_after_en }}"
+                 width="{{ img_w }}"
+                 height="{{ img_h }}"
+                 loading="lazy">
+            <span class="image-pair__label" data-which="after">After</span>
+        </div>
+    </div>
+    <figcaption class="image-pair__caption"
+                data-caption-en="{{ caption_en }}"
+                data-caption-de="{{ caption_de }}">{{ caption_en }}</figcaption>
+</figure>
