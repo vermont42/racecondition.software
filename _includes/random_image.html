@@ -2,9 +2,12 @@
 {% assign half_width = include.half_width %}
 
 <figure{% if half_width %} class="image--half"{% endif %}>
-    <img data-src="{{ prefix }}{{ include.file1 }}" data-alt="{{ include.alt1 }}" data-caption="{{ include.caption1 }}" hidden>
-    <img data-src="{{ prefix }}{{ include.file2 }}" data-alt="{{ include.alt2 }}" data-caption="{{ include.caption2 }}" hidden>
-    <img data-src="{{ prefix }}{{ include.file3 }}" data-alt="{{ include.alt3 }}" data-caption="{{ include.caption3 }}" hidden>
+    {% if include.file1 %}<img data-src="{{ prefix }}{{ include.file1 }}" data-alt="{{ include.alt1 }}" data-caption="{{ include.caption1 }}" hidden>{% endif %}
+    {% if include.file2 %}<img data-src="{{ prefix }}{{ include.file2 }}" data-alt="{{ include.alt2 }}" data-caption="{{ include.caption2 }}" hidden>{% endif %}
+    {% if include.file3 %}<img data-src="{{ prefix }}{{ include.file3 }}" data-alt="{{ include.alt3 }}" data-caption="{{ include.caption3 }}" hidden>{% endif %}
+    {% if include.file4 %}<img data-src="{{ prefix }}{{ include.file4 }}" data-alt="{{ include.alt4 }}" data-caption="{{ include.caption4 }}" hidden>{% endif %}
+    {% if include.file5 %}<img data-src="{{ prefix }}{{ include.file5 }}" data-alt="{{ include.alt5 }}" data-caption="{{ include.caption5 }}" hidden>{% endif %}
+    {% if include.file6 %}<img data-src="{{ prefix }}{{ include.file6 }}" data-alt="{{ include.alt6 }}" data-caption="{{ include.caption6 }}" hidden>{% endif %}
     <figcaption hidden></figcaption>
 </figure>
 <script>
