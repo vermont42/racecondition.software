@@ -78,16 +78,96 @@ property's bookings by how many days before arrival they were made &mdash; warm
   that rewards <em>last&#8209;minute</em> discounting, because it actually has
   last&#8209;minute demand. And because Maui bookings sit on the calendar for the
   better part of a year, a firmer cancellation policy or larger deposit protects it
-  far more than it would Tahoe.
+  far more than it would Tahoe. <em>If anything the 265&#8209;day Maui figure
+  understates how far ahead its guests really plan: the longest&#8209;lead bookings
+  &mdash; placed now for 2027 stays &mdash; haven't arrived yet, so they aren't in
+  this data. Opening the calendar early is the safe call, not a gamble.</em>
 </div>
 
-<h2>2. When guests come &mdash; every property has its own season</h2>
+<h2>2. Are bookings spiky, or a steady drip? <span class="btr__askedby">(Amanda's question)</span></h2>
+
+<p>Amanda asked two good questions: do bookings <strong>spike around certain dates or
+events &mdash; weekends and the like</strong>, or is it a consistent stream? And does
+booking volume <strong>react to outside events</strong>, e.g. people booking less when
+oil or airfare prices jump? Here's what the data can and can't say.</p>
+
+<h3 class="btr__subhead">Day of the week a booking is placed &mdash; no weekend spike</h3>
+
+<p>If guests booked mostly on weekends (browsing on a lazy Sunday) you'd see it here.
+They don't. Bookings arrive in a remarkably even stream all week &mdash; if anything a
+touch <em>lower</em> on weekends than mid&#8209;week.</p>
+
+<div class="btr__chart-card">
+  <div id="weekdayChart"></div>
+  <div class="btr__chart-sub" style="margin-top:var(--space-sm)">All four properties pooled, n=499 bookings. Bars are the share of bookings placed on each weekday; the dashed line is a perfectly even 1/7 (14.3%).</div>
+</div>
+
+<p>As for &ldquo;a consistent amount of time out&rdquo; &mdash; that's the lead&#8209;time
+story above, and the answer is <strong>it depends on the property</strong>: Maui is
+consistent (almost everyone books far ahead), while Tahoe is the opposite of consistent
+&mdash; two separate crowds, one last&#8209;minute and one far&#8209;ahead.</p>
+
+<h3 class="btr__subhead">Booking volume over time &mdash; and the honest limit on the &ldquo;events&rdquo; question</h3>
+
+<p>This is every booking in the history, counted by the month it was <em>placed</em>,
+with the <strong style="color:#B26B4A">airline&#8209;fare price index</strong> drawn over
+it (right axis). The recurring <strong>January bumps</strong> are New&#8209;Year trip
+planning (mostly Tahoe); the big step up in <strong>fall 2024</strong> is simply Banyan
+coming online, and the small tick in spring 2026 is Kanaloa. Eyeball the fare line against
+the bars: the bars' big moves line up with <em>listings</em> and <em>January</em>, not with
+the fare line.</p>
+
+<div class="btr__chart-card">
+  <div id="timelineChart"></div>
+  <div class="btr__chart-sub" style="margin-top:var(--space-sm)">All four properties pooled (bars, left axis) with BLS airline&#8209;fare CPI overlaid (line, right axis). Markers note when listings were added &mdash; those, not guest behavior, drive the biggest moves. The <strong>greyed recent months are incomplete</strong>: a booking placed lately for a far&#8209;off stay hasn't arrived yet, so it isn't in the data &mdash; those months are excluded from the test below.</div>
+</div>
+
+<p>So I did the careful version Amanda asked for: take the booking line, divide out the
+growth that's purely <strong>more listings</strong> (bookings per live unit), subtract each
+month's <strong>normal seasonality</strong> (which also soaks up the January surge), and
+ask whether <strong>airfare or oil prices</strong> explain any of what's left &mdash;
+at the booking month and up to three months earlier. Below, each dot is one month with all
+that structure removed: left&#8209;right is how far airfare sat above or below normal,
+up&#8209;down is how our bookings sat above or below normal. A real &ldquo;pricey flights
+&rarr; fewer bookings&rdquo; effect would tilt the cloud <em>down to the right</em>.</p>
+
+<div class="btr__chart-card">
+  <div id="priceScatter"></div>
+  <div class="btr__chart-sub" style="margin-top:var(--space-sm)">52 months (Feb 2021&ndash;May 2025), seasonality removed from both axes. The dashed line is the best fit &mdash; nearly flat. It's a shapeless blob, not a downhill trend.</div>
+</div>
+
+<div class="btr__note">
+  <strong>The honest verdict: inconclusive &mdash; and here's exactly why.</strong> After
+  removing listings and seasonality, there is <strong>no trustworthy link</strong> between
+  fuel/airfare prices and our booking volume. The one result that even looks statistically
+  real points the <em>wrong way</em> (it says <em>higher</em> fares go with <em>more</em>
+  bookings) &mdash; and it vanishes the moment you account for the fact that fares and our
+  bookings simply <strong>drifted upward together</strong> after COVID. That's a classic
+  coincidence&#8209;of&#8209;trends, not cause and effect. Crude oil shows nothing at all.
+  <br><br>
+  <strong>Why we can't be sure either way:</strong> there are only ~50 usable months, most
+  of the early ones with just a property or two; and &mdash; frustratingly &mdash; the only
+  big fare move on record (airfares jumped ~25% over winter&ndash;spring 2026) lands in
+  exactly the recent stretch we had to grey out, because those bookings haven't arrived in
+  the data yet. So the cleanest natural experiment is the one window the data won't let us
+  use. <strong>A blank result here means &ldquo;not enough data,&rdquo; not &ldquo;prices
+  don't matter.&rdquo;</strong>
+  <br><br>
+  <strong>So what:</strong> don't price or market around fuel and airfare on the strength of
+  this &mdash; there's no reliable signal. The single highest&#8209;value re&#8209;check is
+  to run this again in <strong>9&ndash;12 months</strong>, once that 2026 fare spike has
+  matured into usable bookings. <span style="color:var(--text-muted)">(Full method,
+  regression table, and caveats: <code>docs/booking-trends.md</code>, Appendix&nbsp;A.)</span>
+</div>
+
+<h2>3. When guests come &mdash; every property has its own season</h2>
 
 <p>There is no single &ldquo;peak season&rdquo; across the portfolio. Bars show
 <strong>occupied nights per year</strong> in each month (how full the place is); the
 line shows <strong>check&#8209;ins per year</strong> (how many separate bookings
-arrive). Both are averaged per observed year, which corrects a subtle bias toward
-the first half of the year. Watch how differently the four behave.</p>
+arrive). Both are averaged per observed year &mdash; corrected for how long each
+listing has actually been live &mdash; so the month-to-month <em>shape</em> is honest.
+Watch how differently the four behave.</p>
 
 <div class="btr__grid" id="seasonCharts"></div>
 
@@ -112,7 +192,7 @@ the first half of the year. Watch how differently the four behave.</p>
   soft spot with a targeted promotion.
 </div>
 
-<h2>3. The winter rate premium</h2>
+<h2>4. The winter rate premium</h2>
 
 <p>Even where occupancy is flat, what guests <em>pay</em> per night isn't. This plots
 each property's average nightly rate by month against <em>its own</em> annual average
@@ -132,7 +212,7 @@ month.</p>
   are where a modest discount or a min&#8209;stay relaxation does the most good.
 </div>
 
-<h2>4. Who actually stays &mdash; and what to buy</h2>
+<h2>5. Who actually stays &mdash; and what to buy</h2>
 
 <p>This is the question with the most concrete payoff. The share of stays that bring
 children varies a lot by property, and it tells us how to furnish and describe each
@@ -169,7 +249,7 @@ rules &mdash; so they're not worth a cent of furnishing.)</p>
   </ol>
 </div>
 
-<h2>5. Which platform, and how often they cancel</h2>
+<h2>6. Which platform, and how often they cancel</h2>
 
 <p>The two long&#8209;established properties live on Vrbo; the two new Kona units are
 Airbnb&#8209;first &mdash; which lines up neatly with the lead&#8209;time story (Vrbo
@@ -180,11 +260,16 @@ skews to an older, plan&#8209;ahead crowd, exactly Maui's profile).</p>
   <div class="btr__legend" id="platformLegend"></div>
 </div>
 
-<p>Cancellations run a steady <strong>~21&ndash;25%</strong> of guest bookings on the
-three established properties (Kanaloa's 5% is just too new to read). That's about one
-in four or five &mdash; easy to forget when you're eyeballing a full-looking calendar,
-and it bites hardest on Maui, where the highest cancellation rate meets the longest
-lead times.</p>
+<p>Separately, cancellations run a steady <strong>~21&ndash;25%</strong> of
+already&#8209;arrived bookings on the three established properties (Kanaloa's 5% is just
+too new to read). That's about one in four or five &mdash; easy to forget when you're
+eyeballing a full-looking calendar, and it bites hardest on Maui, where the highest
+cancellation rate meets the longest lead times.</p>
+
+<div class="btr__chart-card">
+  <div id="cancelChart"></div>
+  <div class="btr__chart-sub" style="margin-top:var(--space-sm)">Share of past&#8209;arrival guest bookings that were cancelled. Kanaloa (n=20) is too new to read.</div>
+</div>
 
 <h2>The to&#8209;do list, in one place</h2>
 
@@ -217,11 +302,23 @@ lead times.</p>
     far-ahead Maui).</li>
     <li><strong>Seasonality is normalized per observed year.</strong> Because the data
     ends in mid-June, the first half of the year would otherwise be over-counted; each
-    month is divided by the number of years it was actually observable.</li>
+    month is divided by the number of years it was actually observable. &ldquo;Live&rdquo;
+    is dated from each listing's first <em>booking</em> (not first arrival), since a
+    listing takes bookings before its first guest arrives. June 2026 is itself a
+    half&#8209;month at the cutoff, so June is mildly under&#8209;counted &mdash; don't
+    over&#8209;read one month's exact height.</li>
     <li><strong>Sample sizes:</strong> Tahoe 207, Maui 163, Banyan 110, Kanaloa 19
-    realized stays. Kanaloa and (to a lesser degree) Banyan are provisional.</li>
+    realized stays. Kanaloa and (to a lesser degree) Banyan are provisional. Percentiles
+    (medians, etc.) on small samples are nearest&#8209;rank, so an n=19 or per&#8209;month
+    figure can wobble.</li>
     <li><strong>Money</strong> is host revenue net of channel fees, a reasonable
-    owner-economics proxy, not a full profit&#8209;and&#8209;loss.</li>
+    owner-economics proxy, not a full profit&#8209;and&#8209;loss. Nightly rate is an
+    unweighted per&#8209;stay average (a 2&#8209;night and a 14&#8209;night stay count
+    equally); the &ldquo;rate premium&rdquo; chart shows each property indexed to its own
+    average.</li>
+    <li><strong>Booking weekday/month are bucketed in UTC,</strong> so a booking placed
+    late on a Pacific&#8209;time Sunday can land on Monday &mdash; immaterial to patterns
+    this size, but it means the weekday chart is approximate.</li>
     <li>Built by <a href="https://github.com/vermont42">CondoBot</a>'s analysis
     script; the underlying writeup lives in the project repo. Generated
     <span id="genDate">2026&#8209;06&#8209;14</span>.</li>
@@ -378,6 +475,26 @@ main:has(.btr) { max-width: 62rem; }
 }
 .btr__legend span { display: inline-flex; align-items: center; gap: 0.4em; }
 .btr__legend i { width: 0.85em; height: 0.85em; border-radius: 2px; display: inline-block; }
+/* line sample (rate chart) and hatch sample (kids chart) for accessible legends */
+.btr__legend i.btr__lineswatch { width: 20px; height: 8px; border-radius: 0; line-height: 0; }
+.btr__legend i.btr__hatchswatch {
+  background: repeating-linear-gradient(45deg, var(--text-muted) 0 2px, transparent 2px 4px);
+  border: 1px solid var(--border);
+}
+
+/* "(Amanda's question)" tag on a heading, and the sub-headings within it */
+.btr__askedby {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--accent-rose);
+  white-space: nowrap;
+}
+.btr__subhead {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  margin: var(--space-lg) 0 var(--space-sm);
+}
 
 /* Actions table */
 .btr__actions td:nth-child(2) { font-family: var(--font-ui); font-weight: 600; white-space: nowrap; }
@@ -402,7 +519,7 @@ main:has(.btr) { max-width: 62rem; }
   var DATA = [
     {
       label: "Banyan Tree 300", short: "Banyan", region: "Kailua-Kona", since: "fall 2024",
-      color: "#6B8A82", provisional: false, realized: 110, cancelRatePct: 24,
+      color: "#3E8E9C", dash: "7 4", provisional: false, realized: 110, cancelRatePct: 24,
       platform: { Vrbo: 38, Airbnb: 69, Other: 3 },
       leadMedian: 119, leadN: 110,
       leadBuckets: { "0-7d": 7, "8-30d": 15, "31-60d": 14, "61-120d": 20, "121-240d": 36, "240d+": 18 },
@@ -415,7 +532,7 @@ main:has(.btr) { max-width: 62rem; }
     },
     {
       label: "Kanaloa at Kona 1903", short: "Kanaloa", region: "Kailua-Kona", since: "Mar 2026",
-      color: "#88A0C0", provisional: true, realized: 19, cancelRatePct: 5,
+      color: "#8E7CC3", dash: "2 3", provisional: true, realized: 19, cancelRatePct: 5,
       platform: { Vrbo: 8, Airbnb: 11, Other: 0 },
       leadMedian: 14, leadN: 19,
       leadBuckets: { "0-7d": 6, "8-30d": 9, "31-60d": 3, "61-120d": 1, "121-240d": 0, "240d+": 0 },
@@ -428,29 +545,29 @@ main:has(.btr) { max-width: 62rem; }
     },
     {
       label: "Sands of Kahana 384", short: "Maui", region: "Maui", since: "~2022 on platform",
-      color: "#C8899A", provisional: false, realized: 163, cancelRatePct: 25,
+      color: "#C8899A", dash: "1.5 4", provisional: false, realized: 163, cancelRatePct: 25,
       platform: { Vrbo: 146, Airbnb: 14, Other: 3 },
       leadMedian: 265, leadN: 163,
       leadBuckets: { "0-7d": 1, "8-30d": 3, "31-60d": 6, "61-120d": 15, "121-240d": 47, "240d+": 91 },
-      nightsPerYear: [25.25,22.4,20.8,24.4,21.6,23.8,24.25,19.5,20,21.75,25.25,25.5],
-      arrivalsPerYear: [3.5,2.8,2.8,3,3.4,3.4,2.75,2.5,2.5,3,3.5,3.75],
-      observedYears: [4,5,5,5,5,5,4,4,4,4,4,4],
+      nightsPerYear: [20.2,18.67,17.33,20.33,18,19.83,19.4,15.6,16,17.4,20.2,20.4],
+      arrivalsPerYear: [2.8,2.33,2.33,2.5,2.83,2.83,2.2,2,2,2.4,2.8,3],
+      observedYears: [5,6,6,6,6,6,5,5,5,5,5,5],
       nightlyByMonth: [1033,991,972,863,978,989,1000,950,906,922,950,1037],
       kidsPct: 40, kidsSummerPct: 55, partyMedian: 6,
       revenue: 1099739, medianNightly: 980
     },
     {
       label: "895 Skyline Drive", short: "Tahoe", region: "Lake Tahoe", since: "~2022 on platform",
-      color: "#7C9C72", provisional: false, realized: 207, cancelRatePct: 21,
+      color: "#6F9E5A", dash: "", provisional: false, realized: 207, cancelRatePct: 21,
       platform: { Vrbo: 156, Airbnb: 48, Other: 3 },
       leadMedian: 87, leadN: 207,
       leadBuckets: { "0-7d": 8, "8-30d": 31, "31-60d": 35, "61-120d": 50, "121-240d": 39, "240d+": 44 },
-      nightsPerYear: [15.8,19.8,24,17.2,16.4,23.8,26.25,24,14.75,16.25,11.25,18],
-      arrivalsPerYear: [3.4,5,5.4,3.6,4.2,2,4,3.25,3.75,4.25,3.25,3.75],
-      observedYears: [5,5,5,5,5,5,4,4,4,4,4,4],
+      nightsPerYear: [15.8,16.5,20,14.33,13.67,19.83,21,19.2,11.8,13,9,14.4],
+      arrivalsPerYear: [3.4,4.17,4.5,3,3.5,1.67,3.2,2.6,3,3.4,2.6,3],
+      observedYears: [5,6,6,6,6,6,5,5,5,5,5,5],
       nightlyByMonth: [621,637,579,553,552,599,628,614,614,523,549,677],
-      kidsPct: 42, kidsSummerPct: 44, partyMedian: 5
-      , revenue: 540574, medianNightly: 591
+      kidsPct: 42, kidsSummerPct: 44, partyMedian: 5,
+      revenue: 540574, medianNightly: 591
     }
   ];
 
@@ -462,6 +579,27 @@ main:has(.btr) { max-width: 62rem; }
   // Warm (last-minute) -> cool (far ahead).
   var LEAD_COLORS = ["#C8899A","#D2A98C","#CBBE86","#A8BFA0","#7FA39A","#4A5C58"];
   var PLATFORM_COLORS = { Vrbo: "#4A5C58", Airbnb: "#C8899A", Other: "#B6AE9F" };
+
+  // All four properties POOLED — bookings placed by weekday (Sun..Sat) and by
+  // calendar month (when placed). From the same --json run (bookingsByYearMonth /
+  // bookingsMadeByWeekday, summed). For Amanda's "spiky vs steady / events" question.
+  var WEEKDAY_POOLED = [75,83,68,71,76,63,63]; // Sun..Sat, n=499
+  var DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  var TIMELINE = [["2021-02",5],["2021-04",1],["2021-05",1],["2021-06",1],["2021-07",3],["2021-08",2],["2021-09",5],["2021-10",1],["2021-11",5],["2021-12",6],["2022-01",16],["2022-02",6],["2022-03",10],["2022-04",8],["2022-05",3],["2022-06",7],["2022-07",7],["2022-08",5],["2022-09",4],["2022-10",6],["2022-11",7],["2022-12",8],["2023-01",16],["2023-02",5],["2023-03",8],["2023-04",1],["2023-05",4],["2023-06",2],["2023-07",7],["2023-08",2],["2023-09",6],["2023-10",8],["2023-11",7],["2023-12",4],["2024-01",7],["2024-02",8],["2024-03",8],["2024-04",12],["2024-05",3],["2024-06",5],["2024-07",7],["2024-08",4],["2024-09",23],["2024-10",24],["2024-11",13],["2024-12",20],["2025-01",16],["2025-02",21],["2025-03",8],["2025-04",11],["2025-05",12],["2025-06",14],["2025-07",15],["2025-08",10],["2025-09",7],["2025-10",3],["2025-11",8],["2025-12",3],["2026-01",13],["2026-02",7],["2026-03",15],["2026-04",13],["2026-05",2]];
+  // Listing-launch markers to annotate the timeline (the real drivers of the big moves).
+  var TIMELINE_MARKS = [["2024-09","Banyan added"],["2026-03","Kanaloa added"]];
+
+  // ---- Price-correlation overlay (§2, Amanda's "do bookings react to fuel/airfare?") ----
+  // From scripts/price-correlation.ts --json. AIRFARE = BLS CPI airline fares
+  // (FRED CUUR0000SETG01, index 1982-84=100), aligned to each booking-placed month.
+  // CENSOR_FROM = first month the booking timeline is too incomplete to trust (recent
+  // long-lead bookings haven't arrived yet) — months from here on are greyed + excluded
+  // from the model. SCATTER = [airfare residual, bookings/listing residual] for the 52
+  // analysable months, both with calendar-month seasonality partialled out (so the cloud's
+  // tilt IS the estimated price effect). See docs/booking-trends.md Appendix A.
+  var AIRFARE=[["2021-02",197.2],["2021-03",197.1],["2021-04",223],["2021-05",250.2],["2021-06",256.7],["2021-07",243.6],["2021-08",212.9],["2021-09",199],["2021-10",206],["2021-11",215.2],["2021-12",209],["2022-01",210.8],["2022-02",222.2],["2022-03",243.7],["2022-04",297.1],["2022-05",344.9],["2022-06",344.1],["2022-07",311.2],["2022-08",283.9],["2022-09",284.3],["2022-10",294.3],["2022-11",292.7],["2022-12",268.5],["2023-01",264.6],["2023-02",281.2],["2023-03",286.8],["2023-04",294.6],["2023-05",298.5],["2023-06",279.2],["2023-07",253.3],["2023-08",246.2],["2023-09",246.2],["2023-10",255.5],["2023-11",257.2],["2023-12",243.3],["2024-01",247.6],["2024-02",264],["2024-03",266.5],["2024-04",277.5],["2024-05",281],["2024-06",265.1],["2024-07",246.2],["2024-08",243],["2024-09",250],["2024-10",265.9],["2024-11",269.3],["2024-12",262.6],["2025-01",265.3],["2025-02",262.1],["2025-03",252.6],["2025-04",255.6],["2025-05",260.3],["2025-06",255.9],["2025-07",247.9],["2025-08",251],["2025-09",258],["2025-10",256.5],["2025-11",254.9],["2025-12",253.7],["2026-01",271.2],["2026-02",280.6],["2026-03",290.2],["2026-04",308.5],["2026-05",329.8]];
+  var CENSOR_FROM="2025-06";
+  var SCATTER=[[-48.14,-1.3],[-52.21,-3.133],[-46.58,-2.433],[-36.76,-1.4],[-29.58,-1.375],[-19.98,-1.5],[-33.62,-0.625],[-45.89,-1.292],[-49.44,-3.375],[-43.43,-0.958],[-36.89,-0.917],[-36.31,1.792],[-23.12,-0.8],[-5.66,1.867],[27.61,1.067],[57.89,-0.4],[57.83,1.625],[47.61,0.5],[37.41,0.875],[39.45,-1.792],[38.9,-0.875],[34.06,0.042],[22.67,0.083],[17.56,1.792],[35.87,-1.3],[37.47,0.867],[25.01,-2.433],[11.52,0.1],[-7.04,-0.875],[-10.25,0.5],[-0.31,-0.625],[1.28,-0.792],[0.04,0.125],[-1.37,0.042],[-2.5,-1.917],[0.54,-2.708],[18.6,0.2],[17.13,0.867],[7.91,3.067],[-6.01,-0.4],[-21.21,0.625],[-17.37,0.5],[-3.49,0.375],[5.16,3.875],[10.5,4.125],[10.74,0.875],[16.71,2.75],[18.21,-0.875],[16.79,3.2],[3.27,-0.467],[-13.95,0.733],[-26.65,2.1]];
 
   function esc(s) { return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
   function money(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
@@ -524,20 +662,202 @@ main:has(.btr) { max-width: 62rem; }
         return '<span style="width:' + pctv + '%;background:' + PLATFORM_COLORS[k] + '" title="' +
           k + ': ' + n + ' (' + Math.round(pctv) + '%)"></span>';
       }).join("");
-      return '<div class="btr__hbar-row">' +
-        '<div class="btr__hbar-head"><b>' + esc(p.short) + '</b>' +
-        '<span class="meta">' + p.cancelRatePct + '% cancel rate</span></div>' +
+      var dominant = keys.reduce(function (a, k) { return (p.platform[k] || 0) > (p.platform[a] || 0) ? k : a; }, "Vrbo");
+      return '<div class="btr__hbar-row" role="img" aria-label="' + esc(p.short) +
+        ' platform split, ' + Math.round(100 * (p.platform[dominant] || 0) / total) + ' percent ' + dominant + '">' +
+        '<div class="btr__hbar-head"><b>' + esc(p.short) + '</b></div>' +
         '<div class="btr__hbar">' + segs + '</div></div>';
     }).join("");
     document.getElementById("platformLegend").innerHTML =
       keys.map(function (k) {
         return '<span><i style="background:' + PLATFORM_COLORS[k] + '"></i>' + k + '</span>';
-      }).join("") + '<span style="color:var(--text-muted)">bar width = share of stays; right label = cancellation rate</span>';
+      }).join("") + '<span style="color:var(--text-muted)">bar width = share of stays</span>';
+  }
+
+  // ---------- Cancellation rate (its own small bar chart, was overloaded on the platform bar) ----------
+  function renderCancel() {
+    var W = 640, H = 170, ml = 30, mr = 14, mt = 14, mb = 40;
+    var iw = W - ml - mr, ih = H - mt - mb;
+    var maxV = 30;
+    function Y(v) { return mt + ih - (v / maxV) * ih; }
+    var s = svgOpen(W, H, "Cancellation rate by property, share of past-arrival bookings cancelled");
+    for (var g = 0; g <= maxV; g += 10) {
+      s += '<line class="grid" x1="' + ml + '" y1="' + Y(g) + '" x2="' + (W - mr) + '" y2="' + Y(g) + '"/>';
+      s += '<text x="' + (ml - 5) + '" y="' + (Y(g) + 3) + '" text-anchor="end" font-size="9">' + g + '%</text>';
+    }
+    var gw = iw / DATA.length;
+    DATA.forEach(function (p, i) {
+      var bw = gw * 0.5, x = ml + i * gw + (gw - bw) / 2;
+      var y = Y(p.cancelRatePct), h = mt + ih - y;
+      s += '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + bw.toFixed(1) +
+        '" height="' + h.toFixed(1) + '" rx="2" fill="' + p.color + '" opacity="' + (p.provisional ? 0.4 : 1) +
+        '"><title>' + p.short + ': ' + p.cancelRatePct + '% cancelled</title></rect>';
+      s += '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (y - 4).toFixed(1) + '" text-anchor="middle" font-size="10" class="val">' +
+        p.cancelRatePct + '%</text>';
+      s += '<text x="' + (ml + i * gw + gw / 2).toFixed(1) + '" y="' + (mt + ih + 16) + '" text-anchor="middle" font-size="11" fill="var(--heading)">' +
+        esc(p.short) + (p.provisional ? '*' : '') + '</text>';
+    });
+    s += '</svg>';
+    document.getElementById("cancelChart").innerHTML = s;
+  }
+
+  // ---------- Bookings by weekday (pooled) — answers "weekend spike?" ----------
+  function renderWeekday() {
+    var W = 640, H = 200, ml = 30, mr = 14, mt = 16, mb = 30;
+    var iw = W - ml - mr, ih = H - mt - mb;
+    var total = WEEKDAY_POOLED.reduce(function (a, b) { return a + b; }, 0) || 1;
+    var pcts = WEEKDAY_POOLED.map(function (n) { return 100 * n / total; });
+    var maxV = 20;
+    function Y(v) { return mt + ih - (v / maxV) * ih; }
+    var s = svgOpen(W, H, "Bookings placed by day of week, all properties pooled — close to an even one-seventh each day, no weekend spike");
+    for (var g = 0; g <= maxV; g += 5) {
+      s += '<line class="grid" x1="' + ml + '" y1="' + Y(g) + '" x2="' + (W - mr) + '" y2="' + Y(g) + '"/>';
+      s += '<text x="' + (ml - 5) + '" y="' + (Y(g) + 3) + '" text-anchor="end" font-size="9">' + g + '%</text>';
+    }
+    var gw = iw / 7;
+    pcts.forEach(function (v, i) {
+      var bw = gw * 0.6, x = ml + i * gw + (gw - bw) / 2;
+      var y = Y(v), h = mt + ih - y;
+      var weekend = (i === 0 || i === 6);
+      s += '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + bw.toFixed(1) +
+        '" height="' + h.toFixed(1) + '" rx="2" fill="' + (weekend ? "#C8899A" : "#4A7C8C") +
+        '"><title>' + DOW[i] + ': ' + Math.round(v) + '% (' + WEEKDAY_POOLED[i] + ')</title></rect>';
+      s += '<text x="' + (ml + i * gw + gw / 2).toFixed(1) + '" y="' + (mt + ih + 16) + '" text-anchor="middle" font-size="10" fill="var(--heading)">' + DOW[i] + '</text>';
+    });
+    // even-share reference line at 100/7 %
+    var even = Y(100 / 7);
+    s += '<line x1="' + ml + '" y1="' + even.toFixed(1) + '" x2="' + (W - mr) + '" y2="' + even.toFixed(1) +
+      '" stroke="var(--heading)" stroke-width="1.2" stroke-dasharray="5 3"/>';
+    s += '<text x="' + (W - mr) + '" y="' + (even - 4).toFixed(1) + '" text-anchor="end" font-size="9" class="val">even = 14.3%</text>';
+    s += '</svg>';
+    document.getElementById("weekdayChart").innerHTML = s;
+  }
+
+  // ---------- Bookings-placed timeline (pooled monthly) + airfare overlay ----------
+  function renderTimeline() {
+    // expand TIMELINE (sparse — only months with bookings) into a dense monthly run
+    var map = {}, af = {};
+    TIMELINE.forEach(function (d) { map[d[0]] = d[1]; });
+    AIRFARE.forEach(function (d) { af[d[0]] = d[1]; });
+    var first = TIMELINE[0][0], last = TIMELINE[TIMELINE.length - 1][0];
+    var y0 = +first.slice(0, 4), m0 = +first.slice(5, 7), y1 = +last.slice(0, 4), m1 = +last.slice(5, 7);
+    var months = [];
+    for (var y = y0, m = m0; y < y1 || (y === y1 && m <= m1); m++) {
+      if (m > 12) { m = 1; y++; if (y > y1 || (y === y1 && m > m1)) break; }
+      var key = y + "-" + String(m).padStart(2, "0");
+      months.push({ key: key, y: y, m: m, n: map[key] || 0, af: af[key], censored: key >= CENSOR_FROM });
+    }
+    var W = 680, H = 250, ml = 28, mr = 40, mt = 18, mb = 34;
+    var iw = W - ml - mr, ih = H - mt - mb;
+    var maxV = Math.max.apply(null, months.map(function (d) { return d.n; }));
+    var nMax = Math.ceil(maxV / 5) * 5;
+    function Y(v) { return mt + ih - (v / nMax) * ih; }
+    // right axis: airfare. Pad the observed range so the line sits clear of the bars.
+    var afVals = months.map(function (d) { return d.af; }).filter(function (v) { return v != null; });
+    var afLo = Math.floor((Math.min.apply(null, afVals) - 10) / 25) * 25;
+    var afHi = Math.ceil((Math.max.apply(null, afVals) + 10) / 25) * 25;
+    function YA(v) { return mt + ih - ((v - afLo) / (afHi - afLo)) * ih; }
+    var AF_COLOR = "#B26B4A"; // warm rust — distinct from the green bars, ok for color-blind
+    var bw = iw / months.length;
+    var s = svgOpen(W, H, "Bookings placed per month (bars, left axis) with the airline-fare price index overlaid (line, right axis), 2021 to 2026. The big moves track new listings and the January planning surge, not fares; the recent months are greyed because their long-lead bookings have not arrived yet.");
+    for (var g = 0; g <= nMax; g += Math.max(5, Math.round(nMax / 4 / 5) * 5)) {
+      s += '<line class="grid" x1="' + ml + '" y1="' + Y(g) + '" x2="' + (W - mr) + '" y2="' + Y(g) + '"/>';
+      s += '<text x="' + (ml - 4) + '" y="' + (Y(g) + 3) + '" text-anchor="end" font-size="9">' + g + '</text>';
+    }
+    // shade the censored (untrustworthy) tail
+    var cIdx = months.findIndex(function (d) { return d.censored; });
+    if (cIdx >= 0) {
+      var cx = ml + cIdx * bw;
+      s += '<rect x="' + cx.toFixed(1) + '" y="' + mt + '" width="' + (W - mr - cx).toFixed(1) + '" height="' + ih +
+        '" fill="var(--text-muted)" opacity="0.10"/>';
+      s += '<text x="' + (cx + 3).toFixed(1) + '" y="' + (mt + 9) + '" font-size="8.5" fill="var(--text-muted)">incomplete &rarr;</text>';
+    }
+    months.forEach(function (d, i) {
+      var x = ml + i * bw;
+      var jan = d.m === 1;
+      var y = Y(d.n), h = mt + ih - y;
+      var fill = d.censored ? "var(--text-muted)" : (jan ? "#C8899A" : "#6F8E86");
+      var op = d.censored ? 0.35 : (jan ? 1 : 0.7);
+      s += '<rect x="' + (x + bw * 0.12).toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + (bw * 0.76).toFixed(1) +
+        '" height="' + h.toFixed(1) + '" rx="0.6" fill="' + fill + '" opacity="' + op +
+        '"><title>' + d.key + ': ' + d.n + ' booking' + (d.n === 1 ? '' : 's') + ' placed' + (d.censored ? ' (incomplete — recent long-lead bookings not yet arrived)' : '') + '</title></rect>';
+      if (d.m === 1) {
+        s += '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (mt + ih + 16) + '" text-anchor="middle" font-size="9">' + d.y + '</text>';
+      }
+    });
+    s += '<line class="axis" x1="' + ml + '" y1="' + (mt + ih) + '" x2="' + (W - mr) + '" y2="' + (mt + ih) + '"/>';
+    // airfare line (right axis), drawn on top
+    var pts = months.map(function (d, i) { return d.af == null ? null : [ml + i * bw + bw / 2, YA(d.af)]; });
+    var path = "", started = false;
+    pts.forEach(function (p) {
+      if (!p) { started = false; return; }
+      path += (started ? " L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1);
+      started = true;
+    });
+    s += '<path d="' + path + '" fill="none" stroke="' + AF_COLOR + '" stroke-width="1.8" opacity="0.9"/>';
+    // right-axis ticks
+    for (var ga = afLo; ga <= afHi; ga += 50) {
+      s += '<text x="' + (W - mr + 5) + '" y="' + (YA(ga) + 3) + '" text-anchor="start" font-size="9" fill="' + AF_COLOR + '">' + ga + '</text>';
+    }
+    // vertical right-axis title, set below the marker band so it can't collide with launch labels
+    s += '<text transform="translate(' + (W - 6) + ',' + (mt + ih / 2).toFixed(1) + ') rotate(-90)" text-anchor="middle" font-size="9" fill="' + AF_COLOR + '">airfare index</text>';
+    // launch markers
+    TIMELINE_MARKS.forEach(function (mk) {
+      var idx = months.findIndex(function (d) { return d.key === mk[0]; });
+      if (idx < 0) return;
+      var x = ml + idx * bw + bw / 2;
+      s += '<line x1="' + x.toFixed(1) + '" y1="' + mt + '" x2="' + x.toFixed(1) + '" y2="' + (mt + ih) +
+        '" stroke="var(--heading)" stroke-width="1" stroke-dasharray="3 2" opacity="0.6"/>';
+      s += '<text x="' + x.toFixed(1) + '" y="' + (mt - 4) + '" text-anchor="middle" font-size="9" class="val">&#9660; ' + esc(mk[1]) + '</text>';
+    });
+    s += '</svg>';
+    document.getElementById("timelineChart").innerHTML = s;
+  }
+
+  // ---------- Residual scatter: is there a price tilt once structure is removed? ----------
+  // Each dot is one month, with calendar-month seasonality partialled out of BOTH axes
+  // (Frisch–Waugh): x = airfare's deviation from its seasonal norm, y = bookings-per-listing's
+  // deviation from its seasonal norm. A real "pricier travel → fewer bookings" effect would
+  // tilt the cloud down-right. It doesn't — the cloud is a shapeless blob.
+  function renderPriceScatter() {
+    var host = document.getElementById("priceScatter");
+    if (!host) return;
+    var W = 680, H = 260, ml = 40, mr = 16, mt = 16, mb = 38;
+    var iw = W - ml - mr, ih = H - mt - mb;
+    var xs = SCATTER.map(function (d) { return d[0]; }), ys = SCATTER.map(function (d) { return d[1]; });
+    var xMax = Math.max(Math.abs(Math.min.apply(null, xs)), Math.abs(Math.max.apply(null, xs)));
+    var yMax = Math.max(Math.abs(Math.min.apply(null, ys)), Math.abs(Math.max.apply(null, ys)));
+    xMax = Math.ceil(xMax / 10) * 10; yMax = Math.ceil(yMax);
+    function X(v) { return ml + ((v + xMax) / (2 * xMax)) * iw; }
+    function Y(v) { return mt + ih - ((v + yMax) / (2 * yMax)) * ih; }
+    var s = svgOpen(W, H, "Monthly bookings-per-listing versus airline fares, both with seasonality removed. The points form a shapeless cloud with no downward tilt, i.e. no detectable price effect.");
+    // zero gridlines
+    s += '<line x1="' + X(0).toFixed(1) + '" y1="' + mt + '" x2="' + X(0).toFixed(1) + '" y2="' + (mt + ih) + '" class="grid"/>';
+    s += '<line x1="' + ml + '" y1="' + Y(0).toFixed(1) + '" x2="' + (W - mr) + '" y2="' + Y(0).toFixed(1) + '" class="grid"/>';
+    // OLS line through the cloud (visualises the near-zero slope)
+    var n = SCATTER.length, sx = 0, sy = 0, sxx = 0, sxy = 0;
+    SCATTER.forEach(function (d) { sx += d[0]; sy += d[1]; sxx += d[0] * d[0]; sxy += d[0] * d[1]; });
+    var slope = (n * sxy - sx * sy) / (n * sxx - sx * sx), intc = (sy - slope * sx) / n;
+    s += '<line x1="' + X(-xMax).toFixed(1) + '" y1="' + Y(slope * -xMax + intc).toFixed(1) + '" x2="' + X(xMax).toFixed(1) +
+      '" y2="' + Y(slope * xMax + intc).toFixed(1) + '" stroke="#B26B4A" stroke-width="1.6" stroke-dasharray="5 3" opacity="0.85"/>';
+    SCATTER.forEach(function (d) {
+      s += '<circle cx="' + X(d[0]).toFixed(1) + '" cy="' + Y(d[1]).toFixed(1) + '" r="3.2" fill="#6F8E86" opacity="0.75"/>';
+    });
+    // axis labels
+    s += '<text x="' + (ml + iw / 2).toFixed(1) + '" y="' + (H - 6) + '" text-anchor="middle" font-size="10" fill="var(--text-muted)">airfare vs. its seasonal norm (index points) &rarr; pricier</text>';
+    s += '<text transform="translate(11,' + (mt + ih / 2).toFixed(1) + ') rotate(-90)" text-anchor="middle" font-size="10" fill="var(--text-muted)">bookings/listing vs. norm &rarr; more</text>';
+    s += '</svg>';
+    host.innerHTML = s;
   }
 
   // ---------- SVG helpers ----------
-  var NS = "http://www.w3.org/2000/svg";
-  function svgOpen(w, h) { return '<svg viewBox="0 0 ' + w + ' ' + h + '" role="img">'; }
+  // label -> role="img" + aria-label + <title>, so screen readers and non-JS
+  // contexts get a spoken summary of each chart (the prose carries the detail).
+  function svgOpen(w, h, label) {
+    return '<svg viewBox="0 0 ' + w + ' ' + h + '" role="img"' +
+      (label ? ' aria-label="' + esc(label) + '"' : '') + '>' +
+      (label ? '<title>' + esc(label) + '</title>' : '');
+  }
 
   // Combo: nights/yr bars + arrivals/yr line, dual axis. One per property.
   function seasonChart(p) {
@@ -545,10 +865,11 @@ main:has(.btr) { max-width: 62rem; }
     var iw = W - ml - mr, ih = H - mt - mb;
     var maxN = Math.max.apply(null, p.nightsPerYear) || 1;
     var maxA = Math.max.apply(null, p.arrivalsPerYear) || 1;
+    var peakIdx = p.nightsPerYear.indexOf(maxN); // busiest month, annotated directly
     var nMax = Math.ceil(maxN / 5) * 5;
     var aMax = Math.ceil(maxA);
     var bw = iw / 12;
-    var s = svgOpen(W, H);
+    var s = svgOpen(W, H, p.short + " seasonality: occupied nights per year (bars) and check-ins per year (line) by month");
     // gridlines + left axis labels (nights)
     var g, yy;
     for (g = 0; g <= nMax; g += Math.max(5, Math.round(nMax / 4 / 5) * 5)) {
@@ -568,7 +889,12 @@ main:has(.btr) { max-width: 62rem; }
         '" height="' + Math.max(0, bh).toFixed(1) + '" rx="1.5" fill="' + p.color + '" opacity="' +
         (hot ? 1 : 0.5) + '"><title>' + MONTHS3[m] + ': ' + v.toFixed(1) + ' nights/yr</title></rect>';
       s += '<text x="' + (ml + m * bw + bw / 2).toFixed(1) + '" y="' + (H - 8) +
-        '" text-anchor="middle" font-size="9">' + MONTHS[m] + '</text>';
+        '" text-anchor="middle" font-size="9"' + (m === peakIdx && !p.provisional ? ' class="val"' : '') + '>' + MONTHS[m] + '</text>';
+      // annotate the busiest month directly so the panel reads at a glance
+      if (m === peakIdx && !p.provisional) {
+        s += '<text x="' + (ml + m * bw + bw / 2).toFixed(1) + '" y="' + (y - 4).toFixed(1) +
+          '" text-anchor="middle" font-size="8" class="val">peak</text>';
+      }
     }
     // arrivals line (right axis)
     var pts = [];
@@ -625,7 +951,7 @@ main:has(.btr) { max-width: 62rem; }
     lo = Math.floor(lo / 5) * 5; hi = Math.ceil(hi / 5) * 5;
     function X(m) { return ml + (m / 11) * iw; }
     function Y(v) { return mt + ih - ((v - lo) / (hi - lo)) * ih; }
-    var s = svgOpen(W, H);
+    var s = svgOpen(W, H, "Nightly rate by month, each property indexed to its own annual average (100); winter months sit above the line");
     for (var g = lo; g <= hi; g += 10) {
       s += '<line class="grid" x1="' + ml + '" y1="' + Y(g) + '" x2="' + (W - mr) + '" y2="' + Y(g) + '"/>';
       s += '<text x="' + (ml - 6) + '" y="' + (Y(g) + 3) + '" text-anchor="end" font-size="9">' + g + '</text>';
@@ -643,7 +969,10 @@ main:has(.btr) { max-width: 62rem; }
         path += (started ? " L" : "M") + X(m).toFixed(1) + " " + Y(v).toFixed(1);
         started = true;
       });
-      s += '<path d="' + path + '" fill="none" stroke="' + o.p.color + '" stroke-width="2.2"/>';
+      // distinct hue AND dash pattern per property — so the two greens (Banyan/Tahoe)
+      // stay separable for red-green-weak readers (chart's whole point is comparing them)
+      s += '<path d="' + path + '" fill="none" stroke="' + o.p.color + '" stroke-width="2.4"' +
+        (o.p.dash ? ' stroke-dasharray="' + o.p.dash + '"' : '') + '/>';
       o.v.forEach(function (v, m) {
         if (v == null) return;
         s += '<circle cx="' + X(m).toFixed(1) + '" cy="' + Y(v).toFixed(1) + '" r="2.2" fill="' + o.p.color +
@@ -653,11 +982,18 @@ main:has(.btr) { max-width: 62rem; }
     });
     s += '</svg>';
     document.getElementById("rateChart").innerHTML = s;
+    var dashWord = function (d) { return d === "" ? "solid" : (d.indexOf("1.5") === 0 ? "dotted" : "dashed"); };
     document.getElementById("rateLegend").innerHTML =
       idx.map(function (o) {
-        return '<span><i style="background:' + o.p.color + '"></i>' + esc(o.p.short) +
-          ' (avg ' + money(o.mean) + '/night)</span>';
+        return '<span><i class="btr__lineswatch" style="color:' + o.p.color + '">' + lineSwatch(o.p.dash) + '</i>' +
+          esc(o.p.short) + ' (' + dashWord(o.p.dash) + ', avg ' + money(o.mean) + '/night)</span>';
       }).join("") + '<span style="color:var(--text-muted)">100 = each property’s own average night</span>';
+  }
+  // tiny inline-SVG line sample for a legend, matching the chart's dash pattern
+  function lineSwatch(dash) {
+    return '<svg width="20" height="8" viewBox="0 0 20 8" aria-hidden="true">' +
+      '<line x1="0" y1="4" x2="20" y2="4" stroke="currentColor" stroke-width="2.4"' +
+      (dash ? ' stroke-dasharray="' + dash + '"' : '') + '/></svg>';
   }
 
   // ---------- Kids grouped columns ----------
@@ -667,7 +1003,16 @@ main:has(.btr) { max-width: 62rem; }
     var groups = DATA.length, gw = iw / groups;
     var maxV = 60;
     function Y(v) { return mt + ih - (v / maxV) * ih; }
-    var s = svgOpen(W, H);
+    var s = svgOpen(W, H, "Share of stays bringing children, by property: all-year (solid bar) versus summer Jun to Aug (striped bar)");
+    // diagonal-hatch per property for the "summer" bar — a texture, not just a
+    // lighter shade, so the two bars are distinguishable without relying on lightness
+    s += '<defs>';
+    DATA.forEach(function (p, i) {
+      s += '<pattern id="kidhatch' + i + '" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">' +
+        '<rect width="5" height="5" fill="' + p.color + '" opacity="0.22"/>' +
+        '<line x1="0" y1="0" x2="0" y2="5" stroke="' + p.color + '" stroke-width="2"/></pattern>';
+    });
+    s += '</defs>';
     for (var g = 0; g <= maxV; g += 20) {
       s += '<line class="grid" x1="' + ml + '" y1="' + Y(g) + '" x2="' + (W - mr) + '" y2="' + Y(g) + '"/>';
       s += '<text x="' + (ml - 5) + '" y="' + (Y(g) + 3) + '" text-anchor="end" font-size="9">' + g + '%</text>';
@@ -676,15 +1021,15 @@ main:has(.btr) { max-width: 62rem; }
       var cx = ml + i * gw + gw / 2;
       var bw = gw * 0.26, gap = gw * 0.06;
       var pairs = [
-        { v: p.kidsPct, c: p.color, op: 1, lab: "all year" },
-        { v: p.kidsSummerPct, c: p.color, op: 0.45, lab: "summer" }
+        { v: p.kidsPct, fill: p.color, lab: "all year" },
+        { v: p.kidsSummerPct, fill: "url(#kidhatch" + i + ")", lab: "summer" }
       ];
       pairs.forEach(function (d, j) {
         var x = cx - bw - gap / 2 + j * (bw + gap);
         var y = Y(d.v), h = mt + ih - y;
         s += '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + bw.toFixed(1) +
-          '" height="' + h.toFixed(1) + '" rx="2" fill="' + d.c + '" opacity="' + d.op + '"><title>' +
-          p.short + ' ' + d.lab + ': ' + d.v + '% with kids</title></rect>';
+          '" height="' + h.toFixed(1) + '" rx="2" fill="' + d.fill + '" stroke="' + p.color +
+          '" stroke-width="0.75"><title>' + p.short + ' ' + d.lab + ': ' + d.v + '% with kids</title></rect>';
         s += '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (y - 4).toFixed(1) +
           '" text-anchor="middle" font-size="9" class="val">' + d.v + '</text>';
       });
@@ -697,18 +1042,22 @@ main:has(.btr) { max-width: 62rem; }
     s += '</svg>';
     document.getElementById("kidsChart").innerHTML = s;
     document.getElementById("kidsLegend").innerHTML =
-      '<span><i style="background:var(--text);opacity:1"></i>share of stays with children (all year)</span>' +
-      '<span><i style="background:var(--text);opacity:0.45"></i>summer (Jun–Aug) only</span>';
+      '<span><i style="background:var(--text-muted)"></i>all year (solid bar)</span>' +
+      '<span><i class="btr__hatchswatch"></i>summer Jun–Aug (striped bar)</span>';
   }
 
   function init() {
     try {
       renderCards();
       renderLead();
+      renderWeekday();
+      renderTimeline();
+      renderPriceScatter();
       renderSeasons();
       renderRate();
       renderKids();
       renderPlatform();
+      renderCancel();
       var gd = document.getElementById("genDate");
       if (gd) gd.textContent = GENERATED;
     } catch (e) {
