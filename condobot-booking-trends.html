@@ -1,0 +1,723 @@
+---
+layout: standalone
+title: "Vacation-Rental Booking Trends"
+permalink: /condobot-booking-trends/
+# Unlisted: contains host-revenue figures for a family business. noindex keeps it
+# out of search results; sitemap:false keeps it out of sitemap.xml. Reachable only
+# by people who have the direct link. Flip both if you ever want it public.
+noindex: true
+sitemap: false
+---
+
+<!--
+  One-off data page produced by CondoBot's analysis tooling
+  (scripts/booking-trends.ts in the CondoBot repo). The DATA object below is a
+  verbatim paste of that script's `--json` output for 2026-06-14. To refresh:
+  re-run `bun run scripts/booking-trends.ts --json` and replace DATA + the date.
+  All charts are hand-rolled inline SVG / CSS so the page has no external
+  dependencies and themes with the site's light/dark CSS variables.
+-->
+
+<div class="btr">
+
+<p class="btr__lede">An analysis of the full booking history of our four vacation
+rentals &mdash; two condos in Kailua&#8209;Kona, the Sands of Kahana condo on Maui,
+and the Skyline Drive house above Lake Tahoe. The question: <em>when does demand
+land, how far ahead do guests book, who actually stays, and what should we do about
+it?</em> Numbers come straight from Hospitable's reservation history; the charts
+and the &ldquo;so what&rdquo; are the point.</p>
+
+<div class="btr__note">
+  <strong>Read this first.</strong> The four properties have wildly different
+  histories on the booking platforms, so their sample sizes aren't comparable and
+  I never blend them into one number. <strong>Kanaloa went live in March 2026</strong>
+  &mdash; it has only a few months of data, so treat every Kanaloa figure as a
+  placeholder, not a trend. Banyan (since fall 2024) is suggestive; Maui and Tahoe
+  (4&ndash;5 years on-platform) are solid. Everything here is <em>realized</em>
+  history &mdash; stays that have already happened &mdash; so it can't see the
+  already-booked future, which matters most for far-ahead Maui.
+</div>
+
+<h2>The portfolio at a glance</h2>
+
+<div class="btr__cards" id="statCards"></div>
+
+<p class="btr__caption">Revenue is host revenue (net of channel fees) over each
+property's time on the platform &mdash; not comparable across properties because the
+windows differ, but it tells you where the money is. <em>n</em> = realized stays
+analyzed.</p>
+
+<h2>1. How far ahead guests book &mdash; the biggest difference between properties</h2>
+
+<p>This turned out to be the richest signal in the whole dataset, bigger than day
+of week or even season. <strong>Where a guest books on this timeline dictates how we
+should price and what cancellation policy makes sense.</strong> Each bar splits a
+property's bookings by how many days before arrival they were made &mdash; warm
+(left) is last&#8209;minute, cool (right) is far ahead.</p>
+
+<div class="btr__chart-card">
+  <div id="leadChart"></div>
+  <div class="btr__legend" id="leadLegend"></div>
+</div>
+
+<ul class="btr__takeaways">
+  <li><strong>Maui books ~9 months out</strong> (median 265 days; 56% of stays
+  booked 240+ days ahead). That's a loyal, plan-far-ahead, repeat-guest crowd.</li>
+  <li><strong>Tahoe is two crowds at once</strong> &mdash; a big last&#8209;minute
+  cluster (ski/lake weekenders) <em>and</em> a far&#8209;ahead cluster (holiday and
+  prime-summer planners).</li>
+  <li><strong>Banyan sits in the middle</strong> at ~4 months.</li>
+  <li><strong>Kanaloa's 14&#8209;day median is an illusion</strong> &mdash; a
+  listing born in March can't <em>have</em> long lead times yet. Ignore it.</li>
+</ul>
+
+<div class="btr__sowhat">
+  <strong>So what:</strong> Don't drop Maui's prices to fill a gap three weeks out
+  &mdash; that's simply not when its guests shop; instead open Maui's calendar
+  12&ndash;18 months ahead so the far-out planners can book. Tahoe is the property
+  that rewards <em>last&#8209;minute</em> discounting, because it actually has
+  last&#8209;minute demand. And because Maui bookings sit on the calendar for the
+  better part of a year, a firmer cancellation policy or larger deposit protects it
+  far more than it would Tahoe.
+</div>
+
+<h2>2. When guests come &mdash; every property has its own season</h2>
+
+<p>There is no single &ldquo;peak season&rdquo; across the portfolio. Bars show
+<strong>occupied nights per year</strong> in each month (how full the place is); the
+line shows <strong>check&#8209;ins per year</strong> (how many separate bookings
+arrive). Both are averaged per observed year, which corrects a subtle bias toward
+the first half of the year. Watch how differently the four behave.</p>
+
+<div class="btr__grid" id="seasonCharts"></div>
+
+<ul class="btr__takeaways">
+  <li><strong>Tahoe has a true double peak.</strong> Winter (Feb&ndash;Mar) brings
+  the <em>most check-ins</em> &mdash; lots of short ski weekends. Summer
+  (Jun&ndash;Aug) brings the <em>most nights</em> &mdash; fewer, longer lake stays.
+  The clear soft patch is the <strong>Sep&ndash;Nov shoulder</strong> (plus a dip in
+  May).</li>
+  <li><strong>Hawaii is nearly flat year&#8209;round.</strong> Maui and Kona fill up
+  about the same every month, with only a gentle late&#8209;summer (Aug&ndash;Sep)
+  dip &mdash; so for Hawaii the seasonal lever is the <em>nightly rate</em> (next
+  chart), not occupancy.</li>
+</ul>
+
+<div class="btr__sowhat">
+  <strong>So what:</strong> Tahoe deserves an aggressive, season&#8209;aware calendar
+  &mdash; premium rates and longer minimum stays over the Dec holidays, Feb&ndash;Mar
+  ski weeks, and Jun&ndash;Aug lake season, with discounts and relaxed minimums in
+  the Sep&ndash;Nov shoulder where the empty nights actually are. Hawaii doesn't need
+  heavy seasonal rules; lean on the winter rate premium and prop up the Aug&ndash;Sep
+  soft spot with a targeted promotion.
+</div>
+
+<h2>3. The winter rate premium</h2>
+
+<p>Even where occupancy is flat, what guests <em>pay</em> per night isn't. This plots
+each property's average nightly rate by month against <em>its own</em> annual average
+(100 = that property's typical night), so the three very different price points
+(Maui runs nearly double the others) can share one chart. Above the line = a premium
+month.</p>
+
+<div class="btr__chart-card">
+  <div id="rateChart"></div>
+  <div class="btr__legend" id="rateLegend"></div>
+</div>
+
+<div class="btr__sowhat">
+  <strong>So what:</strong> December&ndash;January (holidays, plus whale season in
+  Hawaii) and Tahoe's February ski peak carry a real premium every year &mdash; hold
+  the line on rates then. The troughs (Hawaii's early fall, Tahoe's October and May)
+  are where a modest discount or a min&#8209;stay relaxation does the most good.
+</div>
+
+<h2>4. Who actually stays &mdash; and what to buy</h2>
+
+<p>This is the question with the most concrete payoff. The share of stays that bring
+children varies a lot by property, and it tells us how to furnish and describe each
+one. (Pets are essentially zero everywhere &mdash; consistent with the no&#8209;pets
+rules &mdash; so they're not worth a cent of furnishing.)</p>
+
+<div class="btr__chart-card">
+  <div id="kidsChart"></div>
+  <div class="btr__legend" id="kidsLegend"></div>
+</div>
+
+<ul class="btr__takeaways">
+  <li><strong>Maui and Tahoe are family properties</strong> &mdash; the two biggest
+  units (both sleep 8), and roughly 4 in 10 stays include a child. <strong>Maui in
+  summer is family-heavy specifically:</strong> 55% of June&ndash;August stays bring
+  kids.</li>
+  <li><strong>Banyan is a couples / small&#8209;group property</strong> &mdash;
+  median party of 4, and only 1 in 5 stays brings a child. Its whole framing
+  (oceanfront corner, two kings, romantic lanai) matches who books it.</li>
+</ul>
+
+<div class="btr__sowhat">
+  <strong>So what &mdash; the shopping list:</strong>
+  <ol>
+    <li><strong>Tahoe: buy a pack&#8209;n&#8209;play and a high chair.</strong> The
+    listing currently tells guests <em>no crib is provided</em> &mdash; yet 42% of
+    stays bring kids. Clearest gap in the portfolio.</li>
+    <li><strong>Maui: add a high chair and pack&#8209;n&#8209;play</strong> and time a
+    toy/games refresh for early summer, when most guests bring children. Lean the
+    summer listing copy family&#8209;friendly.</li>
+    <li><strong>Banyan: leave it couples&#8209;framed.</strong> Don't dilute the
+    oceanfront-romance angle with kid&#8209;gear messaging 80% of its guests don't
+    need.</li>
+  </ol>
+</div>
+
+<h2>5. Which platform, and how often they cancel</h2>
+
+<p>The two long&#8209;established properties live on Vrbo; the two new Kona units are
+Airbnb&#8209;first &mdash; which lines up neatly with the lead&#8209;time story (Vrbo
+skews to an older, plan&#8209;ahead crowd, exactly Maui's profile).</p>
+
+<div class="btr__chart-card">
+  <div id="platformChart"></div>
+  <div class="btr__legend" id="platformLegend"></div>
+</div>
+
+<p>Cancellations run a steady <strong>~21&ndash;25%</strong> of guest bookings on the
+three established properties (Kanaloa's 5% is just too new to read). That's about one
+in four or five &mdash; easy to forget when you're eyeballing a full-looking calendar,
+and it bites hardest on Maui, where the highest cancellation rate meets the longest
+lead times.</p>
+
+<h2>The to&#8209;do list, in one place</h2>
+
+<table class="btr__actions">
+  <thead><tr><th>Action</th><th>Property</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td>Buy a pack&#8209;n&#8209;play + high chair</td><td>Tahoe</td><td>42% of stays bring kids; listing says <em>no crib provided</em></td></tr>
+    <tr><td>Add high chair + pack&#8209;n&#8209;play; family&#8209;lean summer copy</td><td>Maui</td><td>40% kid share, 55% in summer; largest unit</td></tr>
+    <tr><td>Keep couples / oceanfront framing</td><td>Banyan</td><td>Only 20% kid share, median party 4</td></tr>
+    <tr><td>Firmer cancellation policy / bigger deposit</td><td>Maui</td><td>25% cancel rate &times; 9&#8209;month lead = long runway to bail</td></tr>
+    <tr><td>Open the calendar 12&ndash;18 months out</td><td>Maui (&amp; Tahoe)</td><td>56% of Maui stays booked 240+ days ahead</td></tr>
+    <tr><td>Auto&#8209;discount unsold nights inside ~3 weeks</td><td>Tahoe, Banyan</td><td>They have last&#8209;minute demand; Maui doesn't</td></tr>
+    <tr><td>Seasonal minimum stays + shoulder discounts</td><td>Tahoe</td><td>Only property with strong (double) seasonality</td></tr>
+    <tr><td>Lean on the Dec&ndash;Jan rate premium; prop up Aug&ndash;Sep</td><td>Maui, Kona</td><td>Flat demand &mdash; rate is the seasonal lever</td></tr>
+    <tr><td>Time rate &amp; marketing review for late December</td><td>Tahoe</td><td>Its bookings are <em>placed</em> in a January surge</td></tr>
+    <tr><td>Re&#8209;run this analysis in ~12 months</td><td>Kanaloa</td><td>Only 19 stays / 3 months &mdash; no trend yet</td></tr>
+  </tbody>
+</table>
+
+<details class="btr__details">
+  <summary>Method &amp; caveats (for the curious)</summary>
+  <ul>
+    <li><strong>Source:</strong> every reservation Hospitable has for each property
+    from 2020&#8209;01&#8209;01 through 2026&#8209;06&#8209;14, keeping only
+    <em>accepted guest stays</em> (cancellations, declined inquiries, and owner
+    blocks removed). Cancellations are counted separately, never mixed in.</li>
+    <li><strong>Realized history only.</strong> The data ends today, so it contains no
+    future-dated reservations &mdash; the right basis for &ldquo;what has demand looked
+    like,&rdquo; but it can't see the booked-but-not-yet-arrived pipeline (largest for
+    far-ahead Maui).</li>
+    <li><strong>Seasonality is normalized per observed year.</strong> Because the data
+    ends in mid-June, the first half of the year would otherwise be over-counted; each
+    month is divided by the number of years it was actually observable.</li>
+    <li><strong>Sample sizes:</strong> Tahoe 207, Maui 163, Banyan 110, Kanaloa 19
+    realized stays. Kanaloa and (to a lesser degree) Banyan are provisional.</li>
+    <li><strong>Money</strong> is host revenue net of channel fees, a reasonable
+    owner-economics proxy, not a full profit&#8209;and&#8209;loss.</li>
+    <li>Built by <a href="https://github.com/vermont42">CondoBot</a>'s analysis
+    script; the underlying writeup lives in the project repo. Generated
+    <span id="genDate">2026&#8209;06&#8209;14</span>.</li>
+  </ul>
+</details>
+
+</div>
+
+<style>
+/* Widen the reading column for this data-heavy page only (inline = scoped here). */
+main:has(.btr) { max-width: 62rem; }
+
+.btr { font-family: var(--font-body); }
+.btr__lede { font-size: 1.15em; }
+.btr h2 {
+  font-family: var(--font-heading);
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--border);
+}
+.btr ul, .btr ol { padding-left: 1.3em; }
+.btr__takeaways li { margin-bottom: 0.4em; }
+
+.btr__note, .btr__sowhat {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  border-radius: 10px;
+  padding: var(--space-md) var(--space-lg);
+  margin: var(--space-lg) 0;
+}
+.btr__note { background: var(--bg-alt); border: 1px solid var(--border); }
+.btr__sowhat {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-sage) 16%, transparent), color-mix(in srgb, var(--accent-rose) 14%, transparent));
+  border-left: 4px solid var(--accent-teal);
+}
+.btr__caption {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-top: var(--space-sm);
+}
+
+/* Stat cards */
+.btr__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+.btr__card {
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--card-accent, var(--accent-teal));
+  border-radius: 10px;
+  padding: var(--space-md);
+  background: var(--bg-alt);
+}
+.btr__card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  margin: 0 0 0.15em;
+}
+.btr__card .btr__region {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+.btr__card.is-provisional::after {
+  content: "provisional \2014 new listing";
+  display: inline-block;
+  margin-top: 0.5em;
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  color: var(--accent-rose);
+  font-weight: 600;
+}
+.btr__statrow {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  padding: 0.28em 0;
+  border-bottom: 1px dashed var(--border);
+}
+.btr__statrow:last-of-type { border-bottom: 0; }
+.btr__statrow span:first-child { color: var(--text-muted); }
+.btr__statrow span:last-child { font-weight: 600; color: var(--heading); }
+
+/* Generic chart card + responsive grid */
+.btr__chart-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  margin: var(--space-lg) 0;
+  background: var(--bg-alt);
+}
+.btr__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+.btr__grid .btr__chart-card { margin: 0; }
+@media (max-width: 720px) { .btr__grid { grid-template-columns: 1fr; } }
+
+.btr__chart-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  margin: 0 0 0.1em;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+}
+.btr__chart-title .swatch {
+  width: 0.7em; height: 0.7em; border-radius: 2px; flex: none;
+}
+.btr__chart-sub {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin: 0 0 var(--space-sm);
+}
+
+/* SVG theming */
+.btr svg { display: block; width: 100%; height: auto; overflow: visible; }
+.btr svg text { font-family: var(--font-ui); fill: var(--text-muted); }
+.btr svg .axis { stroke: var(--border); stroke-width: 1; }
+.btr svg .grid { stroke: var(--border); stroke-width: 1; stroke-dasharray: 2 3; opacity: 0.55; }
+.btr svg .val { fill: var(--heading); font-weight: 600; }
+
+/* Horizontal stacked bars (lead time, platform) */
+.btr__hbar-row { margin: 0.55em 0; }
+.btr__hbar-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: var(--font-ui); font-size: var(--text-sm); margin-bottom: 0.25em;
+}
+.btr__hbar-head b { color: var(--heading); }
+.btr__hbar-head .meta { color: var(--text-muted); font-size: var(--text-xs); }
+.btr__hbar {
+  display: flex; height: 26px; border-radius: 5px; overflow: hidden;
+  background: var(--bg); border: 1px solid var(--border);
+}
+.btr__hbar span { display: block; height: 100%; }
+.btr__hbar span[title] { cursor: default; }
+
+/* Legends */
+.btr__legend {
+  display: flex; flex-wrap: wrap; gap: 0.4em 1em;
+  font-family: var(--font-ui); font-size: var(--text-xs);
+  color: var(--text-muted); margin-top: var(--space-md);
+}
+.btr__legend span { display: inline-flex; align-items: center; gap: 0.4em; }
+.btr__legend i { width: 0.85em; height: 0.85em; border-radius: 2px; display: inline-block; }
+
+/* Actions table */
+.btr__actions td:nth-child(2) { font-family: var(--font-ui); font-weight: 600; white-space: nowrap; }
+
+.btr__details {
+  margin: var(--space-xl) 0 var(--space-2xl);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+}
+.btr__details summary { cursor: pointer; font-weight: 600; color: var(--link); }
+.btr__details li { margin-bottom: 0.4em; line-height: 1.55; }
+</style>
+
+<script>
+(function () {
+  // ---- Data: verbatim from `bun run scripts/booking-trends.ts --json` ----
+  var GENERATED = "2026-06-14";
+  var MONTHS = ["J","F","M","A","M","J","J","A","S","O","N","D"];
+  var MONTHS3 = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  // Per-property aggregates (only the fields the charts use).
+  var DATA = [
+    {
+      label: "Banyan Tree 300", short: "Banyan", region: "Kailua-Kona", since: "fall 2024",
+      color: "#6B8A82", provisional: false, realized: 110, cancelRatePct: 24,
+      platform: { Vrbo: 38, Airbnb: 69, Other: 3 },
+      leadMedian: 119, leadN: 110,
+      leadBuckets: { "0-7d": 7, "8-30d": 15, "31-60d": 14, "61-120d": 20, "121-240d": 36, "240d+": 18 },
+      nightsPerYear: [30,26.5,23.5,27.5,30,21.5,28,29,21.5,28.5,28,29],
+      arrivalsPerYear: [5,4,4,5.5,5,4,5,7,5.5,5,5.5,5.5],
+      observedYears: [2,2,2,2,2,2,1,1,2,2,2,2],
+      nightlyByMonth: [609,591,549,532,503,541,511,490,447,481,477,630],
+      kidsPct: 20, kidsSummerPct: 20, partyMedian: 4,
+      revenue: 300068, medianNightly: 516
+    },
+    {
+      label: "Kanaloa at Kona 1903", short: "Kanaloa", region: "Kailua-Kona", since: "Mar 2026",
+      color: "#88A0C0", provisional: true, realized: 19, cancelRatePct: 5,
+      platform: { Vrbo: 8, Airbnb: 11, Other: 0 },
+      leadMedian: 14, leadN: 19,
+      leadBuckets: { "0-7d": 6, "8-30d": 9, "31-60d": 3, "61-120d": 1, "121-240d": 0, "240d+": 0 },
+      nightsPerYear: [0,0,2,26,28,12,0,0,0,0,0,0],
+      arrivalsPerYear: [0,0,1,11,5,2,0,0,0,0,0,0],
+      observedYears: [0,0,1,1,1,1,0,0,0,0,0,0],
+      nightlyByMonth: [null,null,719,613,569,659,null,null,null,null,null,null],
+      kidsPct: 26, kidsSummerPct: 50, partyMedian: 4,
+      revenue: 40362, medianNightly: 604
+    },
+    {
+      label: "Sands of Kahana 384", short: "Maui", region: "Maui", since: "~2022 on platform",
+      color: "#C8899A", provisional: false, realized: 163, cancelRatePct: 25,
+      platform: { Vrbo: 146, Airbnb: 14, Other: 3 },
+      leadMedian: 265, leadN: 163,
+      leadBuckets: { "0-7d": 1, "8-30d": 3, "31-60d": 6, "61-120d": 15, "121-240d": 47, "240d+": 91 },
+      nightsPerYear: [25.25,22.4,20.8,24.4,21.6,23.8,24.25,19.5,20,21.75,25.25,25.5],
+      arrivalsPerYear: [3.5,2.8,2.8,3,3.4,3.4,2.75,2.5,2.5,3,3.5,3.75],
+      observedYears: [4,5,5,5,5,5,4,4,4,4,4,4],
+      nightlyByMonth: [1033,991,972,863,978,989,1000,950,906,922,950,1037],
+      kidsPct: 40, kidsSummerPct: 55, partyMedian: 6,
+      revenue: 1099739, medianNightly: 980
+    },
+    {
+      label: "895 Skyline Drive", short: "Tahoe", region: "Lake Tahoe", since: "~2022 on platform",
+      color: "#7C9C72", provisional: false, realized: 207, cancelRatePct: 21,
+      platform: { Vrbo: 156, Airbnb: 48, Other: 3 },
+      leadMedian: 87, leadN: 207,
+      leadBuckets: { "0-7d": 8, "8-30d": 31, "31-60d": 35, "61-120d": 50, "121-240d": 39, "240d+": 44 },
+      nightsPerYear: [15.8,19.8,24,17.2,16.4,23.8,26.25,24,14.75,16.25,11.25,18],
+      arrivalsPerYear: [3.4,5,5.4,3.6,4.2,2,4,3.25,3.75,4.25,3.25,3.75],
+      observedYears: [5,5,5,5,5,5,4,4,4,4,4,4],
+      nightlyByMonth: [621,637,579,553,552,599,628,614,614,523,549,677],
+      kidsPct: 42, kidsSummerPct: 44, partyMedian: 5
+      , revenue: 540574, medianNightly: 591
+    }
+  ];
+
+  var LEAD_ORDER = ["0-7d","8-30d","31-60d","61-120d","121-240d","240d+"];
+  var LEAD_LABEL = {
+    "0-7d": "0–7 days", "8-30d": "1–4 wks", "31-60d": "1–2 mo",
+    "61-120d": "2–4 mo", "121-240d": "4–8 mo", "240d+": "8+ mo"
+  };
+  // Warm (last-minute) -> cool (far ahead).
+  var LEAD_COLORS = ["#C8899A","#D2A98C","#CBBE86","#A8BFA0","#7FA39A","#4A5C58"];
+  var PLATFORM_COLORS = { Vrbo: "#4A5C58", Airbnb: "#C8899A", Other: "#B6AE9F" };
+
+  function esc(s) { return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function money(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
+
+  // ---------- Stat cards ----------
+  function renderCards() {
+    var host = document.getElementById("statCards");
+    host.innerHTML = DATA.map(function (p) {
+      return '<div class="btr__card' + (p.provisional ? ' is-provisional' : '') +
+        '" style="--card-accent:' + p.color + '">' +
+        '<h3>' + esc(p.short) + '</h3>' +
+        '<div class="btr__region">' + esc(p.region) + ' &middot; since ' + esc(p.since) + '</div>' +
+        statRow("Stays analyzed", p.realized) +
+        statRow("Median party", p.partyMedian + " guests") +
+        statRow("Stays with kids", p.kidsPct + "%") +
+        statRow("Books ahead", p.leadMedian + " days") +
+        statRow("Median nightly", money(p.medianNightly)) +
+        statRow("Host revenue", money(p.revenue)) +
+        '</div>';
+    }).join("");
+  }
+  function statRow(k, v) {
+    return '<div class="btr__statrow"><span>' + k + '</span><span>' + v + '</span></div>';
+  }
+
+  // ---------- Horizontal stacked bars (lead time) ----------
+  function renderLead() {
+    var host = document.getElementById("leadChart");
+    host.innerHTML = DATA.map(function (p) {
+      var total = LEAD_ORDER.reduce(function (s, k) { return s + p.leadBuckets[k]; }, 0) || 1;
+      var segs = LEAD_ORDER.map(function (k, i) {
+        var n = p.leadBuckets[k];
+        if (!n) return "";
+        var pctv = (100 * n / total);
+        return '<span style="width:' + pctv + '%;background:' + LEAD_COLORS[i] + '" title="' +
+          LEAD_LABEL[k] + ': ' + n + ' (' + Math.round(pctv) + '%)"></span>';
+      }).join("");
+      return '<div class="btr__hbar-row">' +
+        '<div class="btr__hbar-head"><b>' + esc(p.short) + '</b>' +
+        '<span class="meta">median ' + p.leadMedian + ' days &middot; n=' + p.leadN +
+        (p.provisional ? ' &middot; provisional' : '') + '</span></div>' +
+        '<div class="btr__hbar">' + segs + '</div></div>';
+    }).join("");
+    document.getElementById("leadLegend").innerHTML =
+      LEAD_ORDER.map(function (k, i) {
+        return '<span><i style="background:' + LEAD_COLORS[i] + '"></i>' + LEAD_LABEL[k] + '</span>';
+      }).join("") + '<span style="color:var(--text-muted)">&larr; booked nearer &nbsp;|&nbsp; booked further ahead &rarr;</span>';
+  }
+
+  // ---------- Platform stacked bars ----------
+  function renderPlatform() {
+    var host = document.getElementById("platformChart");
+    var keys = ["Vrbo","Airbnb","Other"];
+    host.innerHTML = DATA.map(function (p) {
+      var total = keys.reduce(function (s, k) { return s + (p.platform[k] || 0); }, 0) || 1;
+      var segs = keys.map(function (k) {
+        var n = p.platform[k] || 0;
+        if (!n) return "";
+        var pctv = 100 * n / total;
+        return '<span style="width:' + pctv + '%;background:' + PLATFORM_COLORS[k] + '" title="' +
+          k + ': ' + n + ' (' + Math.round(pctv) + '%)"></span>';
+      }).join("");
+      return '<div class="btr__hbar-row">' +
+        '<div class="btr__hbar-head"><b>' + esc(p.short) + '</b>' +
+        '<span class="meta">' + p.cancelRatePct + '% cancel rate</span></div>' +
+        '<div class="btr__hbar">' + segs + '</div></div>';
+    }).join("");
+    document.getElementById("platformLegend").innerHTML =
+      keys.map(function (k) {
+        return '<span><i style="background:' + PLATFORM_COLORS[k] + '"></i>' + k + '</span>';
+      }).join("") + '<span style="color:var(--text-muted)">bar width = share of stays; right label = cancellation rate</span>';
+  }
+
+  // ---------- SVG helpers ----------
+  var NS = "http://www.w3.org/2000/svg";
+  function svgOpen(w, h) { return '<svg viewBox="0 0 ' + w + ' ' + h + '" role="img">'; }
+
+  // Combo: nights/yr bars + arrivals/yr line, dual axis. One per property.
+  function seasonChart(p) {
+    var W = 360, H = 210, ml = 30, mr = 26, mt = 14, mb = 26;
+    var iw = W - ml - mr, ih = H - mt - mb;
+    var maxN = Math.max.apply(null, p.nightsPerYear) || 1;
+    var maxA = Math.max.apply(null, p.arrivalsPerYear) || 1;
+    var nMax = Math.ceil(maxN / 5) * 5;
+    var aMax = Math.ceil(maxA);
+    var bw = iw / 12;
+    var s = svgOpen(W, H);
+    // gridlines + left axis labels (nights)
+    var g, yy;
+    for (g = 0; g <= nMax; g += Math.max(5, Math.round(nMax / 4 / 5) * 5)) {
+      yy = mt + ih - (g / nMax) * ih;
+      s += '<line class="grid" x1="' + ml + '" y1="' + yy + '" x2="' + (W - mr) + '" y2="' + yy + '"/>';
+      s += '<text x="' + (ml - 5) + '" y="' + (yy + 3) + '" text-anchor="end" font-size="9">' + g + '</text>';
+    }
+    // bars (nights/yr)
+    var peak = nMax; // highlight months at/above 85% of peak
+    for (var m = 0; m < 12; m++) {
+      var v = p.nightsPerYear[m];
+      var bh = (v / nMax) * ih;
+      var x = ml + m * bw + bw * 0.16;
+      var y = mt + ih - bh;
+      var hot = v >= 0.86 * maxN && v > 0;
+      s += '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + (bw * 0.68).toFixed(1) +
+        '" height="' + Math.max(0, bh).toFixed(1) + '" rx="1.5" fill="' + p.color + '" opacity="' +
+        (hot ? 1 : 0.5) + '"><title>' + MONTHS3[m] + ': ' + v.toFixed(1) + ' nights/yr</title></rect>';
+      s += '<text x="' + (ml + m * bw + bw / 2).toFixed(1) + '" y="' + (H - 8) +
+        '" text-anchor="middle" font-size="9">' + MONTHS[m] + '</text>';
+    }
+    // arrivals line (right axis)
+    var pts = [];
+    for (var i = 0; i < 12; i++) {
+      if (p.observedYears[i] === 0) { pts.push(null); continue; }
+      var px = ml + i * bw + bw / 2;
+      var py = mt + ih - (p.arrivalsPerYear[i] / aMax) * ih;
+      pts.push([px, py]);
+    }
+    var path = "", started = false;
+    pts.forEach(function (pt) {
+      if (!pt) { started = false; return; }
+      path += (started ? " L" : "M") + pt[0].toFixed(1) + " " + pt[1].toFixed(1);
+      started = true;
+    });
+    s += '<path d="' + path + '" fill="none" stroke="var(--heading)" stroke-width="1.6" opacity="0.85"/>';
+    pts.forEach(function (pt, i) {
+      if (!pt) return;
+      s += '<circle cx="' + pt[0].toFixed(1) + '" cy="' + pt[1].toFixed(1) + '" r="2.4" fill="var(--heading)"><title>' +
+        MONTHS3[i] + ': ' + p.arrivalsPerYear[i].toFixed(1) + ' check-ins/yr</title></circle>';
+    });
+    // right axis ticks (arrivals)
+    for (var a = 0; a <= aMax; a += Math.max(1, Math.round(aMax / 4))) {
+      var ry = mt + ih - (a / aMax) * ih;
+      s += '<text x="' + (W - mr + 5) + '" y="' + (ry + 3) + '" text-anchor="start" font-size="9">' + a + '</text>';
+    }
+    s += '<line class="axis" x1="' + ml + '" y1="' + (mt + ih) + '" x2="' + (W - mr) + '" y2="' + (mt + ih) + '"/>';
+    s += '</svg>';
+
+    var sub = p.provisional
+      ? 'Only spring 2026 observed &mdash; provisional.'
+      : 'Bars: occupied nights/yr &middot; line: check-ins/yr';
+    return '<div class="btr__chart-card">' +
+      '<div class="btr__chart-title"><span class="swatch" style="background:' + p.color + '"></span>' + esc(p.short) + '</div>' +
+      '<div class="btr__chart-sub">' + sub + '</div>' + s + '</div>';
+  }
+  function renderSeasons() {
+    document.getElementById("seasonCharts").innerHTML = DATA.map(seasonChart).join("");
+  }
+
+  // ---------- Nightly-rate index (multi-line) ----------
+  function renderRate() {
+    var series = DATA.filter(function (p) { return !p.provisional; });
+    var W = 640, H = 260, ml = 36, mr = 14, mt = 16, mb = 28;
+    var iw = W - ml - mr, ih = H - mt - mb;
+    // index each property's month vs its own mean
+    var idx = series.map(function (p) {
+      var vals = p.nightlyByMonth.filter(function (v) { return v != null; });
+      var mean = vals.reduce(function (s, v) { return s + v; }, 0) / vals.length;
+      return { p: p, mean: mean, v: p.nightlyByMonth.map(function (v) { return v == null ? null : 100 * v / mean; }) };
+    });
+    var lo = 80, hi = 120;
+    idx.forEach(function (o) { o.v.forEach(function (v) { if (v != null) { lo = Math.min(lo, v); hi = Math.max(hi, v); } }); });
+    lo = Math.floor(lo / 5) * 5; hi = Math.ceil(hi / 5) * 5;
+    function X(m) { return ml + (m / 11) * iw; }
+    function Y(v) { return mt + ih - ((v - lo) / (hi - lo)) * ih; }
+    var s = svgOpen(W, H);
+    for (var g = lo; g <= hi; g += 10) {
+      s += '<line class="grid" x1="' + ml + '" y1="' + Y(g) + '" x2="' + (W - mr) + '" y2="' + Y(g) + '"/>';
+      s += '<text x="' + (ml - 6) + '" y="' + (Y(g) + 3) + '" text-anchor="end" font-size="9">' + g + '</text>';
+    }
+    // emphasize the 100 (= own average) line
+    s += '<line x1="' + ml + '" y1="' + Y(100) + '" x2="' + (W - mr) + '" y2="' + Y(100) +
+      '" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4 3"/>';
+    for (var m = 0; m < 12; m++) {
+      s += '<text x="' + X(m).toFixed(1) + '" y="' + (H - 9) + '" text-anchor="middle" font-size="9">' + MONTHS[m] + '</text>';
+    }
+    idx.forEach(function (o) {
+      var path = "", started = false;
+      o.v.forEach(function (v, m) {
+        if (v == null) { started = false; return; }
+        path += (started ? " L" : "M") + X(m).toFixed(1) + " " + Y(v).toFixed(1);
+        started = true;
+      });
+      s += '<path d="' + path + '" fill="none" stroke="' + o.p.color + '" stroke-width="2.2"/>';
+      o.v.forEach(function (v, m) {
+        if (v == null) return;
+        s += '<circle cx="' + X(m).toFixed(1) + '" cy="' + Y(v).toFixed(1) + '" r="2.2" fill="' + o.p.color +
+          '"><title>' + o.p.short + ' ' + MONTHS3[m] + ': ' + money(o.p.nightlyByMonth[m]) +
+          ' (' + Math.round(v) + ' vs avg)</title></circle>';
+      });
+    });
+    s += '</svg>';
+    document.getElementById("rateChart").innerHTML = s;
+    document.getElementById("rateLegend").innerHTML =
+      idx.map(function (o) {
+        return '<span><i style="background:' + o.p.color + '"></i>' + esc(o.p.short) +
+          ' (avg ' + money(o.mean) + '/night)</span>';
+      }).join("") + '<span style="color:var(--text-muted)">100 = each property’s own average night</span>';
+  }
+
+  // ---------- Kids grouped columns ----------
+  function renderKids() {
+    var W = 640, H = 250, ml = 30, mr = 14, mt = 16, mb = 42;
+    var iw = W - ml - mr, ih = H - mt - mb;
+    var groups = DATA.length, gw = iw / groups;
+    var maxV = 60;
+    function Y(v) { return mt + ih - (v / maxV) * ih; }
+    var s = svgOpen(W, H);
+    for (var g = 0; g <= maxV; g += 20) {
+      s += '<line class="grid" x1="' + ml + '" y1="' + Y(g) + '" x2="' + (W - mr) + '" y2="' + Y(g) + '"/>';
+      s += '<text x="' + (ml - 5) + '" y="' + (Y(g) + 3) + '" text-anchor="end" font-size="9">' + g + '%</text>';
+    }
+    DATA.forEach(function (p, i) {
+      var cx = ml + i * gw + gw / 2;
+      var bw = gw * 0.26, gap = gw * 0.06;
+      var pairs = [
+        { v: p.kidsPct, c: p.color, op: 1, lab: "all year" },
+        { v: p.kidsSummerPct, c: p.color, op: 0.45, lab: "summer" }
+      ];
+      pairs.forEach(function (d, j) {
+        var x = cx - bw - gap / 2 + j * (bw + gap);
+        var y = Y(d.v), h = mt + ih - y;
+        s += '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + bw.toFixed(1) +
+          '" height="' + h.toFixed(1) + '" rx="2" fill="' + d.c + '" opacity="' + d.op + '"><title>' +
+          p.short + ' ' + d.lab + ': ' + d.v + '% with kids</title></rect>';
+        s += '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (y - 4).toFixed(1) +
+          '" text-anchor="middle" font-size="9" class="val">' + d.v + '</text>';
+      });
+      s += '<text x="' + cx.toFixed(1) + '" y="' + (mt + ih + 16) + '" text-anchor="middle" font-size="11" fill="var(--heading)">' +
+        esc(p.short) + '</text>';
+      if (p.provisional) {
+        s += '<text x="' + cx.toFixed(1) + '" y="' + (mt + ih + 30) + '" text-anchor="middle" font-size="8">(n=19)</text>';
+      }
+    });
+    s += '</svg>';
+    document.getElementById("kidsChart").innerHTML = s;
+    document.getElementById("kidsLegend").innerHTML =
+      '<span><i style="background:var(--text);opacity:1"></i>share of stays with children (all year)</span>' +
+      '<span><i style="background:var(--text);opacity:0.45"></i>summer (Jun–Aug) only</span>';
+  }
+
+  function init() {
+    try {
+      renderCards();
+      renderLead();
+      renderSeasons();
+      renderRate();
+      renderKids();
+      renderPlatform();
+      var gd = document.getElementById("genDate");
+      if (gd) gd.textContent = GENERATED;
+    } catch (e) {
+      // Fail visibly but quietly — tables/prose still carry the story.
+      if (window.console) console.error("booking-trends charts failed:", e);
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else { init(); }
+})();
+</script>
