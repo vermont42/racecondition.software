@@ -291,6 +291,15 @@ the <strong>last three complete months (March&ndash;May)</strong>.</p>
 <div class="btr__grid" id="yoyCharts"></div>
 <div class="btr__legend" id="yoyLegend" style="margin-top:0"></div>
 
+<h3 class="btr__subhead">Month by month, this year vs last <span class="btr__askedby">(Amanda's follow&#8209;up)</span></h3>
+
+<p>The same numbers as bars, decluttered to just <strong>2025 versus 2026</strong> so each
+month's year&#8209;over&#8209;year change reads straight off the chart. 2026 runs through May
+(the rest of the year hasn't happened yet), so later months show 2025 alone.</p>
+
+<div class="btr__grid" id="yoyBarsCharts"></div>
+<div class="btr__legend" id="yoyBarsLegend" style="margin-top:0"></div>
+
 <p style="margin-top:var(--space-lg)">Zoomed into just those three months &mdash; total
 March&ndash;May bookings, 2025 versus 2026, with the 2022&ndash;24 average drawn as a
 reference tick where there is one:</p>
@@ -1220,6 +1229,55 @@ main:has(.btr) { max-width: 62rem; }
       '<span style="color:var(--text-muted)">lines are in each property&rsquo;s colour</span>';
   }
 
+  // ---------- §7 Monthly YoY bars: 2025 vs 2026 per property (Amanda's follow-up) ----------
+  function yoyBarsPanel(p) {
+    var W = 360, H = 210, ml = 26, mr = 10, mt = 14, mb = 24;
+    var iw = W - ml - mr, ih = H - mt - mb;
+    var y25 = p.byYear[2025], y26 = p.byYear[2026];
+    var maxV = 0;
+    for (var m = 0; m < 12; m++) {
+      [y25 ? y25[m] : null, y26 ? y26[m] : null].forEach(function (v) { if (v != null && v > maxV) maxV = v; });
+    }
+    var nMax = Math.ceil((maxV || 5) / 5) * 5;
+    function Y(v) { return mt + ih - (v / nMax) * ih; }
+    var s = svgOpen(W, H, p.short + " monthly bookings placed, 2025 versus 2026, one pair of bars per month");
+    var step = Math.max(5, Math.round(nMax / 4 / 5) * 5);
+    for (var g = 0; g <= nMax; g += step) {
+      s += '<line class="grid" x1="' + ml + '" y1="' + Y(g) + '" x2="' + (W - mr) + '" y2="' + Y(g) + '"/>';
+      s += '<text x="' + (ml - 4) + '" y="' + (Y(g) + 3) + '" text-anchor="end" font-size="8">' + g + '</text>';
+    }
+    var gw = iw / 12;
+    for (var mm = 0; mm < 12; mm++) {
+      var cx = ml + mm * gw + gw / 2;
+      var bw = gw * 0.34, gap = gw * 0.06;
+      var pairs = [
+        { v: y25 ? y25[mm] : null, op: 0.45, lab: "2025" },
+        { v: y26 ? y26[mm] : null, op: 1, lab: "2026" }
+      ];
+      pairs.forEach(function (d, j) {
+        if (d.v == null) return;
+        var x = cx - bw - gap / 2 + j * (bw + gap);
+        var y = Y(d.v), h = mt + ih - y;
+        s += '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + bw.toFixed(1) +
+          '" height="' + Math.max(0, h).toFixed(1) + '" rx="1" fill="' + p.color + '" opacity="' + d.op +
+          '"><title>' + p.short + ' ' + MONTHS3[mm] + ' ' + d.lab + ': ' + d.v + ' booking' + (d.v === 1 ? '' : 's') + ' placed</title></rect>';
+      });
+      s += '<text x="' + cx.toFixed(1) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="8">' + MONTHS[mm] + '</text>';
+    }
+    s += '<line class="axis" x1="' + ml + '" y1="' + (mt + ih) + '" x2="' + (W - mr) + '" y2="' + (mt + ih) + '"/>';
+    s += '</svg>';
+    return '<div class="btr__chart-card">' +
+      '<div class="btr__chart-title"><span class="swatch" style="background:' + p.color + '"></span>' + esc(p.short) + '</div>' +
+      '<div class="btr__chart-sub">Bookings placed per month &middot; light = 2025, solid = 2026</div>' + s + '</div>';
+  }
+  function renderYoyBars() {
+    document.getElementById("yoyBarsCharts").innerHTML = YOY.map(yoyBarsPanel).join("");
+    document.getElementById("yoyBarsLegend").innerHTML =
+      '<span><i style="background:var(--text-muted);opacity:0.5"></i>2025</span>' +
+      '<span><i style="background:var(--text-muted)"></i>2026</span>' +
+      '<span style="color:var(--text-muted)">bars in each property&rsquo;s colour; 2026 runs through May</span>';
+  }
+
   // ---------- §7 Recent-window totals: Mar–May, 2025 vs 2026 (+ 2022–24 avg tick) ----------
   function renderRecent() {
     function sumRecent(arr) {
@@ -1304,6 +1362,7 @@ main:has(.btr) { max-width: 62rem; }
       renderPlatform();
       renderCancel();
       renderYoy();
+      renderYoyBars();
       renderRecent();
       var gd = document.getElementById("genDate");
       if (gd) gd.textContent = GENERATED;
