@@ -5,6 +5,10 @@
 .jekyll-metadata
 _site/
 
+# private drafts live outside this public repo
+
+ideation/
+
 # ignore all extra node_modules from yarn
 # only keep dependency source (not entire git repo)
 
