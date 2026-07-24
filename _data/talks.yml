@@ -20,7 +20,7 @@ talk4:
         link: https://www.iosdevuk.com/
     location:
         name: Prifysgol Aberystwyth
-        link: http://www.aber.ac.uk/cy/
+        link: https://www.aber.ac.uk/cy/
         city: Aberystwyth 🏴󠁧󠁢󠁷󠁬󠁳󠁿
     links:
         code: https://racecondition.software/blog/dependency-injection/
@@ -34,7 +34,7 @@ talk3:
         link: https://www.iosdevuk.com/
     location:
         name: Prifysgol Aberystwyth
-        link: http://www.aber.ac.uk/cy/
+        link: https://www.aber.ac.uk/cy/
         city: Aberystwyth 🏴󠁧󠁢󠁷󠁬󠁳󠁿
     links:
         code: https://racecondition.software/blog/programmatic-layout/

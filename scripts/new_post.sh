@@ -4,11 +4,11 @@ echo "Create a new post"
 echo ""
 
 while true; do
-    read -p "Enter date (YYYY-MM-DD): " YEAR
+    read -p "Enter date (YYYY-MM-DD): " DATE
 
-    if [[ ! ($YEAR =~ ^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$) ]]; then
+    if [[ ! ($DATE =~ ^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$) ]]; then
         echo ""
-        echo "💥  invalid: date must have format YYYY-MM-DD. Found '$YEAR'."
+        echo "💥  invalid: date must have format YYYY-MM-DD. Found '$DATE'."
         echo ""
     else
         break
@@ -16,16 +16,19 @@ while true; do
 done
 
 while true; do
-    read -p "Enter title (alphanumeric with dashes): " TITLE
+    read -p "Enter slug (alphanumeric with dashes): " SLUG
 
-    if [[ ! ($TITLE =~ ^[A-Za-z0-9\-]+$) ]]; then
+    if [[ ! ($SLUG =~ ^[A-Za-z0-9\-]+$) ]]; then
         echo ""
-        echo "💥  invalid: title must be alphanumeric with dashes. Found '$TITLE'."
+        echo "💥  invalid: slug must be alphanumeric with dashes. Found '$SLUG'."
         echo ""
     else
         break
     fi
 done
+
+read -p "Enter title (human-readable, defaults to slug): " TITLE
+TITLE=${TITLE:-$SLUG}
 
 POST_DIR="_drafts"
 
@@ -44,12 +47,12 @@ done
 
 mkdir -p "$POST_DIR"
 
-POST="$POST_DIR/$YEAR-$TITLE.md"
+POST="$POST_DIR/$DATE-$SLUG.md"
 touch $POST
 
 echo "---
 layout: post
-title: $TITLE
+title: \"$TITLE\"
 subtitle: null
 image:
     file: TODO
@@ -62,8 +65,6 @@ image:
 > TODO: excerpt here
 
 <!--excerpt-->
-
-{% include post_image.html %}
 
 > TODO: content here
 

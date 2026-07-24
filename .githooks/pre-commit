@@ -1,0 +1,49 @@
+#!/bin/bash
+#
+# Reject HEIC/HEIF images. Safari decodes them; Chrome, Firefox, and Edge show a
+# broken image, and social crawlers can't use them as og:image. See the July 2026
+# site sweep, finding 6 — img/iosexpert/dolphin.heic was invisible to most readers
+# for two years.
+#
+# Enable (once per clone):  git config core.hooksPath .githooks
+# Bypass (don't):           git commit --no-verify
+
+set -u
+shopt -s nocasematch  # macOS ships bash 3.2, which lacks ${var,,}
+
+offenders=()
+
+# HEIF-family brands, found at bytes 8-11 of an ISO base-media file.
+heif_brands='^(heic|heix|heim|heis|hevc|hevx|hevm|hevs|mif1|msf1)$'
+
+while IFS= read -r -d '' path; do
+    if [[ $path =~ \.(heic|heif)$ ]]; then
+        offenders+=("$path (HEIC/HEIF extension)")
+        continue
+    fi
+
+    # Catch a HEIC that was merely renamed to .jpg/.png rather than converted.
+    header=$(git show ":$path" 2>/dev/null | head -c 12 | tail -c 8)
+    if [[ ${header:0:4} == "ftyp" ]] && [[ ${header:4:4} =~ $heif_brands ]]; then
+        offenders+=("$path (HEIF container branded '${header:4:4}')")
+    fi
+done < <(git diff --cached --name-only --diff-filter=ACMR -z)
+
+if [[ ${#offenders[@]} -gt 0 ]]; then
+    echo "‼️  Commit rejected: HEIC/HEIF images are not allowed in this repo."
+    echo ""
+    for offender in "${offenders[@]}"; do
+        echo "    $offender"
+    done
+    echo ""
+    echo "Chrome, Firefox, and Edge cannot render HEIC, and social crawlers"
+    echo "reject it as og:image. Convert to JPEG first:"
+    echo ""
+    echo "    sips -s format jpeg -s formatOptions 85 IMAGE.heic --out IMAGE.jpg"
+    echo "    git rm --cached IMAGE.heic && rm IMAGE.heic && git add IMAGE.jpg"
+    echo ""
+    echo "Then update any {% include image.html %} or front-matter reference."
+    exit 1
+fi
+
+exit 0

@@ -27,7 +27,14 @@ bundle exec danger
 
 # Create a new blog post interactively
 scripts/new_post.sh
+
+# Enable the repo's git hooks (one time per clone)
+git config core.hooksPath .githooks
 ```
+
+The `core.hooksPath` setting is local to each clone and is not tracked by git, so a
+fresh clone will not run `.githooks/pre-commit` — which rejects HEIC/HEIF images,
+by extension or by `ftyp` brand — until that command is run.
 
 ## Architecture
 

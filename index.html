@@ -14,8 +14,8 @@ layout: default
     <a href="{{ paginator.next_page_path }}" class="pagination__link{% if paginator.next_page == nil %} pagination__link--disabled{% endif %}" title="Older posts">
         &larr; Older
     </a>
-    <a href="/search" class="pagination__link" title="Search">Search</a>
-    <a href="/archive" class="pagination__link" title="Archive">Archive</a>
+    <a href="/search/" class="pagination__link" title="Search">Search</a>
+    <a href="/archive/" class="pagination__link" title="Archive">Archive</a>
     <a href="{% if paginator.page != 2 %}{{ paginator.previous_page_path }}{% else %}/{% endif %}" class="pagination__link{% if paginator.previous_page == nil %} pagination__link--disabled{% endif %}" title="Newer posts">
         Newer &rarr;
     </a>

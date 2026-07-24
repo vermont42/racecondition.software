@@ -4,8 +4,8 @@ layout: null
 
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <title>{{ site.title }}</title>
-    <subtitle>{{ site.description }}</subtitle>
+    <title>{{ site.title | xml_escape }}</title>
+    <subtitle>{{ site.description | xml_escape }}</subtitle>
     <link href="{{ site.url }}/feed.xml" rel="self" />
     <link href="{{ site.url }}" />
     <updated>{{ site.time | date_to_xmlschema }}</updated>
@@ -24,20 +24,20 @@ layout: null
     <category term="software"/>
     <category term="mobile"/>
 
-    {% for post in site.posts %}
+    {% for post in site.posts limit: 15 %}
+    {% assign summary_text = post.excerpt | strip_html | normalize_whitespace | strip %}
+    {% if post.subtitle %}{% assign summary_text = post.subtitle | append: ' — ' | append: summary_text %}{% endif %}
     <entry>
         <link href="{{ site.url }}{{ post.url }}" />
         <id>{{ site.url }}{{ post.id }}</id>
-        <title>{{ post.title }}</title>
-        {% if post.subtitle %}<subtitle>{{ post.subtitle }}</subtitle>{% endif %}
+        <title>{{ post.title | xml_escape }}</title>
         <published>{{ post.date | date_to_xmlschema }}</published>
         {% if post.date-updated %}
         <updated>{{ post.date-updated | date_to_xmlschema }}</updated>
         {% else %}
         <updated>{{ post.date | date_to_xmlschema }}</updated>
         {% endif %}
-        <summary>{{ post.excerpt }}
-        </summary>
+        <summary>{{ summary_text | xml_escape }}</summary>
         <content type="html">{{ post.content | xml_escape }}
         </content>
     </entry>

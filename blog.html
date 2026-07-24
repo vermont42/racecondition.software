@@ -1,14 +1,18 @@
 ---
-layout: standalone
-title: Blog
+layout: null
+sitemap: false
 ---
 
-{% include search_box.html %}
-
-<br/>
-
-{% for post in site.posts %}
-    <article class="post-entry">
-        {% include post_entry.html post_entry=post include_excerpt=true %}
-    </article>
-{% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Redirecting to the Archive &middot; {{ site.title }}</title>
+    <link rel="canonical" href="{{ site.url }}/archive/">
+    <meta http-equiv="refresh" content="0; url=/archive/">
+    <meta name="robots" content="noindex">
+</head>
+<body>
+    <p>This page has moved to the <a href="/archive/">archive</a>.</p>
+</body>
+</html>

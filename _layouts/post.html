@@ -4,7 +4,8 @@ layout: default
 
 {% assign full_page_url = site.url | append: page.url %}
 
-{% assign issue_title_params = '?title=' | append: page.title %}
+{% assign issue_title = page.title | url_encode %}
+{% assign issue_title_params = '?title=' | append: issue_title %}
 {% assign issue_body_params = '&body=Comments, Questions, Feedback: ' | append: full_page_url %}
 {% assign issue_label_params = '&labels=blog%20comments%20%26%20questions' %}
 {% assign issue_all_params = issue_title_params | append: issue_body_params | append: issue_label_params %}

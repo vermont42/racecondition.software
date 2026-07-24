@@ -9,7 +9,7 @@ Loyal readers of this blog may have noticed a decrease in post frequency since J
 <!--excerpt-->
 
 {% include image.html
-    file="iosexpert/dolphin.heic"
+    file="iosexpert/dolphin.jpg"
     alt="friendly dolphin speaking into Shure SM-58 microphone"
     caption="Friendly Dolphin Speaking into Shure SM-58 Microphone"
     source_link=null
