@@ -168,6 +168,16 @@ a:hover {
     color: var(--link-hover);
 }
 
+/* Footnote/sidenote text is muted, leaving the link color too close to it for
+   color alone to read as a link (in sidenotes the link is set to the muted text
+   color outright). Show the body's gradient underline persistently here rather
+   than only on hover, so these links are visibly links at rest in both themes.
+   Covers both renderings: bottom-of-post footnotes (< 1100px) and sidenotes. */
+.post-content .footnotes a:not(.reversefootnote),
+.post-content .sidenote a:not(.reversefootnote) {
+    background-size: 100% 1px;
+}
+
 /* ===================================
    LAYOUT
    =================================== */
