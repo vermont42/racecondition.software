@@ -2,11 +2,12 @@
 <html lang="en">
    {% include head.html %}
    <body>
+      <a class="skip-link" href="#main">Skip to content</a>
       <div class="progress-bar" id="progressBar"></div>
       <div class="site-container">
          {% include header.html %}
 
-         <main>
+         <main id="main" tabindex="-1">
             {{ content }}
          </main>
 

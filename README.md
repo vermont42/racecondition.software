@@ -2,18 +2,17 @@
 
 *A Blog About Software Development*
 
-![Logo](img/logo.png)
+![Logo](ico/logo.png)
 
 ## About
 
-This my website about software development, primarily, but not exclusively, on iOS and using Swift. Eventually, this website will be a companion to a podcast also called Race Condition.
+This is my website about software development, primarily, but not exclusively, on iOS and using Swift.
 
-Carefully built with [Jekyll](https://jekyllrb.com), [Bootstrap](https://getbootstrap.com), [jQuery](https://jquery.com), and [Font Awesome](https://fortawesome.github.io/Font-Awesome/). Gratefully copied from [Jesse Squires](https://github.com/jessesquires/jessesquires.com).
+Built with [Jekyll](https://jekyllrb.com) and hand-written CSS — no front-end framework and no JavaScript dependencies. Gratefully forked from [Jesse Squires](https://github.com/jessesquires/jessesquires.com), though little of the original design survived the 2026 redesign.
 
 ## Requirements
 
 - [Bundler](https://bundler.io)
-- [Yarn](https://yarnpkg.com/en/)
 
 ## Dependencies
 
@@ -22,23 +21,12 @@ Carefully built with [Jekyll](https://jekyllrb.com), [Bootstrap](https://getboot
 - [jekyll](https://jekyllrb.com) ([Latest](https://github.com/jekyll/jekyll/releases/latest))
 - [jekyll-paginate](https://github.com/jekyll/jekyll-paginate)
 - [jekyll-sitemap](https://github.com/jekyll/jekyll-sitemap)
+- [kramdown-parser-gfm](https://github.com/kramdown/parser-gfm)
 
-#### Updating Gems
+#### Updating gems
 
 ```bash
 $ bundle update
-```
-
-### Yarn
-
-- [Bootstrap](https://getbootstrap.com) ([pkg](https://yarnpkg.com/en/package/bootstrap))
-- [jQuery](https://jquery.com) ([pkg](https://yarnpkg.com/en/package/jquery))
-- [Font Awesome](https://fortawesome.github.io/Font-Awesome/) ([pkg](https://yarnpkg.com/en/package/font-awesome))
-
-#### Updating Yarn
-
-```bash
-$ yarn upgrade
 ```
 
 ## Usage
@@ -49,8 +37,10 @@ $ yarn upgrade
 $ git clone https://github.com/vermont42/racecondition.software.git
 $ cd racecondition.software/
 $ bundle install
-$ yarn install
+$ git config core.hooksPath .githooks
 ```
+
+That last command enables the repo's pre-commit hook, which rejects HEIC/HEIF images. It is per-clone local configuration and is not tracked by git, so a fresh clone runs no hook until it is set.
 
 #### Building the site
 
@@ -71,12 +61,26 @@ $ bundle exec jekyll serve
 $ bundle exec jekyll serve --future --drafts --watch
 ```
 
-_Not tested._
+#### Creating a post
+
+```bash
+$ scripts/new_post.sh
+```
+
+#### Checking the built site
+
+```bash
+$ scripts/verify_site.sh
+```
+
+Validates the Atom feed, the JSON feed, and the sitemap, and confirms that every internal link in `_site/` resolves. CI runs it on every push, and again before the deploy syncs to S3.
+
+## Deployment
+
+Pushes to `master` are built and deployed to S3 and CloudFront by [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). The CloudFront Function handling the `www` → apex and `/blog/` → `/archive/` redirects is checked in at [`infra/cloudfront/redirects.js`](infra/cloudfront/redirects.js).
 
 ## License
 
 > **Copyright &copy; 2018-present Josh Adams.**
 
 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
-
-All code is licensed under an [MIT License](https://opensource.org/licenses/MIT).

@@ -1,0 +1,30 @@
+name: Verify
+
+# Replaces the Travis CI job that stopped running when travis-ci.org shut
+# down. Danger's prose linting is not revived here — it was PR-oriented, and
+# this repo is pushed to directly — so the checks are structural instead: does
+# the site build, and is what it built well-formed and internally consistent.
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+          bundler-cache: true
+
+      - name: Build
+        run: bundle exec jekyll build
+
+      - name: Verify built site
+        run: scripts/verify_site.sh

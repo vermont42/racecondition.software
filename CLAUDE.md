@@ -11,7 +11,6 @@ This is a Jekyll-based static blog for racecondition.software, Josh Adams's blog
 ```bash
 # Install dependencies
 bundle install
-yarn install
 
 # Local development server (localhost:4000)
 bundle exec jekyll serve
@@ -22,8 +21,8 @@ bundle exec jekyll serve --future --drafts --watch
 # Build static site (outputs to _site/)
 bundle exec jekyll build
 
-# Run prose linting (CI/CD check)
-bundle exec danger
+# Check the built site (feeds, sitemap, internal links) — same checks as CI
+scripts/verify_site.sh
 
 # Create a new blog post interactively
 scripts/new_post.sh
@@ -45,11 +44,15 @@ by extension or by `ftyp` brand — until that command is run.
 
 **Key Directories:**
 - `_posts/` - Published blog posts (YYYY-MM-DD-title.md naming convention)
-- `_includes/` - Reusable template components (head.html, header.html, footer.html, image.html)
+- `_includes/` - Reusable template components (head.html, header.html, footer.html, foot.html, image.html)
 - `_data/talks.yml` - Speaking engagement data
 - `css/` - Custom stylesheets (style.css, syntax.css)
 - `img/` - Blog post images organized by post
-- `node_modules/` - Frontend assets (Bootstrap 4.3.1, jQuery 3.5.0, Font Awesome 4.7.0)
+- `ico/` - Logo, avatar, and favicons
+- `scripts/` - Development scripts (new_post.sh, verify_site.sh, check_links.rb)
+- `infra/cloudfront/` - Source of record for the CloudFront Function that serves the site's redirects
+
+The site has no front-end dependencies: no Bootstrap, no jQuery, no Font Awesome, no build step beyond Jekyll. All CSS is hand-written in `css/style.css`, and all JavaScript is inline in `_includes/foot.html`.
 
 ## Blog Post Format
 
@@ -82,12 +85,15 @@ Use `{% include image.html %}` for responsive images within posts.
 
 A GitHub Actions workflow (`.github/workflows/deploy.yml`) automatically deploys the site on every push to `master`:
 1. Builds the Jekyll site
-2. Syncs `_site/` to the S3 bucket
-3. Invalidates the CloudFront cache
+2. Runs `scripts/verify_site.sh` — a failure here stops the deploy before anything is uploaded
+3. Syncs `_site/` to the S3 bucket in three passes, each setting a `Cache-Control` lifetime appropriate to what it uploads
+4. Invalidates the CloudFront cache
 
-### Prose Linting
+### Verification
 
-Travis CI runs `bundle exec danger` for prose linting with spell checking on each push. The Dangerfile configures prose checks with ignored words for Apple platform terms (Swift, iOS, macOS, etc.).
+`.github/workflows/verify.yml` runs on every push and pull request. It builds the site and runs `scripts/verify_site.sh`, which validates `feed.xml` and `sitemap.xml` as XML, parses `feed.json`, and confirms via `scripts/check_links.rb` that every internal `href`/`src` in `_site/` resolves to a real file.
+
+There is no automated prose or spell check. Travis CI ran `bundle exec danger` until travis-ci.org shut down around 2021; the config, the Dangerfile, and the Danger gems were removed in 2026 rather than revived, since Danger is pull-request-oriented and this repo is pushed to directly.
 
 ## Development Workflow
 

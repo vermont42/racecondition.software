@@ -197,6 +197,39 @@ main {
 }
 
 /* ===================================
+   SKIP LINK
+   =================================== */
+
+/* Positioned off-screen rather than display:none, so it stays in the tab
+   order and is the first thing a keyboard user reaches. The header is sticky
+   at z-index 100, so this has to sit above it to be visible once focused. */
+.skip-link {
+    position: absolute;
+    left: var(--space-sm);
+    top: -100px;
+    z-index: 300;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--heading);
+    font-family: var(--font-ui);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+    top: var(--space-sm);
+}
+
+/* main is focusable only as the skip link's target; it should never draw a
+   focus ring of its own. */
+main:focus {
+    outline: none;
+}
+
+/* ===================================
    READING PROGRESS BAR
    =================================== */
 
@@ -792,27 +825,6 @@ figcaption a {
         align-items: center;
     }
 }
-
-/* ===================================
-   SECTION BREAKS
-   =================================== */
-
-.section-break {
-    display: flex;
-    justify-content: center;
-    gap: 0.75rem;
-    padding: var(--space-xl) 0;
-}
-
-.section-break__dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-}
-
-.section-break__dot:nth-child(1) { background: var(--accent-sage); }
-.section-break__dot:nth-child(2) { background: var(--accent-teal); }
-.section-break__dot:nth-child(3) { background: var(--accent-rose); }
 
 /* ===================================
    FOOTNOTES

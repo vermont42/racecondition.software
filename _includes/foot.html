@@ -3,14 +3,29 @@
 (function() {
     var toggle = document.querySelector('.theme-toggle');
     if (!toggle) return;
-    toggle.addEventListener('click', function() {
+
+    var resolved = function() {
         var current = document.documentElement.getAttribute('data-theme');
         if (!current) {
             current = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
         }
-        var next = current === 'dark' ? 'light' : 'dark';
+        return current;
+    };
+
+    // The button ships as aria-pressed="false" because the served HTML is
+    // theme-agnostic — the pre-paint script in head.html picks the theme after
+    // the markup is written. Sync the state here, and on every click.
+    var announce = function(theme) {
+        toggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+        toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    };
+    announce(resolved());
+
+    toggle.addEventListener('click', function() {
+        var next = resolved() === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
+        announce(next);
     });
 })();
 

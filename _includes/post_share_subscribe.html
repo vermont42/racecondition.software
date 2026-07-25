@@ -8,7 +8,7 @@
 
 <div class="post-share">
     <div class="post-share__links">
-        <a class="post-share__link" href="https://x.com/intent/tweet?text={{ page.title | uri_escape }}%20{{ site.url }}{{ page.url }}%20via%20@{{ site.author.twitter }}" target="_blank" rel="noopener">Share on X</a>
+        <a class="post-share__link" href="https://x.com/intent/tweet?text={{ page.title | url_encode }}%20{{ site.url }}{{ page.url }}%20via%20@{{ site.author.twitter }}" target="_blank" rel="noopener">Share on X</a>
         <a class="post-share__link" href="https://www.facebook.com/sharer.php?u={{ site.url }}{{ page.url }}" target="_blank" rel="noopener">Share on Facebook</a>
         <a class="post-share__link" href="/feed.xml">RSS</a>
         <a class="post-share__link" href="/feed.json">JSON Feed</a>
