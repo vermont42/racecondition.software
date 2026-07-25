@@ -9,7 +9,3 @@ vendor/
 # machine-local Claude Code settings
 
 .claude/settings.local.json
-
-# private drafts live outside this public repo
-
-ideation/
