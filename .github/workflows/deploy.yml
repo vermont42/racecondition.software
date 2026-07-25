@@ -4,6 +4,13 @@ on:
   push:
     branches: [master]
 
+# Two pushes in quick succession would otherwise interleave their S3 syncs,
+# each with --delete. Queue them instead, and never cancel a sync partway
+# through: a half-synced bucket is worse than a stale one.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -29,7 +36,30 @@ jobs:
           aws-region: us-west-2
 
       - name: Deploy to S3
-        run: aws s3 sync _site/ s3://${{ secrets.S3_BUCKET_NAME }} --delete
+        env:
+          BUCKET: s3://${{ secrets.S3_BUCKET_NAME }}
+        run: |
+          # S3 serves whatever Cache-Control it was given at upload time, and
+          # none at all otherwise, which left browsers guessing. Three passes,
+          # one per asset lifetime. Each carries --delete but is scoped by the
+          # same filters it uploads with, so a pass prunes only its own keys;
+          # together the three cover every key in the bucket.
+
+          # Images gain new paths rather than being edited in place.
+          aws s3 sync _site/ "$BUCKET" --delete \
+            --exclude '*' --include 'img/*' --include 'ico/*' \
+            --cache-control 'public, max-age=31536000'
+
+          # style.css and syntax.css are not fingerprinted, so a redesign has
+          # to reach returning visitors in a day rather than in a year.
+          aws s3 sync _site/ "$BUCKET" --delete \
+            --exclude '*' --include 'css/*' \
+            --cache-control 'public, max-age=86400'
+
+          # Pages, feeds, sitemap: short, so new posts and edits show up fast.
+          aws s3 sync _site/ "$BUCKET" --delete \
+            --exclude 'img/*' --exclude 'ico/*' --exclude 'css/*' \
+            --cache-control 'public, max-age=300'
 
       - name: Invalidate CloudFront cache
         run: |
