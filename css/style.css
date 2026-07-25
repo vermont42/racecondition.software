@@ -1114,7 +1114,7 @@ sup a {
     margin-bottom: var(--space-xl);
 }
 
-/* Tables (speaking page) */
+/* Tables */
 
 .table-responsive {
     overflow-x: auto;
@@ -1126,6 +1126,21 @@ table {
     width: 100%;
     border-collapse: collapse;
     font-size: var(--text-sm);
+}
+
+/*
+ * A table written as Markdown in a post has no .table-responsive wrapper, so a
+ * wide one used to push the whole page sideways: the aside post overflowed the
+ * body by 257px at 375px. Making the unwrapped table its own scroll container
+ * fixes that without touching wrapped tables, which are not direct children
+ * here. width: 100% above still governs when the table fits, so this is a
+ * no-op at desktop widths.
+ */
+.post-content > table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 th, td {
