@@ -17,12 +17,14 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7'
+          # Single source of truth with local development: chruby reads the
+          # same file, so CI and a working copy cannot drift apart.
+          ruby-version: .ruby-version
           bundler-cache: true
 
       - name: Build
@@ -35,7 +37,7 @@ jobs:
         run: scripts/verify_site.sh
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
