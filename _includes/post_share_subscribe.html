@@ -1,10 +1,8 @@
-{% assign base_edit_url = 'https://github.com/vermont42/racecondition.software/edit/master/_posts/' %}
-
-{% assign issue_date = page.date | date: "%Y-%m-%d" %}
-{% assign page_title = page.url | remove: '/blog/' | remove: '/' %}
-{% assign file_name = issue_date | append: '-' | append: page_title | append: '.md' %}
-
-{% assign edit_url = base_edit_url | append: file_name %}
+{% comment %}
+  page.path is the source file itself, so this link stays correct for posts under
+  _posts/ and for standalone pages that use this layout.
+{% endcomment %}
+{% assign edit_url = 'https://github.com/vermont42/racecondition.software/edit/master/' | append: page.path %}
 
 <div class="post-share">
     <div class="post-share__links">

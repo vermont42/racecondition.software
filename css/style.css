@@ -621,6 +621,21 @@ main:focus {
     margin-bottom: 1.2em;
 }
 
+/* Where a page was published somewhere else first, say so above the text —
+   set apart from the post, and ahead of the paragraph that takes the drop cap. */
+.post-provenance {
+    font-size: var(--text-sm);
+    font-style: italic;
+    color: var(--text-muted);
+    border-left: 2px solid var(--border);
+    padding-left: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.post-provenance p {
+    margin-bottom: 0;
+}
+
 /* Drop cap on first paragraph */
 .post-content > p:first-of-type::first-letter {
     font-family: var(--font-heading);
