@@ -1588,3 +1588,11 @@ html[lang="de"] .gallery-intro[data-i18n-lang="de"] { display: block; }
     transition: opacity 0.18s ease;
 }
 
+
+/* /fcp/ page: the CLAUDE.md sample and the skill prompt are meant to be read and copied, so their
+   code blocks wrap instead of scrolling sideways on narrow screens. */
+.fcp-page pre,
+.fcp-page .highlight pre code {   /* syntax.css sets white-space: pre on .highlight pre code */
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
