@@ -2,6 +2,10 @@
 layout: standalone
 title: Search this site
 search: false
+# Search-results pages are conventionally kept out of search engines. Before
+# this, DuckDuckGo (via Bing) ranked this page for nearly every site: query.
+noindex: true
+sitemap: false
 ---
 
 {% include search_box.html %}
