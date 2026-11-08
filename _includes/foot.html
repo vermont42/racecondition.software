@@ -253,4 +253,291 @@
         });
     });
 })();
+
+// Site search (only on /search/). Queries the Pagefind index that
+// scripts/build_search_index.sh writes to /pagefind/ after the Jekyll build.
+// pagefind.js is generated code, not a vendored dependency: it ships with the
+// index it reads and is rebuilt with it.
+(function() {
+    var resultsEl = document.getElementById('search-results');
+    if (!resultsEl) return;
+    var statusEl = document.getElementById('search-status');
+    var form = document.querySelector('.search__form');
+    var input = form.querySelector('.search__input');
+
+    var PAGE_SIZE = 10;
+    var DEBOUNCE_MS = 250;
+    var timer = null;
+    var latest = 0;      // ticket of the newest query; older ones discard their output
+    var current = null;  // the displayed query: { query, results, shown, urls, generation }
+
+    // ---- Loading, and recovery from failed loads ----
+    //
+    // Pagefind fetches index chunks and result fragments lazily, by content-
+    // hashed name. A fetch can fail transiently, and Pagefind caches the
+    // failure; or a deploy can delete a chunk an open tab still expects. In
+    // either case the fix is to discard the instance and start a new one,
+    // which rereads pagefind-entry.json (Pagefind cache-busts that request)
+    // and so learns the current hashes. Each operation gets one such retry.
+
+    var instance = null;
+    var generation = 0;
+
+    // Same folding as scripts/build_search_words.rb: lowercase, no
+    // diacritics, no punctuation except the characters Pagefind keeps.
+    var makeFolder = function(keep) {
+        var escaped = keep.replace(/[\]\\^-]/g, '\\$&');
+        var strip = new RegExp('[^\\p{L}\\p{N}' + escaped + ']+', 'gu');
+        return function(text) {
+            return text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(strip, '');
+        };
+    };
+
+    var configure = function(revalidate) {
+        var words = fetch('/pagefind/site-words.json', revalidate ? { cache: 'no-cache' } : {})
+            .then(function(response) {
+                if (!response.ok) throw new Error('site-words.json: HTTP ' + response.status);
+                return response.json();
+            });
+        return Promise.all([import('/pagefind/pagefind.js'), words]).then(function(loaded) {
+            var pagefind = loaded[0];
+            return pagefind.options({ excerptLength: 30 }).then(function() {
+                pagefind.init();
+                return { pagefind: pagefind, words: loaded[1].words, fold: makeFolder(loaded[1].keep) };
+            });
+        });
+    };
+
+    var track = function(promise) {
+        instance = promise;
+        promise.catch(function() { if (instance === promise) instance = null; });
+        return promise;
+    };
+
+    var getSearch = function() {
+        return instance || track(configure(false));
+    };
+
+    var restart = function() {
+        generation++;
+        var previous = instance || Promise.resolve(null);
+        track(previous
+            .then(function(search) { return search && search.pagefind.destroy(); }, function() {})
+            .then(function() { return configure(true); }));
+    };
+
+    // Runs op(search, generation, isRetry). On failure, restarts Pagefind,
+    // unless a concurrent operation already did, and runs op once more.
+    var withSearch = function(op) {
+        var attempt = function(isRetry) {
+            var started = generation;
+            return getSearch().then(function(search) {
+                return op(search, generation, isRetry);
+            }).catch(function(error) {
+                if (isRetry) throw error;
+                console.warn('Search: retrying after', error);
+                if (started === generation) restart();
+                return attempt(true);
+            });
+        };
+        return attempt(false);
+    };
+
+    // ---- The word check ----
+    //
+    // When a word matches nothing, Pagefind retries with a shortened form of
+    // it, so "kubernetes" matches a lone "K" and "astrb" matches every "as".
+    // That is the failure that retired the DuckDuckGo box, so every word must
+    // be on the site before the search runs. A word passes if an indexed word
+    // starts with it (prefix matching: "astra" finds "astray", and "existin",
+    // typed on the way to "existing", finds it). Failing that, a word of plain
+    // letters and digits passes if Pagefind's exact mode finds it, which keeps
+    // stemming ("tested" finds "tests") and, unlike the normal mode, never
+    // shortens. Words with punctuation skip that second test, because exact
+    // mode strips punctuation Pagefind does not keep: "C#" would pass as "c".
+
+    var isOnSite = function(search, word) {
+        var folded = search.fold(word);
+        if (!folded) return Promise.resolve(true);
+        for (var i = 0; i < search.words.length; i++) {
+            if (search.words[i].lastIndexOf(folded, 0) === 0) return Promise.resolve(true);
+        }
+        if (!/^[\p{L}\p{N}]+$/u.test(folded)) return Promise.resolve(false);
+        return search.pagefind.search('"' + folded + '"').then(function(exact) {
+            return exact.results.length > 0;
+        });
+    };
+
+    // ---- Rendering ----
+
+    var syncUrl = function(query) {
+        var url = query ? '?q=' + encodeURIComponent(query) : window.location.pathname;
+        history.replaceState(null, '', url);
+    };
+
+    var quote = function(text) { return '“' + text + '”'; };
+
+    var renderResult = function(data) {
+        var article = document.createElement('article');
+        article.className = 'search-result';
+
+        var title = document.createElement('h2');
+        title.className = 'search-result__title';
+        var link = document.createElement('a');
+        link.href = data.url;
+        link.textContent = data.meta.title || data.url;
+        title.appendChild(link);
+        article.appendChild(title);
+
+        if (data.meta.date) {
+            var meta = document.createElement('div');
+            meta.className = 'search-result__meta';
+            meta.textContent = data.meta.date;
+            article.appendChild(meta);
+        }
+
+        // Pagefind builds the excerpt from indexed text, which it has already
+        // HTML-escaped, and wraps matches in <mark>.
+        var excerpt = document.createElement('p');
+        excerpt.className = 'search-result__excerpt';
+        excerpt.innerHTML = data.excerpt;
+        article.appendChild(excerpt);
+
+        return article;
+    };
+
+    var loadPage = function(results, start) {
+        return Promise.all(results.slice(start, start + PAGE_SIZE).map(function(r) { return r.data(); }));
+    };
+
+    // One "More results" button, reused across pages and queries.
+    var more = document.createElement('button');
+    more.type = 'button';
+    more.className = 'search__button search-more';
+
+    var showMore = function() {
+        more.disabled = false;
+        more.textContent = 'More results';
+        if (current && current.shown < current.results.length) {
+            resultsEl.appendChild(more);
+        } else {
+            more.remove();
+        }
+    };
+
+    var appendPage = function(state, pages) {
+        more.remove();
+        pages.forEach(function(data) {
+            // A retry searches afresh, and if a deploy changed the index in
+            // between, the new ranking can repeat a result already shown.
+            if (state.urls[data.url]) return;
+            state.urls[data.url] = true;
+            resultsEl.appendChild(renderResult(data));
+        });
+        state.shown += pages.length;
+        showMore();
+    };
+
+    more.addEventListener('click', function() {
+        var state = current;
+        // Disabled synchronously, so a second click while the first page is
+        // loading cannot request, and append, the same page again.
+        if (!state || more.disabled) return;
+        more.disabled = true;
+        more.textContent = 'Loading…';
+
+        withSearch(function(search, gen, isRetry) {
+            if (state !== current) return null;
+            // Result handles belong to the Pagefind instance that produced
+            // them; after a restart, search again for fresh ones.
+            var ready = (isRetry || state.generation !== gen)
+                ? search.pagefind.search(state.query).then(function(fresh) {
+                    state.results = fresh.results;
+                    state.generation = gen;
+                })
+                : Promise.resolve();
+            return ready.then(function() { return loadPage(state.results, state.shown); });
+        }).then(function(pages) {
+            if (pages && state === current) appendPage(state, pages);
+        }).catch(function(error) {
+            if (state !== current) return;
+            console.error('Search: could not load more results:', error);
+            more.disabled = false;
+            more.textContent = 'Couldn’t load more results. Try again';
+        });
+    });
+
+    // ---- Running a query ----
+
+    var run = function(query) {
+        var ticket = ++latest;
+        current = null;
+        query = query.trim();
+        syncUrl(query);
+
+        if (!query) {
+            statusEl.textContent = '';
+            resultsEl.replaceChildren();
+            return;
+        }
+
+        var words = query.replace(/"/g, ' ').split(/\s+/).filter(Boolean);
+
+        withSearch(function(search, gen) {
+            if (ticket !== latest) return null;
+            return Promise.all(words.map(function(word) {
+                return isOnSite(search, word);
+            })).then(function(found) {
+                var missing = words.filter(function(word, i) { return !found[i]; });
+                if (missing.length || ticket !== latest) return { missing: missing };
+                return search.pagefind.search(query).then(function(response) {
+                    return loadPage(response.results, 0).then(function(pages) {
+                        return { missing: [], results: response.results, pages: pages, generation: gen };
+                    });
+                });
+            });
+        }).then(function(outcome) {
+            if (!outcome || ticket !== latest) return;
+            resultsEl.replaceChildren();
+
+            if (outcome.missing.length) {
+                statusEl.textContent = 'No results for ' + quote(query) + '.' +
+                    (words.length > 1 ? ' Nothing on this site contains ' + outcome.missing.map(quote).join(' or ') + '.' : '');
+                return;
+            }
+
+            var count = outcome.results.length;
+            statusEl.textContent = count === 0
+                ? 'No results for ' + quote(query) + '.'
+                : count + (count === 1 ? ' result' : ' results') + ' for ' + quote(query) + '.';
+            current = { query: query, results: outcome.results, shown: 0, urls: {}, generation: outcome.generation };
+            appendPage(current, outcome.pages);
+        }).catch(function(error) {
+            if (ticket !== latest) return;
+            console.error('Search failed:', error);
+            statusEl.textContent = 'Search is unavailable right now. The archive lists every post.';
+            resultsEl.replaceChildren();
+        });
+    };
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        clearTimeout(timer);
+        run(input.value);
+    });
+
+    input.addEventListener('input', function() {
+        clearTimeout(timer);
+        timer = setTimeout(function() { run(input.value); }, DEBOUNCE_MS);
+    });
+
+    var initial = new URLSearchParams(window.location.search).get('q') || '';
+    if (initial) {
+        input.value = initial;
+        run(initial);
+    } else {
+        getSearch().catch(function() {});
+        input.focus();
+    }
+})();
 </script>

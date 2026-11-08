@@ -1,6 +1,15 @@
 ---
 layout: standalone
 title: Search this site
+search: false
 ---
 
 {% include search_box.html %}
+
+<p class="search-status" id="search-status" role="status" aria-live="polite"></p>
+
+<div class="search-results" id="search-results"></div>
+
+<noscript>
+    <p class="search-status">Search runs in the browser and needs JavaScript. The <a href="/archive/">archive</a> lists every post.</p>
+</noscript>

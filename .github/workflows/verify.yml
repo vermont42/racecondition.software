@@ -28,5 +28,10 @@ jobs:
       - name: Build
         run: bundle exec jekyll build
 
+      # Pagefind is a Rust binary that npx fetches; the runner image already
+      # has Node. The version is pinned in the script.
+      - name: Build search index
+        run: scripts/build_search_index.sh
+
       - name: Verify built site
         run: scripts/verify_site.sh

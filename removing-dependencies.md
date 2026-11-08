@@ -4,8 +4,9 @@ title: "Removing Dependencies: One Weird Trick for Increasing Happiness"
 date: 2022-06-14
 permalink: /removing-dependencies/
 # Rehosted for linking, not for browsing: this page is deliberately absent from
-# the blog listing, the archive, the feeds, and the sitemap.
+# the blog listing, the archive, the feeds, the sitemap, and site search.
 sitemap: false
+search: false
 ---
 
 <div class="post-provenance" markdown="1">

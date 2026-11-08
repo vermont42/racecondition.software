@@ -12,7 +12,12 @@ This is a Jekyll-based static blog for racecondition.software, Josh Adams's blog
 # Development with drafts and future posts
 bundle exec jekyll serve --future --drafts --watch
 
-# Check the built site (feeds, sitemap, internal links) — same checks as CI
+# Build the Pagefind search index into _site/pagefind/ (after a Jekyll build;
+# 'jekyll serve' keeps it across rebuilds, but rerun this to pick up edits —
+# verify_site.sh fails while the index is older than the pages)
+scripts/build_search_index.sh
+
+# Check the built site (feeds, sitemap, search index, internal links) — same checks as CI
 scripts/verify_site.sh
 
 # Create a new blog post interactively
@@ -28,13 +33,15 @@ by extension or by `ftyp` brand — until that command is run.
 
 ## Architecture
 
-The site has no front-end dependencies: no Bootstrap, no jQuery, no Font Awesome, no build step beyond Jekyll. All CSS is hand-written in `css/style.css`, and all JavaScript is inline in `_includes/foot.html`.
+The site has no front-end dependencies: no Bootstrap, no jQuery, no Font Awesome. All CSS is hand-written in `css/style.css`, and all JavaScript is inline in `_includes/foot.html`.
+
+The one build step beyond Jekyll is site search. `scripts/build_search_index.sh` runs a pinned Pagefind over `_site` and writes `_site/pagefind/`, whose generated `pagefind.js` the search script in `foot.html` imports, then runs `scripts/build_search_words.rb` to write `site-words.json`, the list of indexed words. Pagefind indexes only elements marked `data-pagefind-body` (the post `<article>` and the standalone-layout wrapper); front matter `search: false` opts a page out. The search script rejects a query containing a word not on the site, because Pagefind otherwise falls back to a shortened form of the word and returns unrelated pages. `#` and `+` are indexed as parts of words (`C++`, `C#`); that set is defined once, in `build_search_index.sh`, which passes it to Pagefind and to the word-list script, which records it in `site-words.json` for the search script's query folding.
 
 `infra/cloudfront/` is the source of record for the CloudFront Function that serves the site's redirects.
 
 ## CI/CD
 
-Every push to `master` deploys to production (`.github/workflows/deploy.yml`); a `scripts/verify_site.sh` failure stops the deploy before anything is uploaded. `.github/workflows/verify.yml` runs the same checks on every push and pull request.
+Every push to `master` deploys to production (`.github/workflows/deploy.yml`); both workflows build the site, then the search index, then verify. A `scripts/verify_site.sh` failure stops the deploy before anything is uploaded. `.github/workflows/verify.yml` runs the same checks on every push and pull request.
 
 There is no automated prose or spell check. Travis CI ran `bundle exec danger` until travis-ci.org shut down around 2021; the config, the Dangerfile, and the Danger gems were removed in 2026 rather than revived, since Danger is pull-request-oriented and this repo is pushed to directly.
 

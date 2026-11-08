@@ -1,17 +1,11 @@
-<!--
-Sources:
-https://duckduckgo.com/search_box
-https://muffinresearch.co.uk/adding-a-duckduckgo-search-box-to-your-blog/
--->
-
+{% comment %}
+    Submits to /search/, where the inline script in foot.html runs the query
+    against the Pagefind index. The archive page includes this box too, so a
+    search from there lands on the results page with ?q= filled in.
+{% endcomment %}
 <div class="search">
-    <form name="search" action="https://duckduckgo.com/" class="search__form">
-        <input type="search" class="search__input" placeholder="Search via DuckDuckGo" name="q">
-        <input type="hidden" value="racecondition.software" name="sites">
-        <input type="hidden" value="1" name="kh">
-        <input type="hidden" value="1" name="kn">
-        <input type="hidden" value="1" name="kac">
-        <input type="hidden" value="1" name="kc">
+    <form class="search__form" action="/search/" method="get" role="search">
+        <input type="search" class="search__input" placeholder="Search this site" aria-label="Search this site" name="q" autocomplete="off">
         <button class="search__button" type="submit">Search</button>
     </form>
 </div>

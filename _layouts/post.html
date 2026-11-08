@@ -16,14 +16,20 @@ layout: default
 {% assign minutes = words | divided_by: 250 %}
 {% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}
 
-<article>
+{% comment %}
+    data-pagefind-body scopes the search index to the article, leaving out the
+    header, footer, and share links. Pages without it are not indexed at all,
+    which is how the paginated listings stay out of results. search: false in
+    front matter opts a page out.
+{% endcomment %}
+<article{% unless page.search == false %} data-pagefind-body{% endunless %}>
     <header class="post-header">
         <h1 class="post-header__title">{{ page.title }}</h1>
         {% if page.subtitle %}
             <p class="post-header__subtitle">{{ page.subtitle }}</p>
         {% endif %}
-        <div class="post-header__meta">
-            <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date_to_string }}</time>
+        <div class="post-header__meta" data-pagefind-ignore>
+            <time datetime="{{ page.date | date: '%Y-%m-%d' }}" data-pagefind-meta="date">{{ page.date | date_to_string }}</time>
             <span class="post-entry__meta__sep"></span>
             <span>{{ minutes }} min read</span>
         </div>

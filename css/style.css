@@ -1041,6 +1041,67 @@ sup a {
     border-color: var(--accent-teal);
 }
 
+.search-status {
+    font-family: var(--font-ui);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    text-align: center;
+    margin: 0 auto var(--space-md);
+}
+
+.search-status:empty {
+    display: none;
+}
+
+.search-result {
+    padding: var(--space-lg) 0;
+}
+
+.search-result + .search-result {
+    border-top: 1px solid var(--border);
+}
+
+.search-result__title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.625rem);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: var(--space-xs);
+}
+
+.standalone .search-result__title a {
+    color: var(--heading);
+    background: none;
+}
+
+.standalone .search-result__title a:hover {
+    color: var(--link);
+}
+
+.search-result__meta {
+    font-family: var(--font-ui);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    margin-bottom: var(--space-sm);
+}
+
+.search-result__excerpt {
+    margin-bottom: 0;
+    overflow-wrap: anywhere;
+}
+
+.search-result__excerpt mark {
+    background: color-mix(in srgb, var(--accent-sage) 45%, transparent);
+    color: inherit;
+    padding: 0 0.1em;
+    border-radius: 2px;
+}
+
+.search-more {
+    display: block;
+    margin: var(--space-lg) auto 0;
+}
+
 /* ===================================
    UPDATED NOTICE
    =================================== */
