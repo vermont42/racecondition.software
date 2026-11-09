@@ -77,7 +77,7 @@ Validates the Atom feed, the JSON feed, and the sitemap, and confirms that every
 
 ## Deployment
 
-Pushes to `master` are built and deployed to S3 and CloudFront by [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). The CloudFront Function handling the `www` → apex and `/blog/` → `/archive/` redirects is checked in at [`infra/cloudfront/redirects.js`](infra/cloudfront/redirects.js).
+Pushes to `master` are built and deployed to S3 and CloudFront by [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). The CloudFront Function handling the `www` → apex, `/blog/` → `/archive/`, and `/removing-dependencies.html` → `/removing-dependencies/` redirects is checked in at [`infra/cloudfront/redirects.js`](infra/cloudfront/redirects.js).
 
 ## License
 

@@ -23,6 +23,13 @@ function handler(event) {
         redirect = true;
     }
 
+    // The rehosted Suki post lives at /removing-dependencies/, but resumes
+    // already sent to employers link /removing-dependencies.html.
+    if (uri === '/removing-dependencies.html') {
+        target = '/removing-dependencies/';
+        redirect = true;
+    }
+
     // Both hosts served the whole site, so search engines saw two complete
     // copies with no signal about which one was authoritative.
     if (host === 'www.' + APEX) {
