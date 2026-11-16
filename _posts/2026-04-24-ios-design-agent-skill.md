@@ -93,7 +93,7 @@ A few things are worth pointing out. First, I gave Claude a precedent: it had us
 
 ## The Three Proposals
 
-Claude returned three complete, self-contained HTML demos, each with a full design token set, typography, cursor animation, watermark, hero treatment, and footer. Each was tonally distinct from the other two. I offer a brief description of each, drawn from Claude’s own [proposals README](https://github.com/vermont42/kanaloa1903.com/blob/main/proposals/README.md), and one screenshot per proposal.
+Claude returned three complete, self-contained HTML demos, each with a full design token set, typography, cursor animation, watermark, hero treatment, and footer. Each was tonally distinct from the other two. I offer a brief description of each, drawn from Claude’s own [proposals README](https://github.com/vermont42/kanaloa1903.com/blob/main/docs/proposals/README.md), and one screenshot per proposal.
 
 **Mauka Makai** (Hawaiian for “mountain to sea”). The luxury, upscale-resort direction. Reference points, volunteered by Claude: Aman Resorts, Kinfolk, and Cereal magazine. The typeface triad is Cormorant Garamond for display, Libre Baskerville for body text, and Instrument Sans for UI labels and navigation. Three distinctive moves: the Tideline Ripple cursor, a pair of concentric gold rings that expand and fade where the pointer lingers; a pen-and-ink ti-leaf watermark rendered as SVG; and the Golden Hour scroll progress bar, a 3-pixel horizontal rule at the top of the viewport whose gradient runs gold, to deep Pacific blue, to sea mist as you scroll.
 
