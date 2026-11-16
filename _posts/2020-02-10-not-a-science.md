@@ -66,7 +66,7 @@ Nick Griffith [expresses](https://metova.com/the-problem-with-implicitly-unwrapp
 
 In my experience, Griffith is correct that `IBOutlet`s represent an exception to IUOs' disfavored status. They are ubiquitous in projects that use Interface Builder, perhaps because Xcode inserts the `!` after a control-drag from UI elements in XIBs and storyboards to source files.[^2]
 
-Because of IUOs' disfavored status, I have, for the past several years, avoided them entirely in side-project code I write, even in cases where I know that a value will never be `nil`, for example when I initialize a `URL` using a `String` that represents a valid URL. Here is an example from [Conjugar](https://itunes.apple.com/us/app/conjugar/id1236500467) where I [initialize](https://github.com/vermont42/Conjugar/blob/master/Conjugar/RatingsFetcher.swift#L15) the `URL` for the app's rate-and-review screen in the App Store app:
+Because of IUOs' disfavored status, I have, for the past several years, avoided them entirely in side-project code I write, even in cases where I know that a value will never be `nil`, for example when I initialize a `URL` using a `String` that represents a valid URL. Here is an example from [Conjugar](https://itunes.apple.com/us/app/conjugar/id1236500467) where I [initialize](https://github.com/vermont42/Conjugar/blob/b30d0b5f73cb71116246916447e91dc6f226c24b/Conjugar/RatingsFetcher.swift#L15) the `URL` for the app's rate-and-review screen in the App Store app:
 
 ```
 guard let url = URL(string: "https://itunes.apple.com/lookup?id=\(iTunesID)") else {

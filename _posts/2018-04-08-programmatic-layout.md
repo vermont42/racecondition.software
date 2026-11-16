@@ -795,7 +795,7 @@ The implementation of `CreditsView` is similar to that of `BreedBrowseView`, dis
     half_width=false
 %}
 
-There are nine `UILabel`s near the top of the screen that are identical except for their content. Rather than repeating the setup of each `UILabel`, the Author [factored out](https://github.com/vermont42/Conjugar/blob/master/Conjugar/VerbView.swift) shared setup. This shared code could at the top of `init()`, as in Conjugar, or in a separate function. Here is how Conjugar avoids duplication of code for the `UILabel`s:
+There are nine `UILabel`s near the top of the screen that are identical except for their content. Rather than repeating the setup of each `UILabel`, the Author [factored out](https://github.com/vermont42/Conjugar/blob/adb236e2ddeb7ea7752ca9a45887f471e7211cf3/Conjugar/VerbView.swift) shared setup. This shared code could at the top of `init()`, as in Conjugar, or in a separate function. Here is how Conjugar avoids duplication of code for the `UILabel`s:
 
 ```
 [translation, parentOrType, participioLabel, participio, gerundioLabel, gerundio, raizFuturaLabel, raizFutura, defectivo].forEach {
@@ -850,7 +850,7 @@ class CreditsVC: UIViewController, UITextViewDelegate {
 
 The final implementation of this `UIViewController` subclass is similar to those of others you have seen, with a wrinkle.
 
-// 0: As you may have experienced, the way to implement a `UIButton` tap using the IB approach is to control-drag from the `UIButton` in the storyboard to the `UIViewController` implementation. This code shows the PL approach: add targets in code to the `UIButton`s and provide implementations for the selectors you specify. The approach is similar for other controls like `UISegmentedControl`. Here is an example from [Conjugar](https://github.com/vermont42/Conjugar/blob/master/Conjugar/BrowseVerbsVC.swift):
+// 0: As you may have experienced, the way to implement a `UIButton` tap using the IB approach is to control-drag from the `UIButton` in the storyboard to the `UIViewController` implementation. This code shows the PL approach: add targets in code to the `UIButton`s and provide implementations for the selectors you specify. The approach is similar for other controls like `UISegmentedControl`. Here is an example from [Conjugar](https://github.com/vermont42/Conjugar/blob/adb236e2ddeb7ea7752ca9a45887f471e7211cf3/Conjugar/BrowseVerbsVC.swift):
 
 ```
 override func loadView() {
@@ -862,7 +862,7 @@ override func loadView() {
 
 // 1: This is an implementation of a selector that fires when the user taps a `UIButton`. The `@objc` keyword is required to expose the implementation to the Objective-C runtime.
 
-On an illustrative note, here is the implementation of a selector for a `UISegmentedControl` in [Conjugar](https://github.com/vermont42/Conjugar/blob/master/Conjugar/BrowseVerbsVC.swift):
+On an illustrative note, here is the implementation of a selector for a `UISegmentedControl` in [Conjugar](https://github.com/vermont42/Conjugar/blob/adb236e2ddeb7ea7752ca9a45887f471e7211cf3/Conjugar/BrowseVerbsVC.swift):
 
 ```
 @objc func valueChanged(_ sender: UISegmentedControl) {
