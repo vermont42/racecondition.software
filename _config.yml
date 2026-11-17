@@ -7,7 +7,7 @@ plugins:
     - jekyll-sitemap
 
 # File rules
-exclude: [vendor, Gemfile, Gemfile.lock, LICENSE, README.md, CLAUDE.md, writing_style.md, scripts/, infra/]
+exclude: [vendor, Gemfile, Gemfile.lock, LICENSE, README.md, CLAUDE.md, scripts/, infra/]
 # Jekyll empties _site on every build. The Pagefind index is generated into it
 # afterward by scripts/build_search_index.sh, so keep it across local rebuilds
 # by 'jekyll serve'. CI builds from a fresh checkout and never sees a stale one.

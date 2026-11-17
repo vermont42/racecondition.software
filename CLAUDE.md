@@ -53,4 +53,4 @@ UI changes must be verified for both desktop and mobile viewports. To test mobil
 
 ## Writing Style
 
-When generating prose for this blog (post content, descriptions, etc.), follow the writing style documented in `writing_style.md`. Key characteristics include: academic yet personal tone, thesis-driven organization with balanced argumentation, extensive footnotes and hyperlinking, cross-domain synthesis, and precise language with deliberate word choices.
+When generating prose for this blog (post content, descriptions, etc.), follow the writing style documented in `../ideation/writing_style.md`. Key characteristics include: academic yet personal tone, thesis-driven organization with balanced argumentation, extensive footnotes and hyperlinking, cross-domain synthesis, and precise language with deliberate word choices.
